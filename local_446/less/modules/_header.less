@@ -1,0 +1,62 @@
+@header-height: 70px;
+.header {
+    background: #8d3433;
+    height: @header-height;
+}
+.headerSelected {
+    // border-bottom: 3px solid white;
+    background-color: @red-hover;
+}
+
+.header-image {
+    margin-bottom: 3px;
+}
+
+.headerText {
+    color: white;
+}
+
+.header-button {
+    &.sapMBtn {
+        height: @header-height;
+        padding: 0 0; //padding-top: 30px;
+        //width: 5rem;
+    }
+    & .sapMBtn {
+        padding: 0;
+    }
+    &.sapMMenuBtn {
+        height: @header-height;
+        padding: 0 0; //width: 5rem; 
+    }
+    & .sapMBtnInner {
+        height: @header-height;
+        padding-top: 25px;
+        font-size: @h4;
+    }
+    & .sapMBtnContent {
+        color: white;
+    }
+    &.sapMBtn .sapMBtnIcon {
+        color: white!important;
+    }
+    &.sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner::after {
+        color: white;
+        padding-top: 23px!important;
+    }
+    & .sapUiMnuItm {
+        width: 15rem!important;
+    }
+}
+
+.envHeader {
+    display: inline-block;
+    font-weight: 500;
+    background-color: white;
+    padding: 4px 10px;
+    color: #467082;
+    border-radius: 8px;
+    white-space: nowrap;
+    margin: 12px 0px 0px 30px;
+    font-size: 12px;
+}

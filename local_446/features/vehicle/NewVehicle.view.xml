@@ -1,0 +1,55 @@
+<mvc:View controllerName="edu.mit.parking.features.vehicle.NewVehicle" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" bindingContexts="{/}">
+    <Page title="{i18n>title}" showHeader="false" class="page">
+        <!-- Header -->
+        <core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML"/>
+        <HBox width="100%" class="container">
+            <VBox class="main" width="100%" justifyContent="SpaceBetween">
+                <VBox>
+                    <Text id="vehicle_text_title" text="{parts: ['/tempVehicle', '/editVehicle'], formatter: '.formatter.getVehicleTitle'}" class="title-global sapUiTinyMarginBottom" />
+                    <VBox class="panel-vehicle" width="100%" busy="{/saveVehicle}" busyIndicatorDelay="0">
+                        <VBox id="vehicle_container" binding="{/vehicle}">
+                            <VBox>
+                                <Text text="{path:'/tempVehicle', formatter: '.formatter.getTypeOfVehicle'} {/vehicleNumber} {i18n>Vehicle.Text.Details}" class=" addVehicle-head" />
+                                <Text text="{i18n>Vehicle.Text.RequiredFields}" class="required-field-text sapUiSmallMarginBottom"/>
+                                <core:Fragment fragmentName="edu.mit.parking.features.vehicle.VehicleDetails" type="XML" />
+                            </VBox>
+                            <!--<Link text="{i18n>Global.Link.AddAnotherVehicle}" press="onPressAddAnotherVehicle" class="sapUiSmallMarginTop sapUiSmallMarginBottom" />-->
+                        </VBox>
+                        <HBox wrap="Wrap" class="" visible="{/tempVehicle}">
+                            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginTopBottom vehicle-input-container">
+                                <HBox>
+                                    <Text text="{i18n>Vehicle.Text.StartDate}" />
+                                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                                </HBox>
+                                <DatePicker id="vehicle_datepicker_startDate" placeholder=" " dateValue="{path: '/vehicle/startDate', type: '.CustomTypes.combo'}" change="removeValidationError" class="input vehicle-input" />
+                            </VBox>
+                            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginTopBottom vehicle-input-container">
+                                <HBox>
+                                    <Text text="{i18n>Vehicle.Text.EndDate}" />
+                                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                                </HBox>
+                                <DatePicker id="vehicle_datepicker_endDate" placeholder=" " dateValue="{path: '/vehicle/endDate', type: '.CustomTypes.combo'}" change="removeValidationError" class="input vehicle-input"/>
+                            </VBox>
+                        </HBox>
+                        <Text text="{i18n>Vehicle.Text.MaximunTempVehicle}" visible="{/tempVehicle}"/>
+                        <HBox wrap="Wrap" class="sapUiLargeMarginTop ">
+                            <Button id="vehicle_button_submit" text="{parts: ['/tempVehicle', '/editVehicle'], formatter: '.formatter.getVehicleTypeButtonText'}" class="sapUiMediumMarginEnd blue-button" press="onPressSubmitVehicles" />
+                            <Link text="{i18n>Global.Link.Cancel}" press="onPressCancel" class="sapUiSmallMarginTop" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+                <!-- Footer -->
+                <Image src="images/MIT_logo.png" class="sapUiTinyMarginTop" height="3rem"/>
+            </VBox>
+            <VBox class="side">
+                <Text text="{i18n>Permit.Text.Questions}" class="side-header-text"/>
+                <core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML" />
+            </VBox>
+        </HBox>
+    </Page>
+</mvc:View>

@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+    <VBox>
+        <HBox visible="{= ${/newPermit/vehicles}.length > 1 || ${carpool}}">
+            <Text text="{parts: ['vehicleNumber'], formatter: '.formatter.getNewPermitDetailsTitle'}" class=" sapUiLargeMarginEnd permit-vehicle-number"
+                visible="{= ${/newPermit/vehicles}.length > 1 }" />
+            <Link text="{i18n>Global.Link.Remove}" visible="{= ${vehicleNumber} !== ${/minNumberOfVehicles} }" press="onPressRemoveVehicle"
+                class="permit-link" />
+        </HBox>
+        <core:Fragment fragmentName="edu.mit.parking.features.vehicle.VehicleDetails" type="XML" class="" />
+        <!-- <HBox class="permit-green-driver-discount-container" visible="{/electricVehicleDiscount}">
+											<CheckBox selected="{electricVehicleDiscount}" select="onPressElectricVehicleDiscount" class="permit-checkbox permit-checkbox-green-vehicle sapUiSmallMarginBottom" />
+											<FormattedText htmlText="{i18n>NewPermit.Text.ElectricVehicleHTML}" visible="{/electricVehicleDiscount}" class=""/> -->
+        <!-- <HBox wrap="Wrap">
+												<Text text="{i18n>NewPermit.Text.GreenDriverDiscount}" class="sapUiTinyMarginEnd" />
+												<Link text="{i18n>NewPermit.Link.GreenDriverDiscount}" href="http://web.mit.edu/facilities/transportation/parking/" target="_newtab" />
+											</HBox> -->
+        <!-- </HBox> -->
+    </VBox>
+</core:FragmentDefinition>

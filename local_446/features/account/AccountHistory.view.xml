@@ -1,0 +1,288 @@
+<mvc:View controllerName="edu.mit.parking.features.account.AccountHistory" xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+    <Page title="{i18n>title}" showHeader="false" class="page">
+        <!-- Header -->
+        <core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML" />
+        <VBox class="main" justifyContent="SpaceBetween">
+            <VBox>
+                <!-- <Button icon="sap-icon://arrow-left" press="onNavBack" type="Transparent"/> -->
+                <Text text="{i18n>AccountHistory.Text.AccountHistory}" class="title-global" />
+                <Link text="{i18n>Global.Back}" press="onNavBack" class="sapUiTinyMarginBottom"/>
+                <HBox wrap="Wrap" width="100%" >
+                    <!--Left Container-->
+                    <VBox class="sapUiMediumMarginEnd">
+                        <VBox class="panel-account sapUiTinyMarginBottom">
+                            <HBox class="sapUiSmallMarginBottom panel-header ">
+                                <!-- <VBox class="sapUiSmallMarginEnd">
+                                    <Text text="{i18n>Ticket.Text.Display}" />
+                                    <ComboBox items="{sessionData>/helperSets/accountHistoryType}" selectedKey="ALL" selectionChange="onFilterTable" class="combo">
+                                        <core:Item key="{sessionData>id}" text="{sessionData>text}" />
+                                    </ComboBox>
+                                </VBox> -->
+                                <!-- <VBox>
+                                    <Text text="{i18n>Ticket.Text.Timeframe}" />
+                                    <ComboBox items="{sessionData>/helperSets/accountTimeframe}" selectedKey="ALL"
+                                        class="combo">
+                                        <core:Item key="{sessionData>id}" text="{sessionData>text}" selectionChange="" />
+                                    </ComboBox>
+                                </VBox> -->
+                            </HBox>
+                            <!--<Table id="ticket_table" inset="false" items="{path:'/activity'}" noDataText="{i18n>Global.Text.NoTickets}"><columns><Column width="6rem" hAlign="Begin"><Text text="{i18n>Global.Text.Date}" /></Column><Column minScreenWidth="Tablet" demandPopin="true" hAlign="Begin"><Text text="{i18n>Global.Text.Description}" /></Column><Column width="4rem" demandPopin="true" hAlign="Begin"><Text text="{i18n>Global.Text.Amount}" /></Column></columns><items><ColumnListItem press="onPressTicketRow"><cells><Text text="{date}" /><Text text="{description}" /><Text text="{amount}" /></cells></ColumnListItem></items></Table>-->
+                            <!--Testing Panels for table control-->
+                            <!-- <Toolbar class="noBorderBottom">
+                            <Table inset="false" showNoData="false" class="transparent-table-header">
+                                <columns>
+                                    <Column width="8rem">
+                                        <Text text="{i18n>Global.Text.Date}" />
+                                    </Column>
+                                    <Column minScreenWidth="550px" demandPopin="true">
+                                        <Text text="{i18n>Global.Text.Description}" />
+                                    </Column>
+                                    <Column width="4rem" hAlign="End">
+                                        <Text text="{i18n>Global.Text.Amount}" />
+                                    </Column>
+                                    <Column width="2rem"></Column>
+                                </columns>
+                            </Table>
+                        </Toolbar>
+                        <VBox id="vbox_history" items="{path: '/activity', factory: '.onCreateTable'}"></VBox> -->
+
+                            <!-- New design -->
+                            <Table inset="false" showNoData="false" class="transparent-table-header transaction-table-no-border">
+                                <columns>
+                                    <Column width="10rem">
+                                        <Text text="{i18n>AccountHistory.Text.ParkingPeriod}" />
+                                    </Column>
+                                    <Column width="5rem" hAlign="Center" minScreenWidth="626px" demandPopin="false">
+                                        <!-- <Text text="{i18n>AccountHistory.Text.PaymentDate}" /> -->
+                                    </Column>
+                                    <Column width="5rem" hAlign="End" minScreenWidth="371px" demandPopin="false">
+                                        <Text text="{i18n>AccountHistory.Text.Amount}" />
+                                    </Column>
+                                    <Column width="1rem" minScreenWidth="371px" demandPopin="false"></Column>
+                                    <Column width="2rem">
+                                    </Column>
+                                </columns>
+                            </Table>
+                            <!-- No Data text -->
+
+                            <HBox justifyContent="Center" alignItems="Center" width="100%" height="3rem" class="account-no-data-container"
+                                visible="{= ${sessionData>/billing/items}.length === 0}">
+                                <Text text="{i18n>AccountHistory.Text.NoData}" />
+                            </HBox>
+
+                            <!-- Transaction Panel Container -->
+                            <VBox items="{sessionData>/billing/items}">
+                                <Panel expandable="true" class="panel-no-border">
+                                    <headerToolbar>
+                                        <Toolbar class="account-toolbar-period" height="auto">
+                                            <!-- Top Panel Table  -->
+                                            <Table inset="false" showNoData="false" class="customTableHeader-panel panel-table trans-panel"
+                                                mode="SingleSelectMaster" selectionChange="onPressInvoice">
+                                                <columns>
+                                                    <Column width="10rem" class="transactions-period-th" />
+                                                    <Column width="5rem" hAlign="Center" minScreenWidth="626px"
+                                                        demandPopin="true" />
+                                                    <Column width="5rem" hAlign="End" minScreenWidth="371px"
+                                                        demandPopin="true" />
+                                                    <Column width="1rem" hAlign="Begin" minScreenWidth="371px"
+                                                        demandPopin="false" />
+                                                    <Column width="2rem" />
+                                                </columns>
+                                                <items>
+                                                    <ColumnListItem class="panel-table-row">
+                                                        <cells>
+                                                            <VBox>
+                                                                <HBox wrap="Wrap">
+                                                                    <Text text="{path: 'sessionData>invoiceDateText'}"
+                                                                        wrapping="false" class="sapUiSmallMarginEnd" />
+                                                                    <HBox visible="{= ${sessionData>status} === 'O'}">
+                                                                        <FormattedText htmlText="&lt;span class=&quot;open-billing-dot&quot;&gt;&lt;/span&gt;"
+                                                                            class="sapUiSmallMarginBegin" />
+                                                                        <Text text="{i18n>Dashboard.Text.Open}" class="open-billing " />
+                                                                    </HBox>
+                                                                </HBox>
+                                                            </VBox>
+                                                            <VBox>
+                                                                <!-- <Text text="{i18n>AccountHistory.Text.PaymentDate}"
+                                                                    class="transaction-payment-date-item transactions-table-header-text" /> -->
+                                                                <!-- <Text text="{path: 'sessionData>billingDate', formatter: '.formatter.getDateWithYear'}" /> -->
+                                                            </VBox>
+                                                            <VBox>
+                                                                <Text text="{i18n>AccountHistory.Text.Amount}" class="transaction-amount-item transactions-table-header-text" />
+                                                                <HBox justifyContent="End" class="transactions-amount-container">
+                                                                    <HBox justifyContent="End" class="sapUiTinyMarginEnd">
+                                                                        <Text text="${sessionData>amount}" class="success"
+                                                                            visible="{= ${sessionData>status} === 'F'}" />
+                                                                        <Text text="${sessionData>amount}" class="warning"
+                                                                            visible="{= ${sessionData>status} === 'P'}" />
+                                                                        <Text text="${sessionData>amount}" class="error"
+                                                                            visible="{= ${sessionData>status} === 'N'}" />
+                                                                        <Text text="${sessionData>amount}" class=""
+                                                                            visible="{= ${status} === 'V' || ${sessionData>status} === 'O' || ${sessionData>status} === 'W'}" />
+                                                                    </HBox>
+                                                                    <HBox class="transaction-amount-item">
+                                                                        <!-- <core:Icon src="sap-icon://accept" class=" success transaction-icon"
+                                                                            visible="{= ${sessionData>status} === 'F'}" />
+                                                                        <core:Icon src="sap-icon://pending" class=" warning transaction-icon"
+                                                                            visible="{= ${sessionData>status} === 'P'}" />
+                                                                        <Image src="images/PartialPay.png" class=" error transaction-icon"
+                                                                            height="1.3rem" visible="{= ${sessionData>status} === 'W'}" />
+                                                                        <core:Icon src="sap-icon://alert" class=" error transaction-icon"
+                                                                            visible="{= ${sessionData>status} === 'N'}"
+                                                                            toolTip="Not Paid" /> -->
+                                                                        <Button icon="sap-icon://accept" visible="{= ${sessionData>status} === 'F'}"
+                                                                            tooltip="Fully Paid" type="Transparent"
+                                                                            class="icon-button icon-button-success" />
+                                                                        <Button icon="sap-icon://goalseek" visible="{= ${sessionData>status} === 'P'}"
+                                                                            tooltip="Partially Paid" type="Transparent"
+                                                                            class="icon-button icon-button-warning" />
+                                                                        <Button icon="sap-icon://pending" visible="{= ${sessionData>status} === 'W'}"
+                                                                            tooltip="Pending Payment" type="Transparent"
+                                                                            class="icon-button" />
+                                                                        <Button icon="sap-icon://alert" visible="{= ${sessionData>status} === 'N'}"
+                                                                            tooltip="Not Paid" type="Transparent" class="icon-button icon-button-error" />
+                                                                        <!-- <Text text="{path: 'amount', formatter: '.formatter.getCurrencyWithDecimal'}"
+                                                                            class="" visible="{= ${status} === 'V' || ${sessionData>status} === 'O'}" /> -->
+                                                                    </HBox>
+                                                                </HBox>
+                                                            </VBox>
+                                                            <HBox class="transactions-icon-column">
+                                                                <!-- <core:Icon src="sap-icon://accept" class=" success"
+                                                                    visible="{= ${sessionData>status} === 'F'}" />
+                                                                <core:Icon src="sap-icon://pending" class=" warning "
+                                                                    visible="{= ${sessionData>status} === 'P'}" />
+                                                                <Image src="images/PartialPay.png" class=" error transaction-icon"
+                                                                    height="1.3rem" visible="{= ${sessionData>status} === 'W'}" /> -->
+                                                                <!-- <core:Icon src="sap-icon://alert" class=" error transaction-icon"
+                                                                    visible="{= ${sessionData>status} === 'N'}" /> -->
+                                                                <Button icon="sap-icon://accept" visible="{= ${sessionData>status} === 'F'}"
+                                                                    tooltip="Fully Paid" type="Transparent" class="icon-button icon-button-success" />
+                                                                <Button icon="sap-icon://goalseek" visible="{= ${sessionData>status} === 'P'}"
+                                                                    tooltip="Partially Paid" type="Transparent" class="icon-button icon-button-warning" />
+                                                                <Button icon="sap-icon://pending" visible="{= ${sessionData>status} === 'W'}"
+                                                                    tooltip="Pending Payment" type="Transparent" class="icon-button" />
+                                                                <Button icon="sap-icon://alert" visible="{= ${sessionData>status} === 'N'}"
+                                                                    tooltip="Not Paid" type="Transparent" class="icon-button icon-button-error" />
+                                                            </HBox>
+                                                            <HBox justifyContent="End" alignItems="Center">                                                
+                                                                <core:Icon src="sap-icon://slim-arrow-right" press="onPressExpandPeriod"
+                                                                    size="1rem" width="2rem" height="2rem" class="expand-button"
+                                                                    visible="{= ${sessionData>transactions}.length > 0}" />
+                                                                    <Button icon="sap-icon://download" press="onDownloadPDF" tooltip="Download PDF" class="icon-button" visible="{= ${sessionData>status} !== 'O'}"/>
+                                                                    <Button   class="icon-button" visible="{= ${sessionData>status} === 'O'}"/>
+                                                            </HBox>
+                                                        </cells>
+                                                    </ColumnListItem>
+                                                </items>
+                                            </Table>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <!-- Inner Panel Table Header-->
+                                    <Table inset="false" showNoData="false" class="transparent-table-header transaction-table-no-border "
+                                        visible="{= ${sessionData>transactions}.length > 0}">
+                                        <columns>
+                                            <Column width="8rem" hAlign="Begin">
+                                                <Text text="{i18n>Global.Text.Date}" class="panel-table-header" />
+                                            </Column>
+                                            <Column minScreenWidth="625px" demandPopin="false" hAlign="Begin">
+                                                <Text text="{i18n>Global.Text.Description}" class="panel-table-header" />
+                                            </Column>
+                                            <Column width="4rem" hAlign="End">
+                                                <Text text="{i18n>Global.Text.Amount}" />
+                                            </Column>
+                                            <Column width="2rem"></Column>
+                                        </columns>
+                                    </Table>
+                                    <!-- Transaction Details Panel Container -->
+                                    <VBox items="{sessionData>transactions}">
+                                        <Panel expandable="{= ${sessionData>activity}.length > 0}" class="panel-no-background panel-no-padding">
+                                            <headerToolbar>
+                                                <Toolbar height="auto" class="transactions-toolbar">
+                                                    <!-- Inner Panel Table -->
+                                                    <Table inset="false" showNoData="false" class="transparent-sub-table-header  testtt transaction-table-no-border"
+                                                     mode="SingleSelectMaster" selectionChange="onPressTransaction">
+                                                        <columns>
+                                                            <Column width="8rem" hAlign="Begin" />
+                                                            <Column minScreenWidth="625px" demandPopin="true" hAlign="Begin" />
+                                                            <Column width="4rem" hAlign="End" />
+                                                            <Column width="2rem" />
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem>
+                                                                <cells>
+                                                                    <Text text="{path: 'sessionData>date', formatter: '.formatter.getDateWithYear'}" />
+                                                                    <VBox>
+                                                                        <Text text="{i18n>Global.Text.Description}"
+                                                                            class="panel-table-header transactions-description-item transactions-table-header-text" />
+                                                                        <Text text="{sessionData>description}" />
+                                                                        <Text text="{sessionData>transactionNote}" class="transaction-note" visible="{= ${sessionData>transactionNote}.length > 0}"/>
+                                                                    </VBox>
+
+                                                                    <Text text="{path: 'sessionData>amount', formatter: '.formatter.getCurrencyWithDecimal'}" />
+                                                                    <HBox justifyContent="End">
+                                                                        <core:Icon src="sap-icon://slim-arrow-right"
+                                                                            press="onPressExpandTransaction" 
+                                                                            size="1rem"
+                                                                            width="3rem" height="3rem" class="expand-button"
+                                                                            visible="{= ${sessionData>activity}.length > 0}" /> 
+                                                                    </HBox>
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </Toolbar>
+                                            </headerToolbar>
+                                            <!-- Parking Activity  -->
+                                            <VBox items="{sessionData>activity}" class="panel-parking-activity-container"
+                                                visible="{= ${sessionData>activity}.length > 0}">
+                                                <HBox class="transactions-parking-activity-container sapUiTinyMarginBottom">
+                                                    <Text text="{sessionData>areaText}" width="" class="sapUiLargeMarginEnd" />
+                                                    <Text text="{parts:['sessionData>type','sessionData>entryDate','sessionData>entryTime','sessionData>exitDate','sessionData>exitTime'], formatter: '.formatter.getDailyActivity'}" />
+                                                </HBox>
+                                            </VBox>
+                                        </Panel>
+                                    </VBox>
+                                </Panel>
+                            </VBox>
+                        </VBox>
+                    </VBox>
+                    <!--  Right Container-->
+                    <!-- <VBox visible="{= !${device>/system/phone}}" class="responsive-padding account-billing-tile">
+                    <core:Fragment fragmentName="edu.mit.parking.features.fragments.Billing" type="XML" />
+                </VBox> -->
+                <!-- Right Container -->
+                <VBox>
+                    <VBox class="panel-legend">
+                        <Text text="Legend" class="list-content-text sapUiSmallMarginBottom"/>
+                        <HBox class="border-bottom-grey legend-row" alignItems="Center">
+                        
+                            <core:Icon src="sap-icon://pending" width="3.2rem" size="1.3rem"
+                             class="" />
+                             <Text text="A payment transaction is pending. No action is needed." />
+                        </HBox>
+                        <HBox class="border-bottom-grey legend-row" alignItems="Center">
+                            <core:Icon src="sap-icon://alert" width="3.2rem" size="1.3rem"
+                             class="error" />
+                             <Text text="A payment transaction has failed. We will retry and if needed, contact you if the problem persist." />
+                        </HBox>
+                        <HBox class="border-bottom-grey legend-row" alignItems="Center">
+                            <core:Icon src="sap-icon://goalseek" width="3.2rem" size="1.3rem"
+                             class="warning" />
+                             <Text text="A partial payment was received. We will retry and if needed, contact you if the problem persist." />
+                        </HBox>
+                        <HBox class="legend-row" alignItems="Center">
+                            <core:Icon src="sap-icon://accept" width="3.2rem" size="1.3rem"
+                             class="success" />
+                             <Text text="Full payment was received." />
+                        </HBox>
+                        
+                    </VBox>
+                </VBox>
+                </HBox>
+            </VBox>
+            <!-- Footer -->
+            <Image src="images/MIT_logo.png" height="3rem" class="sapUiTinyMarginTop" />
+        </VBox>
+    </Page>
+</mvc:View>

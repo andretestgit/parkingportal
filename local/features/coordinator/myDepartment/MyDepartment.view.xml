@@ -1,0 +1,174 @@
+<mvc:View controllerName="edu.mit.parking.features.coordinator.myDepartment.MyDepartment" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:t="sap.ui.table">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="scrollContainer">
+        <Text text="{i18n>Dashboard.Text.MyDepartment}" class="title-global title-global-padding" />
+        <HBox wrap="Wrap" class="responsive-padding">
+            <!--Left Container-->
+            <VBox class="white-panel" width="{= ${device>/system/phone} ? '100%' : '55%'}">
+                <HBox justifyContent="SpaceBetween">
+                    <VBox>
+                        <!-- <Text text="{i18n>Dashboard.Text.Display}"/><ComboBox></ComboBox> -->
+                    </VBox>
+                    <VBox>
+                        <Text text="{i18n>Global.Text.Search}"/>
+                        <SearchField width="14rem" liveChange="onSearch"/>
+                    </VBox>
+                </HBox>
+                <t:Table selectionMode="Single" rows="{sessionData>/coordinator/departmentPermits}" rowSelectionChange="onPressTableRow" ariaLabelledBy="title" class="sapUiSmallMarginTop transparent-table-header" visibleRowCount="{/visibleRowCount}" enableColumnReordering="false">
+                    <t:columns>
+                        <t:Column sortProperty="name" width="10rem">
+                            <Text text="{i18n>MyDept.Text.Name}" />
+                            <t:template>
+                                <Text text="{path: 'sessionData>name'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column sortProperty="kerbId" width="8rem">
+                            <Text text="{i18n>MyDept.Text.Kerb}" />
+                            <t:template>
+                                <Text text="{path: 'sessionData>kerbId'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column sortProperty="permitType" width="8rem">
+                            <Text text="{i18n>MyDept.Text.Affiliation}" />
+                            <t:template>
+                                <Text text="{path: 'sessionData>permitType'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column >
+                            <Text text="{i18n>MyDept.Text.LicensePlate}" width="8rem"/>
+                            <t:template>
+                                <Text text="{path: 'sessionData>vehicles', formatter: '.formatter.getLicenseString'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column sortProperty="location">
+                            <Text text="{i18n>MyDept.Text.Location}" />
+                            <t:template>
+                                <Text text="{sessionData>location}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column sortProperty="status" width="7rem">
+                            <Text text="{i18n>MyDept.Text.Status}" />
+                            <t:template>
+                                <Text text="{sessionData>status}" />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                    <!-- <t:rowActionTemplate><t:RowAction><t:RowActionItem icon="sap-icon://pdf-attachment" press="onPressDownloadPDF" visible="{= ${sessionData>status} === 'Accepted'}"/><t:RowActionItem icon="sap-icon://sys-cancel" press="onPressDownloadPDF" visible="{= ${sessionData>status} === 'Accepted'}"/></t:RowAction></t:rowActionTemplate> -->
+                </t:Table>
+                <Table id="department_table" inset="false" mode="SingleSelectMaster" items="{path:'sessionData>/coordinator/departmentPermits', sorter:{path:'name'}}" class="sapUiLargeMarginTop transparent-table-header " selectionChange="onPressTableRow">
+                    <columns>
+                        <Column id="name" width="8rem" hAlign="Begin" class="">
+                            <HBox justifyContent="SpaceBetween">
+                                <Text text="{i18n>MyDept.Text.Name}" />
+                                <core:Icon src="sap-icon://sort-ascending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/name} === 1}"/>
+                                <core:Icon src="sap-icon://sort-descending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/name} === 2}"/>
+                            </HBox>
+                        </Column>
+                        <Column id="kerbId" width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                            <HBox justifyContent="SpaceBetween">
+                                <Text text="{i18n>MyDept.Text.Kerb}" />
+                                <core:Icon src="sap-icon://sort-ascending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/kerbId} === 1}"/>
+                                <core:Icon src="sap-icon://sort-descending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/kerbId} === 2}"/>
+                            </HBox>
+                        </Column>
+                        <Column id="permitType" width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                            <HBox justifyContent="SpaceBetween">
+                                <Text text="{i18n>MyDept.Text.Affiliation}" />
+                                <core:Icon src="sap-icon://sort-ascending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/permitType} === 1}"/>
+                                <core:Icon src="sap-icon://sort-descending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/permitType} === 2}"/>
+                            </HBox>
+                        </Column>
+                        <Column id="vehicles_plateNumber" width="8rem" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                            <Text text="{i18n>MyDept.Text.LicensePlate}" />
+                        </Column>
+                        <Column id="location" width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                            <HBox justifyContent="SpaceBetween">
+                                <Text text="{i18n>MyDept.Text.Location}" />
+                                <core:Icon src="sap-icon://sort-ascending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/location} === 1}"/>
+                                <core:Icon src="sap-icon://sort-descending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/location} === 2}"/>
+                            </HBox>
+                        </Column>
+                        <Column id="status" width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                            <HBox justifyContent="SpaceBetween">
+                                <Text text="{i18n>MyDept.Text.Status}" />
+                                <core:Icon src="sap-icon://sort-ascending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/status} === 1}"/>
+                                <core:Icon src="sap-icon://sort-descending" class="sapUiTinyMarginBegin" size="13px" visible="{= ${/sorterIcons/status} === 2}"/>
+                            </HBox>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Text text="{path: 'sessionData>name'}" />
+                                <Text text="{path: 'sessionData>kerbId'}" />
+                                <Text text="{path: 'sessionData>permitType'}" />
+                                <Text text="{path: 'sessionData>vehicles', formatter: '.formatter.getLicenseString'}" />
+                                <Text text="{sessionData>location}" />
+                                <Text text="{sessionData>status}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+            <!--  Right Container-->
+            <VBox id="right_container" width="{= ${device>/system/phone} ? '100%' : '30%'}" visible="{= !${device>/system/phone}}" class="sapUiLargeMarginBegin ">
+                <!-- Permit Details -->
+                <VBox visible="{= ${/state} === 1}" class="white-background  ">
+                    <VBox class="listItem border-bottom-grey">
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <HBox>
+                                    <Text text="{sessionData>name}" class="bold-text sapUiSmallMaginTopBottom sapUiTinyMarginEnd"/>
+                                    <Text text="{sessionData>permitType}" class="affiliation-text"/>
+                                </HBox>
+                                <Text text="{sessionData>status}"/>
+                            </HBox>
+                            <Text text="{sessionData>location}" class="sapUiMediumMarginBottom"/>
+                            <!-- <Text text="{sessionData>kerbId}"/> -->
+                            <Link text="{sessionData>email}"/>
+                            <Text text="{sessionData>phoneNumber}"/>
+                        </VBox>
+                    </VBox>
+                    <VBox items="{path: 'sessionData>vehicles', sorter:{path:'temporary', descending: false }}" visible="{= ${/state} === 1}">
+                        <VBox class="listItem">
+                            <HBox>
+                                <Image src="{path: 'sessionData>bodyType', formatter: '.formatter.getVehicleImage'}" width="60px" class="sapUiMediumMarginEnd" />
+                                <VBox class="" width="100%">
+                                    <!-- <Text text="{path: 'sessionData>licensePlate', formatter: '.formatter.dashboardVehicleNumber'}" />-->
+                                    <Text text="{path:'sessionData>plateNumber', formatter:'.formatter.departmentVehicleNumber'}" class="text-section-head" />
+                                    <Text text="{sessionData>year} {sessionData>make} {sessionData>model}" />
+                                    <Text text="{sessionData>plateNumber}" />
+                                    <Text text="Expires on {path:'sessionData>endDate', formatter:'.formatter.getDateWithoutYear'}" visible="{sessionData>temporary}" class="red-text" />
+                                    <!-- Violations -->
+                                    <VBox items="{sessionData>tickets}" class="sapUiSmallMarginTop" width="100%">
+                                        <HBox class="vehicle-ticket-container" justifyContent="SpaceBetween" width="80%">
+                                            <Text text="{i18n>Global.Text.Violation}: {path: 'sessionData>violationDate', formatter: '.formatter.getDateWithYear'}" class=" red-text"/>
+                                            <Text text="${sessionData>amount}" class=" red-text"/>
+                                            <!-- <Link text="{i18n>Global.Text.PayNow}"/> -->
+                                        </HBox>
+                                    </VBox>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                    <HBox class="sapUiSmallMarginTop">
+                        <HBox width="4.7rem"/>
+                        <VBox class="">
+                            <HBox wrap="Wrap">
+                                <Link text="{i18n>Permit.Link.AddTemporaryVehicle}" press="onPressAddTemporaryVehicle" class="sapUiSmallMarginBottom sapUiMediumMarginBegin" />
+                                <Text text="{i18n>Permit.Text.UpTo2}" class="sapUiTinyMarginBegin" />
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                </VBox>
+                <!-- Request Permit -->
+                <!-- <VBox visible="{= ${/state} === 2}" class="white-background listItem"><Text text="{sessionData>name}" class="bold-text sapUiSmallMarginBottom"/><HBox justifyContent="SpaceBetween"><VBox><Link text="{sessionData>email}"/><Text text="{sessionData>phoneNumber}"/></VBox><Button text="{i18n>Global.Button.RequestPermit}" class="blue-button"/></HBox></VBox> -->
+            </VBox>
+        </HBox>
+    </ScrollContainer>
+</mvc:View>

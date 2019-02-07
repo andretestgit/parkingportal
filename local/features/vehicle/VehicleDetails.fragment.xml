@@ -1,0 +1,58 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <!--	<l:Grid defaultSpan="L3 M3 S12" class="sapUiLargeMarginTop"><l:content><Text text="{path:'{/tempVehicle}', formatter: '.formatter.getTypeOfVehicle'} {vehicleNumber} {i18n>Vehicle.Text.Details}"><layoutData><l:GridData span="L12 M12 S12"/></layoutData></Text><VBox><Text text="{i18n>Vehicle.Text.Make}"/><Input value="{make}" width="{= ${device>/system/phone} ? '10rem' : '7rem'}"/></VBox><VBox ><Text text="{i18n>Vehicle.Text.Model}"/><Input value="{model}" width="{= ${device>/system/phone} ? '10rem' : '7rem'}"/></VBox><VBox ><Text text="{i18n>Vehicle.Text.Color}"/><ComboBox selectedKey="{color}" width="{= ${device>/system/phone} ? '7rem' : '10rem'}"/></VBox><VBox><Text text="{i18n>Vehicle.Text.LicensePlate}"/><Input value="{licensePlate}" width="{= ${device>/system/phone} ? '10rem' : '7rem'}"/><layoutData><l:GridData span="L2 M2 S12" linebreak="true"/></layoutData></VBox><VBox><Text text="{i18n>Vehicle.Text.State}"/><ComboBox selectedKey="{state}" width="{= ${device>/system/phone} ? '7rem' : '10rem'}"/></VBox></l:content></l:Grid>-->
+    <VBox wrap="Wrap" class="">
+        <HBox wrap="Wrap">
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                <Text text="{i18n>Vehicle.Text.Body}" />
+                <ComboBox selectedKey="{bodyType}" width="{= ${device>/system/phone} ? '17rem' : '9rem'}" change="onChangeBodyType" items="{sessionData>/helperSets/bodyType}" class="vehicle-combo combo">
+                    <core:Item key="{sessionData>id}" text="{sessionData>text}"/>
+                </ComboBox>
+            </VBox>
+            <!-- <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom"><Text text="{i18n>Vehicle.Text.Year}" /><Input value="{year}" width="{= ${device>/system/phone} ? '17rem' : '5rem'}" liveChange="removeValidationError" class="vehicle-input input" type="Number"/></VBox> -->
+            <!-- Input -->
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                <Text text="{i18n>Vehicle.Text.Make}" />
+                <Input value="{make}" width="{= ${device>/system/phone} ? '17rem' : '8rem'}" liveChange="removeValidationError" class="vehicle-input input" visible="{= ${bodyType} === 'MOTORCYCLE'}"/>
+                <ComboBox selectedKey="{make}" width="{= ${device>/system/phone} ? '17rem' : '8rem'}" change="onChangeMake" items="{lookups>/vehicle/make}" class="vehicle-combo combo" visible="{= ${bodyType} !== 'MOTORCYCLE'}">
+                    <core:Item key="{lookups>name}" text="{lookups>name}" />
+                </ComboBox>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                <Text text="{i18n>Vehicle.Text.Model}" />
+                <Input value="{model}" width="{= ${device>/system/phone} ? '100%' : '8rem'}" liveChange="removeValidationError" class="vehicle-input input" visible="{= ${bodyType} === 'MOTORCYCLE'}"/>
+                <ComboBox selectedKey="{model}" width="{= ${device>/system/phone} ? '17rem' : '8rem'}" change="removeValidationError" class="vehicle-combo combo" visible="{= ${bodyType} !== 'MOTORCYCLE'}" enabled="{= ${make}.length > 0}">
+                    <core:Item key="{lookups>name}" text="{lookups>name}" />
+                </ComboBox>
+            </VBox>
+            <!-- <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom"><Text text="{i18n>Vehicle.Text.Color}" /><ComboBox selectedKey="{color}" width="{= ${device>/system/phone} ? '17rem' : '8rem'}" change="removeValidationError" items="{lookups>/vehicle/color}" class="vehicle-combo combo"><core:Item key="{lookups>name}" text="{lookups>name}" /></ComboBox></VBox> -->
+        </HBox>
+        <HBox wrap="Wrap">
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                <Text text="{i18n>Vehicle.Text.Year}" />
+                <Input value="{year}" width="{= ${device>/system/phone} ? '17rem' : '5rem'}" liveChange="removeValidationError" class="vehicle-input input" type="Number"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                <Text text="{i18n>Vehicle.Text.Color}" />
+                <ComboBox selectedKey="{color}" width="{= ${device>/system/phone} ? '17rem' : '8rem'}" change="removeValidationError" items="{lookups>/vehicle/color}" class="vehicle-combo combo">
+                    <core:Item key="{lookups>name}" text="{lookups>name}" />
+                </ComboBox>
+            </VBox>
+        </HBox>
+        <HBox wrap="Wrap" class="">
+            <VBox class="sapUiSmallMarginEnd ">
+                <Text text="{i18n>Vehicle.Text.LicensePlate}" />
+                <Input value="{plateNumber}" width="{= ${device>/system/phone} ? '17rem' : '7rem'}" liveChange="removeValidationError" class="vehicle-input input"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd ">
+                <Text text="{i18n>Vehicle.Text.State}" />
+                <ComboBox selectedKey="{plateState}" width="{= ${device>/system/phone} ? '17rem' : '5rem'}" change="removeValidationError" items="{lookups>/vehicle/state}" class="vehicle-combo combo">
+                    <core:Item key="{lookups>state}" text="{lookups>state}"/>
+                </ComboBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>

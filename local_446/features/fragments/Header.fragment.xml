@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc">
+	<!-- <OverflowToolbar> -->
+	<!-- <Text text="{i18n>Header.Text.Park}" class="sapUiMediumMarginBegin headerText" /> -->
+	<!-- <Button text="{i18n>Header.Text.Park}" class="sapUiMediumMarginBegin header-button sapUiMediumMarginEnd" press="onNavHome" /> -->
+	<HBox class="header">
+		<!-- Non mobile header -->
+		<HBox class="responsive-header" justifyContent="SpaceBetween" visible="{}">
+			<HBox alignItems="End">
+				<!-- <Button icon="sap-icon://arrow-left" press="onNavBack" type="Transparent" class="header-button" visible="{= ${device>/system/phone} &amp;&amp; ${/showNavBack} === 1}"/> -->
+				<!-- <Button icon="sap-icon://arrow-left" press="onNavBack" type="Transparent"/> -->
+				<Image src="images/Logo2.png" height="3rem" class="sapUiTinyMarginTop header-image" press="onNavHome"/>
+			</HBox>			<!-- <ToolbarSpacer/> -->
+			<HBox>
+				<Text text="NON PRODUCTION: DEV" visible="{= ${sessionData>/environment} === 'DEV' &amp;&amp; ${device>/system/desktop}}" class="envHeader sapUiSmallMarginEnd sapUiSmallMarginTop"></Text>
+				<Text text="NON PRODUCTION: TEST" visible="{= ${sessionData>/environment} === 'TEST' &amp;&amp; ${device>/system/desktop}}" class="envHeader sapUiSmallMarginEnd sapUiSmallMarginTop"></Text>
+				<Button text="{i18n>Header.Button.FAQ}" class="sapUiSmallMarginEnd header-button" type="Transparent" visible="{device>/system/desktop}" press="onPressFAQ"/>
+				<!-- <Button text="{i18n>Header.Button.Logout}" class="sapUiMediumMarginEnd headerButton" type="Transparent" /> -->
+				<MenuButton text="{sessionData>/user/kerb}" visible="{device>/system/desktop}" class="header-button" type="Transparent">
+					<menu>
+						<Menu>
+							<items>
+								<MenuItem text="Logout" press="onPressLogout" />
+							</items>
+						</Menu>
+					</menu>
+				</MenuButton>
+			</HBox>
+		</HBox>
+		<!-- Mobile header -->
+	</HBox>
+	<!--	<Link text="{i18n>headerFAQ}" class="sapUiSmallMarginEnd headerText"/><Link text="{i18n>headerLogout}" class="sapUiMediumMarginEnd headerText" />	-->
+	<!-- </OverflowToolbar> -->
+</core:FragmentDefinition>

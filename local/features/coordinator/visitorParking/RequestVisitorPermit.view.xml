@@ -1,0 +1,80 @@
+<mvc:View controllerName="edu.mit.parking.features.coordinator.visitorParking.RequestVisitorPermit" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="sapUiLargeMarginBottom scrollContainer">
+        <Text text="{i18n>Visitor.Text.VisitorParkingRequest}" class="title-global title-global-padding"/>
+        <VBox class="responsive-padding" width="100%">
+            <VBox class="white-panel" width="{= ${device>/system/phone} ? '100%' : '90%'}">
+                <Text text="{i18n>Visitor.Text.PermitsOrder180}" class="red-text sapUiSmallMarginBottom"/>
+                <HBox class="sapUiLargeMarginBottom sapUiTinyMarginBegin">
+                    <VBox class="sapUiSmallMarginEnd" width="12rem">
+                        <Text text="{i18n>Visitor.Text.ContactName}"/>
+                        <Input value="{/contactName}" placeholder="Margaret Mahoney" width="90%" class="visitor-input visitor-field" change="removeValidationError"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd" width="10rem">
+                        <Text text="{i18n>Visitor.Text.Phone}"/>
+                        <MaskInput id="visitor_phone_input" mask = "(999) 999-9999" placeholder="(123) 456-7890" value="{/phoneNumber}" width="8rem" change="removeValidationError" class="visitor-field"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd" width="12rem">
+                        <Text text="{i18n>Visitor.Text.Email}"/>
+                        <Input id="visitor_email_input" value="{/email}" placeholder="mmahoney@mit.edu" type="Email" width="90%" change="removeValidationError" class="visitor-field"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Text text="{i18n>Visitor.Text.CostObject}"/>
+                        <Input value="{/costObject}" placeholder="1234567890" type="Number" class="visitor-input visitor-field" change="removeValidationError"/>
+                    </VBox>
+                </HBox>
+                <HBox class="sapUiSmallMarginBottom border-bottom-visitor" width="80%">
+                    <Text text="{i18n>Visitor.Text.VisitorName}" width="12rem" class="sapUiSmallMarginEnd sapUiTinyMarginBegin"/>
+                    <Text text="{i18n>Visitor.Text.Date}" width="10rem" class="sapUiSmallMarginEnd"/>
+                    <Text text="{i18n>Visitor.Text.Location}" width="12rem" class="sapUiSmallMarginEnd"/>
+                    <Text text="{i18n>Visitor.Text.TimeIn}" width="10rem" class="sapUiSmallMarginEnd"/>
+                    <Text text="{i18n>Visitor.Text.TimeOut}" width="10rem" class="sapUiSmallMarginEnd"/>
+                </HBox>
+                <VBox items="{/visitors}" class="border-bottom-visitor" width="80%">
+                    <HBox class="sapUiTinyMarginBottom">
+                        <VBox width="12rem" class="sapUiSmallMarginEnd sapUiTinyMarginBegin">
+                            <Input value="{name}" width="90%" placeholder="Jane Smith" class="visitor-input visitor-field " change="removeValidationError"/>
+                            <!-- <Link text="{i18n>Visitor.Link.DeleteVisitor}" press="onPressDeleteVisitor"/> -->
+                        </VBox>
+                        <VBox>
+                            <VBox items="{days}">
+                                <HBox class="sapUiTinyMarginBottom">
+                                    <HBox width="10rem" class="sapUiSmallMarginEnd">
+                                        <DatePicker value="{date}" width="8rem" valueFormat="yyyy-MM-dd" placeholder="3/5/2018" displayFormat="short" class="visitor-date visitor-field" change="removeValidationError"/>
+                                    </HBox>
+                                    <HBox width="12rem" class="sapUiSmallMarginEnd">
+                                        <ComboBox selectedKey="{location}" width="11rem" class=" visitor-combo visitor-field" change="removeValidationError" items="{sessionData>/helperSets/visitorLocation}">
+                                            <core:Item key="{sessionData>id}" text="{sessionData>text} - {sessionData>remainingSpots}" enabled="{= ${sessionData>remainingSpots} > 0}"/>
+                                        </ComboBox>
+                                        <!-- <core:Icon src="sap-icon://copy" class="sapUiTinyMarginEnd sapUiTinyMarginTop" color="blue" press="onPressCopyDay"/> -->
+                                    </HBox>
+                                    <HBox width="10rem" class="sapUiSmallMarginEnd">
+                                        <TimePicker value="{timeIn}" width="7rem" valueFormat="hh:mm a" displayFormat="hh:mm a" change="removeValidationError" placeholder="" class="visitor-date visitor-field"/>
+                                    </HBox>
+                                    <HBox width="10rem" class="">
+                                        <TimePicker value="{timeOut}" width="7rem" valueFormat="hh:mm a" displayFormat="hh:mm a" change="removeValidationError" placeholder="" class="visitor-date visitor-field"/>
+                                    </HBox>
+                                    <core:Icon src="sap-icon://sys-cancel" class="sapUiTinyMarginEnd sapUiTinyMarginTop" color="red" press="onPressDeleteVisitor"/>
+                                </HBox>
+                            </VBox>
+                            <!-- <Link text="{i18n>Visitor.Link.AddAnotherDay}" press="onPressAddAnotherDay"/> -->
+                        </VBox>
+                    </HBox>
+                </VBox>
+                <Link text="{i18n>Visitor.Link.AddAnotherVisitor}" class="sapUiTinyMarginTop sapUiTinyMarginBegin sapUiLargeMarginBottom" press="onPressAddAnotherVisitor"/>
+                <VBox class="sapUiTinyMarginBegin">
+                    <Text text="{i18n>Comments}"/>
+                    <TextArea width="24rem" height="6rem" value="{/comment}" class="sapUiSmallMarginBottom"/>
+                    <HBox>
+                        <Button text="{i18n>Global.Button.Submit}" class="blue-button sapUiSmallMarginEnd btn-8" press="onPressSubmit"/>
+                        <Link text="{i18n>Global.Link.Cancel}" press="onPressCancel" class="sapUiSmallMarginTop"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollContainer>
+</mvc:View>

@@ -1,0 +1,196 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <HBox wrap="Wrap" width="100%" visible="{= ${sessionData>/user/type} === 'COORDINATOR'}" class="responsive-padding ">
+        <!-- Left Container -->
+        <VBox width="{= ${device>/system/phone} ? '100%' : '50%'}" class="sapUiLargeMarginTop">
+            <!-- My Department -->
+            <VBox width="{= ${device>/system/phone} ? '100%' : '90%'}" class="sapUiLargeMarginBottom">
+                <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                    <Text text="{i18n>Dashboard.Text.MyDepartment}" class="title-global"/>
+                    <Link id="myDepartment_link" text="{i18n>Dashboard.Link.ViewDetails}" class="bold-text sapUiSmallMarginTop" press="onPressViewDetails"/>
+                </HBox>
+                <VBox class="white-background one-rem-padding">
+                    <!-- <Text text="{i18n>Dashboard.Text.Display}"/><ComboBox></ComboBox> -->
+                    <Table inset="false" mode="None" items="{path:'sessionData>/coordinator/departmentPermits'}" class="sapUiSmallMarginTop transparent-table-header">
+                        <columns>
+                            <Column width="" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Name}" />
+                            </Column>
+                            <Column width="" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Affiliation}" />
+                            </Column>
+                            <Column width="" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Location}" />
+                            </Column>
+                            <Column width="" minScreenWidth="1450px" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Status}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{path: 'sessionData>name'}" />
+                                    <Text text="{path: 'sessionData>permitType'}" />
+                                    <Text text="{sessionData>location}" />
+                                    <Text text="{sessionData>status}" />
+                                    <!-- <Text text="{path: 'sessionData>vehicles', formatter: '.formatter.getLicenseString'}" /> -->
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+            <!-- Department Vehicles -->
+            <VBox width="{= ${device>/system/phone} ? '100%' : '90%'}" class="sapUiLargeMarginBottom">
+                <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                    <Text text="{i18n>Dashboard.Text.DepartmentVehicles}" class="title-global"/>
+                    <Link id="departmentVehicles_vehicle_link" text="{i18n>Dashboard.Link.ViewDetails}" class="bold-text sapUiSmallMarginTop" press="onPressViewDetails"/>
+                </HBox>
+                <VBox class="white-background one-rem-padding">
+                    <Table inset="false" mode="None" items="{path:'sessionData>/coordinator/departmentVehicles'}" class="sapUiSmallMarginTop transparent-table-header">
+                        <columns>
+                            <Column width="" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Lot}" />
+                            </Column>
+                            <Column width="" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Make}" />
+                            </Column>
+                            <Column width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashbaord.Text.Model}" />
+                            </Column>
+                            <Column width="" minScreenWidth="1450px" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.License}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{path: 'sessionData>location'}" />
+                                    <Text text="{sessionData>vehicle/make}" />
+                                    <Text text="{sessionData>vehicle/model}" />
+                                    <Text text="{path: 'sessionData>vehicle/plateNumber'}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+            <!-- Department Vehicle Tickets and Appeals -->
+            <VBox width="{= ${device>/system/phone} ? '100%' : '90%'}" class="sapUiLargeMarginBottom">
+                <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                    <Text text="{i18n>Dashboard.Text.DepartmentVehiclesTicket}" class="title-global"/>
+                    <Link id="departmentVehicles_tickets_link" text="{i18n>Dashboard.Link.ViewDetails}" class="bold-text sapUiSmallMarginTop" press="onPressViewDetails"/>
+                </HBox>
+                <VBox class="white-background one-rem-padding">
+                    <Table inset="false" mode="None" items="{path:'sessionData>/coordinator/departmentTickets'}" class="sapUiSmallMarginTop transparent-table-header">
+                        <columns>
+                            <Column width="" hAlign="Begin">
+                                <Text text="{i18n>Global.Text.Date}" />
+                            </Column>
+                            <Column width="" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Ticket.Text.PlateNumber}" />
+                            </Column>
+                            <Column width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Global.Text.Amount}" />
+                            </Column>
+                            <Column width="" minScreenWidth="1450px" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Ticket.Text.Status}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{path: 'sessionData>violationDate', formatter: '.formatter.getDateWithYear'}" />
+                                    <Text text="{sessionData>vehicle/plateNumber}" />
+                                    <Text text="{sessionData>amount}" />
+                                    <Text text="{path: 'sessionData>status'}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </VBox>
+        <!-- End Left Container -->
+        <!-- Start Right Container -->
+        <VBox width="{= ${device>/system/phone} ? '100%' : '50%'}" class="sapUiLargeMarginTop">
+            <!-- Visitor Passes -->
+            <VBox width="{= ${device>/system/phone} ? '100%' : '90%'}" class="sapUiLargeMarginBottom">
+                <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                    <Text text="{i18n>Dashboard.Text.VisitorParking}" class="title-global"/>
+                    <Link id="visitorParking_link" text="{i18n>Dashboard.Link.ViewDetails}" class="bold-text sapUiSmallMarginTop" press="onPressViewDetails"/>
+                </HBox>
+                <VBox class="white-background one-rem-padding">
+                    <HBox justifyContent="End" wrap="Wrap">
+                        <!-- <VBox><Text text="{i18n>Dashboard.Text.Display}"/><ComboBox></ComboBox></VBox> -->
+                        <Button text="{i18n>Dashboard.Button.RequestVisitorPermit}" class="blue-button" press="onPressRequestVisitorPermit"/>
+                    </HBox>
+                    <Table inset="false" mode="None" items="{path:'sessionData>/coordinator/visitorParking'}" class="sapUiSmallMarginTop transparent-table-header">
+                        <columns>
+                            <Column width="" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Request}" />
+                            </Column>
+                            <Column width="" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.Location}" />
+                            </Column>
+                            <Column width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.RequestDate}" />
+                            </Column>
+                            <!-- <Column width="" minScreenWidth="1450px" demandPopin="true" hAlign="Begin"><Text text="{i18n>Dashboard.Text.Status}" /></Column> -->
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{path: 'sessionData>visitorName'}" />
+                                    <Text text="{sessionData>location}" />
+                                    <Text text="{path: 'sessionData>date', formatter: '.formatter.getDateWithYear'}" />
+                                    <!-- <Text text="{path: 'sessionData>status'}" /> -->
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+            <!-- Scratch Passes -->
+            <VBox width="{= ${device>/system/phone} ? '100%' : '90%'}">
+                <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                    <Text text="{i18n>Dashboard.Text.ScratchPass}" class="title-global"/>
+                    <Link id="scratchPasses_link" text="{i18n>Dashboard.Link.ViewDetails}" class="bold-text sapUiSmallMarginTop" press="onPressViewDetails"/>
+                </HBox>
+                <VBox class="white-background one-rem-padding">
+                    <HBox justifyContent="End" wrap="Wrap">
+                        <!-- <VBox><Text text="{i18n>Dashboard.Text.Display}"/><ComboBox></ComboBox></VBox> -->
+                        <Button text="{i18n>Dashboard.Button.OrderScratchPass}" class="blue-button" press="onPressOrderScratchPass"/>
+                    </HBox>
+                    <Table inset="false" mode="None" items="{path:'sessionData>/coordinator/scratchPasses'}" class="sapUiSmallMarginTop transparent-table-header">
+                        <columns>
+                            <Column width="" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.NumberOfScratch}"/>
+                            </Column>
+                            <Column width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.RequestDate}" />
+                            </Column>
+                            <Column width="" minScreenWidth="1450px" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Dashboard.Text.JV}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{path: 'sessionData>quantity'}" />
+                                    <!-- <Text text="{sessionData>location}" /> -->
+                                    <Text text="{path: 'sessionData>date', formatter: '.formatter.getDateWithYear'}" />
+                                    <Text text="{path: 'sessionData>jv'}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </VBox>
+        <!-- End Right Container -->
+    </HBox>
+</core:FragmentDefinition>

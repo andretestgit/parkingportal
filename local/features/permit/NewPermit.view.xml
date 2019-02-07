@@ -1,0 +1,95 @@
+<mvc:View controllerName="edu.mit.parking.features.permit.NewPermit" 
+	xmlns:html="http://www.w3.org/1999/xhtml" 
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:core="sap.ui.core">
+	<ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="sapUiLargeMarginBottom scrollContainer">
+		<HBox wrap="Wrap" width="100%" visible="{= ${sessionData>/user/type} !== 'COORDINATOR'}">
+			<VBox class="main-container">
+				<Text text="{i18n>Permit.Text.RequestPermit}" class="title-global  title-global-padding" />
+				<VBox class="responsive-padding" height="100%" fitContainer="true">
+					<VBox class="white-panel" width="{= ${device>/system/phone} ? '100%' : '75%'}">
+						<VBox class="border-bottom-newPermit sapUiMediuMarginBottom">
+							<Text text="{i18n>NewPermit.Text.PermitDetails}"/>
+							<SegmentedButton class="sapUiMediumMarginBottom seg_button" items="{/permit/permitType}">
+								<items>
+									<SegmentedButtonItem text="{text}"/>
+								</items>
+							</SegmentedButton>
+							<!-- With input field -->
+							<VBox>
+								<Text text="{i18n>NewPermit.Text.LikeToPark}"/>
+								<HBox>
+									<Input placeholder="{i18n>NewPermit.Placeholder.BuildingNumber}" width="{= !${device>/system/phone} ? '15rem' : '10rem'}" class="sapUiSmallMarginEnd input"/>
+									<Text text="$10 per day, max $1900" class="permit__sub_text sapUiTinyMarginTop"/>
+								</HBox>
+							</VBox>
+							<Link text="{i18n>NewPermit.Link.AddCommentForParkingOffice}" class="permit__link_addcomment" press="onPressComment" visible="{= !${/showComment}}"/>
+							<!-- Comment Box -->
+							<VBox width="60%" visible="{/showComment}" class="sapUiSmallMarginTop">
+								<HBox justifyContent="SpaceBetween" class="permit__comment_box permit__comment_header">
+									<Text text="{i18n>NewPermit.Text.Comment}" class=""/>
+									<Link text="{i18n>NewPermit.Link.RemoveComment}" press="onPressComment" class="permit__link_comment "/>
+								</HBox>
+								<TextArea value="{/newPermit/comment}" width="100%" height="5rem"/>
+							</VBox>
+							<Text text="{i18n>NewPermit.Text.ParkingOfficeNotice}" class="permit__sub_text sapUiTinyMarginTop" width="70%"/>
+							<!-- Economy  -->
+							<HBox class="sapUiSmallMarginTop">
+								<CheckBox class="sapUiTinyMarginEnd permit__checkbox "/>
+								<Text text="{i18n>NewPermit.Text.Prefer}" class=" permit__checkbox_text"/>
+								<Link text="{i18n>NewPermit.Link.WestGate}" class=" permit__checkbox_text"/>
+								<Text text="{i18n>NewPermit.Text.EconomyCost}" class="permit__checkbox_text_price " />
+							</HBox>
+						</VBox>
+						<!-- Carpool -->
+						<VBox></VBox>
+						<!-- Vehicles -->
+						<VBox class="border-bottom-newPermit">
+							<VBox items="{/vehicles}">
+								<VBox>
+									<HBox class="sapUiSmallMarginTop">
+										<Text text="{path: 'vehicleNumber', formatter: '.formatter.getNewPermitDetailsTitle'}" class="sapUiTinyMarginBottom sapUiLargeMarginEnd grey-text"/>
+										<Link text="{i18n>Global.Link.Remove}" visible="{= ${vehicleNumber} !== 1 ? true : false}" press="onPressRemoveVehicle" class="permit__link"/>
+									</HBox>
+									<core:Fragment fragmentName="edu.mit.parking.features.vehicle.VehicleDetails" type="XML" class="sapUiTinyMarginBottom"/>
+								</VBox>
+							</VBox>
+							<Link text="{i18n>Global.Link.AddAnotherVehicle}" press="onPressAddAnotherVehicle" class="permit__link"/>
+							<Text text="{i18n>NewPermit.Text.VehicleLimit}" class="permit__sub_text" />
+						</VBox>
+						<!-- Permit Details -->
+						<VBox class="sapUiMediumMarginTop  sapUiMediumMarginBottom permit-details">
+							<Text text="{i18n>NewPermit.Text.PermitDetails}"/>
+							<Text text="{i18n>Global.Text.ParkAnywhere}"/>
+						</VBox>
+						<!-- Payment Options -->
+						<VBox class="sapUiMediumMarginBottom">
+							<Text text="{i18n>NewPermit.Text.PaymentMethod}"/>
+							<SegmentedButton items="{/permit/paymentOptions}" selectedKey="{/newPermit/paymentMethod}" class="seg_button sapUiSmallMarginBottom">
+								<items>
+									<SegmentedButtonItem text="{text}"/>
+								</items>
+							</SegmentedButton>
+							<Text text="Placeholder text for payment type description "/>
+						</VBox>
+						<!-- Bottom Buttons -->
+						<HBox wrap="Wrap">
+							<Button text="{i18n>NewPermit.Button.RequestPermit}" class="sapUiSmallMarginEnd blue-button"/>
+							<Link text="{i18n>Global.Link.Cancel}" class="sapUiSmallMarginTop"/>
+						</HBox>
+					</VBox>
+				</VBox>
+			</VBox>
+			<VBox class="side-container ">
+				<Text text="{i18n>Dashboard.Text.MITPrograms}" />
+				<Link text="{i18n>Dashboard.Link.Atlas}" class="sapUiMediumMarginBottom link" wrapping="true" />
+				<Text text="{i18n>Dashboard.Text.ClaimYour}" />
+				<Link text="{i18n>Dashboard.Text.ElectriceVehicleRebate}" class="sapUiMediumMarginBottom link" wrapping="true" />
+				<Text text="{i18n>Global.Text.QuestionContact}" />
+				<core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML" />
+			</VBox>
+		</HBox>
+	</ScrollContainer>
+</mvc:View>

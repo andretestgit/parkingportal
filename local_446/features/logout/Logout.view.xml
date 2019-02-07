@@ -1,0 +1,28 @@
+<mvc:View controllerName="edu.mit.parking.common.BaseController" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form">
+    <Page title="{i18n>title}" showHeader="false" class="page">
+        <!-- Header -->
+        <core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML"/>
+        <VBox class="main" width="100%" justifyContent="SpaceBetween">
+            <VBox>
+                <Text text="{i18n>Logout.Text.ImportantInfo}" class="title-global sapUiSmallMarginBottom" />
+                <!--Left Container-->
+                <VBox class="panel" width="50rem">
+                    <FormattedText class="regular-text" width="680px" htmlText="
+					You are authenticated to MIT Parking Services through &lt;a href=&quot;http://ist.mit.edu/touchstone-detail&quot; target=&quot;_blank&quot;&gt;MIT Touchstone&lt;/a&gt;. MIT Touchstone is a &lt;a href=&quot;http://en.wikipedia.org/wiki/Single_sign-on&quot; target=&quot;_blank&quot;&gt;single sign-on&lt;/a&gt; service that allows members of the MIT community to log in to participating MIT websites. Once you are authenticated via Touchstone, &lt;strong&gt;the only way to log out of Touchstone is to close the browser.&lt;/strong&gt;
+                    &lt;br/&gt;&lt;br/&gt;
+                    To return to MIT Parking Services, please click &lt;a target=&quot;_self&quot; href=&quot;/index.html&quot;&gt;here&lt;/a&gt;.
+                    &lt;br/&gt;&lt;br/&gt;
+                    Please contact the Help Desk at  &lt;strong&gt;computing-help@mit.edu &lt;/strong&gt; or &lt;strong&gt;3-1101&lt;/strong&gt; for assistance."/>
+                </VBox>
+                <!-- Footer -->
+            </VBox>
+            <Image src="images/MIT_logo.png" class="sapUiTinyMarginTop" height="3rem"/>
+        </VBox>
+    </Page>
+</mvc:View>

@@ -1,0 +1,15 @@
+<core:FragmentDefinition 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc">
+	<VBox>
+		<Text text="{i18n>NewPermit.Text.PermitDetails}"/>
+		<SegmentedButton>
+			<items>
+				<SegmentedButtonItem text="{i18n>NewPermit.Button.Personal}"/>
+				<SegmentedButtonItem text="{i18n>NewPermit.Button.Carpool}"/>
+			</items>
+		</SegmentedButton>
+	</VBox>
+</core:FragmentDefinition>

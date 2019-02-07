@@ -1,0 +1,20 @@
+<mvc:View controllerName="edu.mit.parking.features.permit.CancelPermit" 
+	xmlns:html="http://www.w3.org/1999/xhtml" 
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:core="sap.ui.core">
+	<ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="sapUiLargeMarginBottom scrollContainer">
+		<VBox class="fill-page-container one-rem-padding" height="100%">
+			<Text text="{i18n>Permit.Text.CancelRenewal}" class="title-global large-margin-begin sapUiLargeMarginTop sapUiSmallMarginBottom"/>
+			<VBox class="white-background large-margin-begin one-rem-padding" width="{= ${device>/system/phone} ? '100%' : '50%'}">
+				<Text text="{i18n>Permit.Text.DoNotRenewPermit}" class="sapUiSmallMarginTop blue-text"/>
+				<Text text="{i18n>Permit.Text.YourPermitWillExpireOn}"/>
+				<HBox wrap="Wrap" class="sapUiSmallMarginTop sapUiMediumMarginBottom">
+					<Button text="{i18n>Permit.Button.CancelPermit}" class="sapUiSmallMarginEnd blue-button" press="onPressCancelPermit"/>
+					<Link text="{i18n>Global.Link.Cancel}" class="sapUiSmallMarginTop"/>
+				</HBox>
+			</VBox>
+		</VBox>
+	</ScrollContainer>
+</mvc:View>

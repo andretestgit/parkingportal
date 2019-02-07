@@ -1,0 +1,286 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+	<VBox class="permit-border-bottom sapUiMediumMarginBottom permit-container" visible="{= ${/permit/permitTypes}.length > 1 || ${showLocation} || ${/permit/renewalLocationFor2018}.length > 0 || ${headerText}.length > 0 || (${carpool} &amp;&amp; !${carpoolInvitation})}">
+		<!-- Top Permit Selection Box -->
+		<!--  Header Text -->
+		<FormattedText htmlText="{headerText}" class=" permit-header-text" visible="{= ${headerText}.length > 0}" />
+		<FormattedText htmlText="{path: '/permit/renewalLocationFor2018', formatter: '.formatter.getRenewPermit2018'}"
+		 visible="{= ${/permit/renewalLocationFor2018}.length > 0}" />
+		<!-- Permit Type Header Text  -->
+		<!--<Text text="{i18n>NewPermit.Text.PermitType}" visible="{= ${/permit/permitTypes}.length > 1}"/>-->
+		<!-- Permit Types -->
+		<SegmentedButton items="{/permit/permitTypes}" selectedKey="{/newPermit/permitTypeId}" selectionChange="onChangePermitType"
+		 visible="{= ${/permit/permitTypes}.length > 1}">
+			<items>
+				<SegmentedButtonItem key="{permitTypeId}" text="{text}" />
+			</items>
+		</SegmentedButton>
+		<HBox class="sapUiSmallMarginBottom" visible="{= (${showLocation} &amp;&amp; ${/permit/permitType}.length > 1)}" />
+		<!-- <VBox items="{/permit/preferredLot}" visible="{= ${/permit/preferredLot}.length > 0}" class="sapUiSmallMarginTop ">
+							<RadioButton groupName="GroupA" text="{text}" class="permit-preferred-lot-radio" selected="{path:'/newPermit/preferredLot', formatter: 'edu.mit.parking.formatter.getLotSelected'}" select="onChangePreferredLot"/>
+						</VBox> -->
+		<!-- Carpool Lots -->
+		<!-- <Text text="Requested Lot" visible="{= ${carpool} &amp;&amp; !${carpoolInvitation}}" class="sapUiSmallMarginTop"/>
+							<ComboBox class="combo permit-input-carpool" items="{lookups>/carpool}" visible="{= ${carpool} &amp;&amp; !${carpoolInvitation}}">
+								<core:Item key="{lookups>id}" text="{lookups>text}" />
+							</ComboBox> -->
+		<!-- Choose lot -->
+		<VBox visible="{showLocation}" class="vehicle-input-container" width="100%">
+			<Text text="{locationHeaderText}" />
+			<HBox wrap="Wrap" width="100%" class="permit-location-container">
+				<Input placeholder="{i18n>NewPermit.Placeholder.BuildingNumber}" value="{location}" class=" input permit-input-lot"
+				 enabled="{editLocation}" maxLength="40" visible="{= ${showLocation} &amp;&amp; !${carpool}}" />
+				<ComboBox id="carpool_location" selectedKey="{path: '/newPermit/locationId', type: '.CustomTypes.combo'}" class="input permit-input-lot"
+				 items="{locationOptions}" selectionChange="onChangeCarpoolLot" visible="{= ${showLocation} &amp;&amp; ${carpool}}">
+					<core:Item key="{id}" text="{name}" />
+				</ComboBox>
+				<Text text="{parts: ['permitFeeDetails/dailyFee', 'permitFeeDetails/recurringFee', 'permitFeeDetails/recurringFrequency', 'permitFeeDetails/annualCap'], formatter: '.formatter.getPermitCostSubText'}"
+				 class="permit-sub-text sapUiSmallMarginTop" visible="{= ${economyPermitTypeId} !== null}" />
+				<Link text="{i18n>NewPermit.Link.ViewOnMap}" target="_blank" href="{locationUrl}" class="sapUiSmallMarginTop"
+				 visible="{= ${locationUrl}.length > 0}" />
+			</HBox>
+		</VBox>
+		<!-- <Link text="{i18n>NewPermit.Link.AddCommentForParkingOffice}" class="permit-link-addcomment" press="onPressComment" visible="{= !${/showComment} &amp;&amp; ${canAddComment}}" /> -->
+		<!-- Comment Box -->
+		<!-- <VBox visible="{= ${/showComment} &amp;&amp; ${canAddComment}}" class="sapUiMediumMarginTop permit-comment-container sapUiTinyMarginBottom">
+								<HBox justifyContent="SpaceBetween" class="permit-comment-box permit-comment-header">
+									<Text text="{i18n>NewPermit.Text.Comment}" class="" />
+									<Link text="{i18n>NewPermit.Link.RemoveComment}" press="onPressComment" class=" " />
+								</HBox>
+								<TextArea value="{/newPermit/comment}" placeholder="{i18n>NewPermit.Text.CommentPlaceholder}" width="100%" class="permit-text-area" />
+							</VBox> -->
+		<Text text="{i18n>NewPermit.Text.ParkingOfficeNotice}" class="permit-sub-text permit-text-best-effort sapUiTinyMarginTop"
+		 visible="{showLocation}" />
+		<!-- Economy  -->
+		<HBox class="sapUiMediumMarginTop" visible="{= ${economyPermitTypeId} !== null}">
+			<CheckBox class="permit-checkbox " select="onSelectEconomy" visible="{= ${economyPermitTypeId} !== null}" selected="{/newPermit/economy}" />
+			<HBox wrap="Wrap" class="permit-economy-container">
+				<Text text="{i18n>NewPermit.Text.Prefer}" class=" permit-checkbox-text" />
+				<Link text="{i18n>NewPermit.Link.WestGate}" class=" permit-checkbox-text sapUiTinyMarginEnd" target="_blank" press="onPressEnconomyLink" />
+				<Text text="{parts: ['economyFeeDetails/dailyFee', 'economyFeeDetails/recurringFee', 'economyFeeDetails/recurringFrequency', 'economyFeeDetails/annualCap'], formatter: '.formatter.getPermitCostSubText'}"
+				 class="permit-checkbox-text-price " />
+			</HBox>
+			<!-- <FormattedText htmlText="&lt;input type=&quot;checkbox&quot;&gt; I have a bike and it is awesdomsmdfasdfsd! ({parts: ['/permit/cost/type', '/permit/cost/fee', '/permit/cost/cap', '/permit/economy'], formatter: '.formatter.getPermitCostSubText'})&lt;a href=&quot;url&quot;> Test &lt;/a&gt;&lt;/input&gt;"/> -->
+		</HBox>
+	</VBox>
+	<!-- Join a Carpool -->
+	<VBox visible="{= ${carpoolInvitation}}" class="permit-border-bottom sapUiMediumMarginBottom permit-container" width="100%">
+		<!-- Carpool Details -->
+		<VBox class="sapUiTinyMarginBegin" width="100%">
+			<Text text="{i18n>NewPermit.Text.CarpoolDetails}" class=" sapUiSmallMarginBottom permit-header-text" />
+			<Text text="{i18n>NewPermit.Text.RequestedLocation}" class="permit-sub-header-text" />
+			<Text text="{location}" class="bold-text sapUiSmallMarginBottom" />
+			<Text text="{i18n>NewPermit.Text.TotalInCarpool}" class="permit-sub-header-text" />
+			<Text text="{= ${carpoolMembers}.length}" class="bold-text sapUiSmallMarginBottom" />
+		</VBox>
+		<Table inset="false" width="80%" showNoData="false" class="transparent-table-header carpool-zebra-table " items="{carpoolMembers}">
+			<columns>
+				<Column>
+					<Text text="{i18n>NewPermit.Text.ParticipantsName}" />
+				</Column>
+				<Column minScreenWidth="381px" demandPopin="false">
+					<Text text="{i18n>NewPermit.Text.Status}" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<VBox>
+							<Text text="{name}" />
+							<!--<Text text="{status}" class="carpool-email sapUiTinyMarginTop"/>-->
+							<HBox class=" carpool-email sapUiTinyMarginTop">
+								<Text text="{path: 'status', formatter: '.formatter.getStatusText'}" class="success" visible="{= ${status} === 'A'}" />
+								<Text text="{path: 'status', formatter: '.formatter.getStatusText'}" class="warning" visible="{= ${status} === 'P'}" />
+								<Text text="{path: 'status', formatter: '.formatter.getStatusText'}" class="error" visible="{= ${status} === 'R'}" />
+							</HBox>
+						</VBox>
+						<HBox class="">
+							<Text text="{path: 'status', formatter: '.formatter.getStatusText'}" class="success" visible="{= ${status} === 'A'}" />
+							<Text text="{path: 'status', formatter: '.formatter.getStatusText'}" class="warning" visible="{= ${status} === 'P'}" />
+							<Text text="{path: 'status', formatter: '.formatter.getStatusText'}" class="error" visible="{= ${status} === 'R'}" />
+						</HBox>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</VBox>
+	<!-- Carpool Member Invitations -->
+	<VBox class="permit-border-bottom sapUiMediumMarginBottom permit-container" visible="{= ${carpool} &amp;&amp; !${carpoolInvitation}}">
+		<VBox class="sapUiSmallMarginBottom">
+			<!-- <Text text="{i18n>NewPermit.Text.CarpoolDetails}" class=" sapUiSmallMarginBottom permit-header-text" /> -->
+			<Text text="{i18n>NewPermit.Text.SendInvit}" class="permit-header-text" />
+			<Text text="{i18n>NewPermit.Text.InvitDesc}" class="sapUiSmallMarginBottom permit-sub-text" />
+			<Text text="{i18n>NewPermit.Text.TotalInCarpool}" class="" />
+			<!-- <Input value="{/newPermit/carpool/name}" width="6rem" class="input"/> -->
+			<ComboBox selectedKey="{/numberOfPeople}" width="6rem" class="combo" items="{/valueHelp}" selectionChange="onChangeNumberOfPeople"
+			 visible="{carpool}">
+				<core:Item key="{id}" text="{text}" />
+			</ComboBox>
+		</VBox>
+		<HBox justifyContent="SpaceBetween">
+			<VBox width="100%">
+				<Text text="{i18n>NewPermit.Text.Email}" />
+				<VBox id="carpool_email_container" items="{/newPermit/inviteCarpoolMembers}">
+					<!-- <Input value="{path: 'email', type: '.CustomTypes.input'}" class="input sapUiSmallMarginBottom permit-input-carpool" visible="{= ${carpool} &amp;&amp; !${carpoolInvitation}}"/> -->
+					<Input placeholder="Search by email, name or kerb" type="Text" textFormatMode="Value" showSuggestion="true"
+					 suggest="suggestEmail" suggestionItems="{ path: '/suggestions'}" suggestionItemSelected="" change="onChangeEmail"
+					 filterSuggests="false" showSecondaryValues="true" maxSuggestionWidth="auto" class="permit-input-carpool sapUiSmallMarginBottom">
+					<suggestionItems>
+						<core:ListItem key="{id}" text="{email}" additionalText="{displayName}" />
+					</suggestionItems>
+					</Input>
+					<!-- <Input selectedKey="{path: 'email', type: '.CustomTypes.input'}" textFormatMode="Key" showSecondaryValues="true" maxSuggestionWidth="auto" filterSuggests="false" suggestionItemSelected="carpoolEmailSelected" type="Text" placeholder="Search by email, name or kerb" suggest="suggestEmail" showSuggestion="true" suggestionItems="{/suggestions}" class="permit-input-carpool sapUiSmallMarginBottom">
+											<suggestionItems>
+												<core:Item key="{email}" text="{lastName}, {firstName}     {email}" additionalText="{lastName}, {firstName}"/>
+											</suggestionItems>
+										</Input> -->
+				</VBox>
+			</VBox>
+		</HBox>
+	</VBox>
+	<!-- Contact Details -->
+	<VBox class="permit-border-bottom permit-container sapUiMediumMarginBottom" visible="{= ${requirePhoneNumber} || ${requireEmail}}">
+		<Text text="{i18n>NewPermit.Text.ContactDetails}" class=" permit-header-text" />
+		<Text text="{i18n>Vehicle.Text.RequiredFields}" class="required-field-text sapUiTinyMarginBottom" />
+		<Text text="{i18n>NewPermit.Text.Email}" visible="{requireEmail}" />
+		<Input id="contact_email" value="{path:'/newPermit/contactEmail', type: '.CustomTypes.input'}" class="sapUiMediumMarginBottom"
+		 visible="{requireEmail}" width="9rem" liveChange="removeValidationError" />
+		<Text text="{i18n>NewPermit.Text.PhoneNumber}" visible="{requirePhoneNumber}" />
+		<!-- <Input value="{/newPermit/phonenNumber}" class=" permit-input-lot"/> -->
+		<MaskInput id="contact_phone" mask="(999) 999-9999" placeholder="(123) 456-7890" value="{path: '/newPermit/contactWorkPhone', type: '.CustomTypes.input'}"
+		 width="9rem" class="sapUiTinyMarginBottom" visible="{requirePhoneNumber}" change="removeValidationError" />
+	</VBox>
+	<!-- Vehicles -->
+	<VBox class="permit-border-bottom permit-container">
+		<Link text="{i18n>NewPermit.Link.AddYourVehicle}" visible="{= ${/newPermit/vehicles}.length === 0}" press="onPressAddAnotherVehicle" />
+		<VBox visible="{= ${/newPermit/vehicles}.length > 0}">
+			<Text text="{path: 'carpool', formatter: '.formatter.getVehicleDetailsTitle'}" class="permit-header-text" />
+			<Text text="{i18n>Vehicle.Text.RequiredFields}" class="required-field-text sapUiTinyMarginBottom" />
+			<!-- <VBox id="vehicle_container" items="{path: '/newPermit/vehicles', factory: '.vehicleFactory'}" class="permit-vehicle-container"> -->
+			<VBox id="vehicle_container" items="{path: '/newPermit/vehicles', events: {change: '.onVehicleChange'}}" class="permit-vehicle-container">
+				<core:Fragment fragmentName="edu.mit.parking.features.fragments.PermitVehicle" type="XML" />
+			</VBox>
+			<HBox visible="{= ${maxNumberOfVehicles} > 1 }">
+				<Link text="{i18n>Global.Link.AddAnotherVehicle}" press="onPressAddAnotherVehicle" class="permit-link permit-link-another-vehicle sapUiTinyMarginEnd"
+				 enabled="{= ${maxNumberOfVehicles} > ${/newPermit/vehicles}.length}" />
+				<Text text="{i18n>NewPermit.Text.NoCost}" class="permit-sub-text permit-add-vehicle-sub-text" />
+			</HBox>
+			<Text text="{path: 'maxNumberOfVehicles', formatter: '.formatter.getPermitVehicleLimitText'}" class="permit-sub-text "
+			 visible="{= ${maxNumberOfVehicles} > 1 }" />
+		</VBox>
+	</VBox>
+	<!-- Permit Details -->
+	<VBox class="permit-container">
+		<VBox class="sapUiMediumMarginTop sapUiMediumMarginBottom permit-details ">
+			<Text text="{i18n>NewPermit.Text.PermitDetails}" />
+			<HBox visible="{= !${carpool}}" wrap="Wrap" class="permit-cost-container ">
+				<Text text="{parts: ['/permitFeeDetails/dailyFee', '/permitFeeDetails/recurringFee', '/permitFeeDetails/recurringFrequency' ], formatter: '.formatter.getPermitCost'}"
+				 class="sapUiTinyMarginEnd permit-details-cost" />
+				<Text text="(up to a maximum of ${parts: ['/permitFeeDetails/annualCap'], formatter: '.formatter.getNumberWithComma'} annually)"
+				 class="permit-details-cost-sub" visible="{= ${/permitFeeDetails/annualCap} > 0}" />
+				<Text text="(up to 3 months from start of permit)" class="permit-details-cost-sub" visible="{= ${/permitFeeDetails/recurringFrequency} === 'Q'}" />
+			</HBox>
+			<HBox class="permit-cost-container" visible="{carpool}" wrap="Wrap">
+				<Text text="{parts: ['/permitFeeDetails/recurringFee','/numberOfPeople'], formatter: '.formatter.getCarpoolPermitCost'}"
+				 class="sapUiTinyMarginEnd permit-details-cost" />
+				<Text text="{parts: ['/permitFeeDetails/recurringFee','/numberOfPeople'], formatter: '.formatter.getCarpoolPermitBreakdown'}"
+				 class="permit-details-cost-sub" />
+			</HBox>
+			<HBox visible="{= ${/permitFeeDetails/recurringFee} > 0 &amp;&amp; ${/permitFeeDetails/dailyFee} > 0}" wrap="Wrap">
+				<Text text="{parts: ['/permitFeeDetails/dailyFee', '/permitFeeDetails/recurringFee', '/permitFeeDetails/recurringFrequency'], formatter: '.formatter.getPermitFeeText'}"
+				 class="sapUiTinyMarginEnd permit-details-cost" />
+				<!-- <Text text="(per month)" class="permit-details-cost-sub" visible="{=  ${/permitFeeDetails/recurringFrequency} === 'M'}"/> -->
+				<Text text="(charged in September, prorated)" class="permit-details-cost-sub" visible="{= ${/permitFeeDetails/recurringFrequency} === 'Y'}" />
+			</HBox>
+			<!--<Text text="{i18n>NewPermit.Text.BilledMonthly}" visible="{= ${/newPermit/paymentMethod} === 'S' || ${/newPermit/paymentMethod} === 'C' }"-->
+			<!-- class="sapUiTinyMarginTop"/>-->
+			<!--<Text text="{i18n>NewPermit.Text.BilledPayroll}" visible="{= ${/newPermit/paymentMethod} === 'P' }" class="sapUiTinyMarginTop"/>-->
+			<Text text="{path: 'defaultValidity', formatter: '.formatter.getPermitExpireText'}" class="sapUiTinyMarginTop"
+			 visible="{= ${defaultValidity} !== 'U'}" />
+			<!-- <Text text="{i18n>NewPermit.Text.PermitDetailsDesc}" class="permit-details-desc" visible="{= ${/permit/cost/cap} > 0 &amp;&amp; !${/carpool} &amp;&amp; ${/permit/cost/yearlyFee} > 0}"/> -->
+			<!-- <Text text="{parts: ['/permitFeeDetails/recurringFee'], formatter: '.formatter.getPermitDetailsDesc'}" visible="{freeOffHours}" class=" sapUiTinyMarginTop"/> -->
+			<!-- <Text text="{i18n>NewPermit.Text.PermitDetailsDescNoCap}" class="permit-details-desc" visible="{= !${/permit/cost/cap} > 0 || ${/carpool}}"/>
+							<Text text="{i18n>NewPermit.Text.PermitDetailsDescNoCap}" class="permit-details-desc" visible="{= ${/permit/type} === 'EMPLOYEE_CAMPUS_RESIDENT'}"/> -->
+			<Text text="{parts: ['/permitFeeDetails/dailyFee', '/permitFeeDetails/recurringFee', '/permitFeeDetails/recurringFrequency'], formatter: '.formatter.getPermitAutoRenewText'}"
+			 class="sapUiTinyMarginTop" />
+			<Text text="{i18n>NewPermit.Text.CancelPermit}" class="sapUiTinyMarginTop" />
+			<Text text="{i18n>NewPermit.Text.PaymentJV}" class="permit-jv-text sapUiTinyMarginTop" visible="{= ${/newPermit/paymentMethod} === 'J'}" />
+			<!-- <Text text="You may park only one vehicle on campus at a time." class="sapUiTinyMarginTop" /> -->
+		</VBox>
+		<!-- Payment Options -->
+		<VBox visible="{= ${paymentOptions/payroll} || ${paymentOptions/studentAccount}}">
+			<Text text="{i18n>NewPermit.Text.PaymentMethod}" />
+			<!-- <SegmentedButton items="{/permit/paymentOptions}" selectedKey="{/newPermit/paymentMethod}" class=" permit-payment-segment" selectionChange="onChangePayment"> -->
+			<SegmentedButton selectedKey="{/newPermit/paymentMethod}" class="permit-payment-segment" selectionChange="onChangePayment">
+				<items>
+					<SegmentedButtonItem key="P" text="{i18n>NewPermit.Button.PayrollDeduction}" visible="{paymentOptions/payroll}" />
+					<SegmentedButtonItem key="S" text="{i18n>NewPermit.Button.StudentAccount}" visible="{paymentOptions/studentAccount}" />
+					<SegmentedButtonItem key="C" text="{i18n>NewPermit.Button.CreditDebit}" visible="{paymentOptions/creditCard}" />
+					<!--<SegmentedButtonItem key="J" text="{i18n>NewPermit.Button.JV}" visible="{/permit/paymentOptions/journalVoucher}"/>-->
+				</items>
+			</SegmentedButton>
+			<!-- <VBox items="{/permit/paymentOptions}" class="sapUiSmallMarginTop permit-payment-lot-radio"><RadioButton groupName="GroupB" text="{text}" class="permit-lot-radio" selected="{path:'/newPermit/paymentMethod', formatter: 'edu.mit.parking.formatter.getLotSelected'}" select="onChangePayment"/></VBox> -->
+			<Text text="{i18n>NewPermit.Text.PaymentDesc}" class="permit-sub-text permit-sub-text-payment sapUiTinyMarginBottom"
+			 visible="{= ${/permit/paymentOptions}.length > 0}" />
+		</VBox>
+		<!-- <Text text="{parts: ['/permitFeeDetails/dailyFee', '/permitFeeDetails/recurringFee', '/permitFeeDetails/recurringFrequency'], formatter: '.formatter.getCreditDisclaimer'}" class="permit-payment-credit " visible="{= ${/newPermit/paymentMethod} === 'C'}"/> -->
+		<Text text="{i18n>NewPermit.Text.CreditDisclaimer}" class="permit-payment-credit " visible="{= ${/newPermit/paymentMethod} === 'C'}" />
+		<Text text="{i18n>NewPermit.Text.PayrollDisclaimer}" class="permit-payment-credit " visible="{= ${/newPermit/paymentMethod} === 'P'}" />
+		<Text text="{i18n>NewPermit.Text.StudentAccountDisclaimer}" class="permit-payment-credit " visible="{= ${/newPermit/paymentMethod} === 'S'}" />
+		<!-- Cost Object -->
+		<VBox visible="{= ${paymentOptions/journalVoucher}}" class="sapUiSmallMarginBottom">
+			<Text text="{i18n>NewPermit.Text.CostObject}" />
+			<Input width="10rem" />
+		</VBox>
+		<!-- Terms of Service Agreement -->
+		<!-- <HBox class="sapUiSmallMarginTop">
+								<CheckBox class="permit-checkbox" selected="{/agreeToTermsAndConditions}"/>
+								<FormattedText htmlText="{i18n>NewPermit.Link.CarpoolTermsOfServiceHTML}" visible="{carpool}" class="permit-tos-link"/> -->
+		<!-- <HBox wrap="Wrap" class="permit-economy-container" visible="{carpool}">
+									<Text text="{i18n>NewPermit.Text.AgreeParkingOffice}" class=" permit-checkbox-text" />
+									<Link text="{i18n>NewPermit.Link.CarpoolTermsOfService}" class=" permit-checkbox-text sapUiTinyMarginEnd" target="_blank" href="http://web.mit.edu/facilities/"/>
+								</HBox> -->
+		<!-- <HBox wrap="Wrap" class="permit-economy-container" visible="{= !${carpool}}">
+									<Text text="{i18n>NewPermit.Text.AgreeParkingOffice}" class=" permit-checkbox-text" />
+									<Link text="{i18n>NewPermit.Link.TermsOfService}" class=" permit-checkbox-text sapUiTinyMarginEnd" target="_blank" href="http://web.mit.edu/facilities/" />
+								</HBox> -->
+		<!-- <FormattedText htmlText="{i18n>NewPermit.Link.TermsOfServiceHTML}" visible="{= !${carpool}}" class="permit-tos-link"/> -->
+		<!-- <FormattedText htmlText="&lt;input type=&quot;checkbox&quot;&gt; I have a bike and it is awesdomsmdfasdfsd! ({parts: ['/permit/cost/type', '/permit/cost/fee', '/permit/cost/cap', '/permit/economy'], formatter: '.formatter.getPermitCostSubText'})&lt;a href=&quot;url&quot;> Test &lt;/a&gt;&lt;/input&gt;"/> -->
+		<!-- </HBox> -->
+
+		<VBox visible="{= ${carpool} &amp;&amp; !${carpoolInvitation}}" class="sapUiSmallMarginTop">
+			<!--<Text class="permit-carpool-tos-text" text="Members understand that this carpool is not yet reserved at this time."/>-->
+			<Text class="permit-carpool-tos-text" text="Members understand that this carpool is not yet reserved at this time. After this carpool request is submitted, each invited member of the carpool will be sent an email invitation with a link to this application form. All members of the carpool must submit their application and opt into the carpool before the Parking and Transportation Office can fulfill your parking request. Please be sure that all members are aware of this required step." />
+			<!--<Text class="permit-carpool-tos-text"-->
+			<!--	text="Members will need a valid login to this website in order to complete the carpool application process."/>-->
+			<!-- <Text class="permit-tos-text" text="By submitting this form you are agreeing to the terms of service above."/> -->
+		</VBox>
+		<Text text="All members of the carpool must submit their application and opt into the carpool before the Parking and Transportation Office can fulfill your parking request."
+		 class="sapUiSmallMarginTop" visible="{carpoolInvitation}" />
+
+		<FormattedText htmlText="{i18n>NewPermit.HTML.AgreeToTOS}" class="sapUiTinyMarginTop" visible="{= !${carpool}}" />
+		<FormattedText htmlText="{i18n>NewPermit.HTML.AgreeToTOSCarpool}" class="sapUiTinyMarginTop" visible="{= ${carpool} || ${carpoolInvitation}}" />
+
+		<!-- Bottom Buttons -->
+		<HBox wrap="Wrap" class="sapUiMediumMarginTop">
+			<!-- <Button text="{parts: ['/newPermit/paymentMethod', 'carpoolInvitation'], formatter: '.formatter.getPermitSubmitButtonText'}"
+				class="blue-button sapUiLargeMarginEnd" press="onPressSubmit"/> -->
+			<Button text="Request Parking" visible="{= ${/newPermit/paymentMethod} !== 'C' &amp;&amp; !${carpoolInvitation}}"
+			 class="blue-button sapUiLargeMarginEnd" enabled="{= ${carpool} &amp;&amp; !${carpoolInvitation} ? ${/carpoolMemberValidated} : true}"
+			 press="onPressSubmit" />
+			<Button text="Accept Invitation" visible="{= ${/newPermit/paymentMethod} !== 'C' &amp;&amp; ${carpoolInvitation}}"
+			 class="blue-button sapUiLargeMarginEnd" enabled="{= ${carpool} &amp;&amp; !${carpoolInvitation} ? ${/carpoolMemberValidated} : true}"
+			 press="onPressSubmit" />
+			<VBox visible="{= ${/newPermit/paymentMethod} === 'C'}">
+				<Button text="Request Parking and Setup Credit Card Autopay" visible="{= !${carpoolInvitation}}" class="credit-button sapUiLargeMarginEnd"
+				 press="onPressSubmit" />
+				<Button text="Accept Invitation and Setup Credit Card Autopay" visible="{= ${carpoolInvitation}}" class="credit-button sapUiLargeMarginEnd"
+				 press="onPressSubmit" />
+				<Text text="(external page will open to take/process credit card information)" class="permit-sub-text credit-button-subt-text" />
+			</VBox>
+			<Link text="decline invitation" class="cancel-link  sapUiSmallMarginTop" press="onPressReject" visible="{= ${carpoolInvitation}}" />
+			<Link text="{i18n>Global.Link.Cancel}" class="sapUiSmallMarginTop cancel-link " press="onNavBack" visible="{= !${carpoolInvitation}}" />
+		</HBox>
+		<!-- Testing Cybersource Form -->
+		<FormattedText htmlText="{i18n>NewPermit.Text.CyberSourceForm}" />
+	</VBox>
+</core:FragmentDefinition>

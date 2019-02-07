@@ -1,0 +1,143 @@
+<mvc:View controllerName="edu.mit.parking.features.permit.PermitDetails" 
+	xmlns:html="http://www.w3.org/1999/xhtml" 
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:core="sap.ui.core">
+	<Page title="{i18n>title}" showHeader="false" class="page">
+		<!-- Header -->
+		<core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML" />
+		<HBox width="100%" class="container">
+			<VBox class="main" width="100%" justifyContent="SpaceBetween">
+				<VBox>
+					<Text text="{i18n>Permit.Text.PermitDetails}" class="title-global" />
+					<Link text="{i18n>Global.Back}" press="onNavBack" class="sapUiTinyMarginBottom"/>
+					<VBox class="panel-permit " width="100%" busy="{sessionData>/busyFlags/permits}" busyIndicatorDelay="0">
+						<!-- Location Info -->
+						<HBox class="sapUiSmallMarginBottom border-bottom-grey ">
+							<!-- <core:Icon src="sap-icon://map-3" size="3rem" class="sapUiMediumMarginEnd" /> -->
+							<Image src="images/GoogleMaps.PNG" class="image-map" press="onPressMap" />
+							<VBox class="permit-location">
+								<core:Fragment fragmentName="edu.mit.parking.features.fragments.PermitDetails" type="XML" />
+								<!-- <ProgressIndicator percentValue="{= ${sessionData>permitFeeDetails/annualCapProgress} / ${sessionData>permitFeeDetails/annualCap} * 100}" displayValue="${sessionData>permitFeeDetails/annualCapProgress}/${sessionData>permitFeeDetails/annualCap} " state="None" width="100%" class="progress-indicator" visible="{= ${sessionData>permitFeeDetails/annualCap} > 0 &amp;&amp; ${sessionData>permitFeeDetails/annualCapProgress} !== 0 }" /> -->
+								<!--	<HBox class="progressIndicator"><ProgressIndicator percentValue="{= ${runningBalance} / ${costCap} * 100}" displayValue="${runningBalance}" state="None" width="100%"/><Text text="${runningBalance}" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/></HBox>-->
+							</VBox>
+						</HBox>
+						<!-- Payment Info -->
+						<HBox class="sapUiSmallMarginBottom border-bottom-grey">
+							<core:Icon src="sap-icon://sales-quote" size="3rem" class="sapUiLargeMarginEnd sapUiSmallMarginBegin" />
+							<VBox>
+								<Text text="{i18n>Permit.Text.PaymentInformation}" class="list-content-header-text" />
+								<Text text="{parts: ['sessionData>paymentMethod', 'sessionData>cardLastFour'], formatter: '.formatter.getPaymentMethod'}" class="list-content-text" />
+								<Link text="{i18n>Permit.Link.UpdateCredit}" class="sapUiSmallMarginTop" visible="{= ${sessionData>paymentMethod} === 'C'}" press="updateCreditCard" />
+								<Link text="{i18n>Permit.Link.SwitchToCreditCard}" class="sapUiSmallMarginTop" visible="{= ${sessionData>paymentMethod} !== 'C'}" press="updateCreditCard" />
+							</VBox>
+						</HBox>
+						<!-- Contact Info -->
+						<HBox class="sapUiSmallMarginBottom border-bottom-grey" visible="{= ${sessionData>contactEmail}.length > 0 || ${sessionData>contactWorkPhone}.length > 0}">
+							<core:Icon src="sap-icon://contacts" size="2.5rem" class="sapUiLargeMarginEnd sapUiSmallMarginBegin" />
+							<VBox>
+								<HBox>
+									<Text text="{i18n>Permit.Text.ContactDetails}" class="list-content-header-text sapUiTinyMarginBottom " />
+									<Link text="edit" press="onPressEditContactInfo" class="sapUiSmallMarginBegin" visible="{= ${sessionData>canEditContactInfo} &amp;&amp; !${/flags/editContactInfo}}"/>
+								</HBox>
+								<HBox busyIndicatorDelay="0" busy="{/flags/contactInfo}">
+									<VBox class="" visible="{= ${sessionData>contactEmail}.length > 0}" width="12rem">
+										<Text text="{i18n>Permit.Text.Email}" class="list-content-text" />
+										<Text text="{sessionData>contactEmail}" visible="{= !${/flags/editContactInfo}}"/>
+										<Input id="input_email" value="{path:'/editContactInfo/email', type: '.CustomTypes.input'}" class="sapUiMediumMarginBottom" visible="{/flags/editContactInfo}" width="9rem" liveChange="removeValidationError" />
+									</VBox>
+									<VBox visible="{= ${sessionData>contactWorkPhone}.length > 0}">
+										<Text text="{i18n>Permit.Text.Phone}" class="list-content-text" />
+										<Text text="{sessionData>contactWorkPhone}" visible="{= !${/flags/editContactInfo}}"/>
+										<HBox visible="{/flags/editContactInfo}">
+											<MaskInput id="input_phone" mask="(999) 999-9999" placeholder="(123) 456-7890" value="{path: '/editContactInfo/phoneNumber', type: '.CustomTypes.input'}" width="9rem" class="sapUiTinyMarginBottom" visible="{/flags/editContactInfo}" change="removeValidationError" />
+											<Button text="Save" press="onPressSaveContactInfo" class="blue-button sapUiMediumMarginBegin" />
+											<Link text="cancel" class="sapUiSmallMarginBegin sapUiSmallMarginTop" press="onPressCancelEditContactInfo" />
+										</HBox>
+									</VBox>
+								</HBox>
+							</VBox>
+						</HBox>
+						<HBox class="sapUiSmallMarginBottom border-bottom-grey" visible="{= ${sessionData>carpoolMembers}.length > 0}" width="100%">
+							<core:Icon src="sap-icon://family-care" size="2.5rem" class="sapUiLargeMarginEnd sapUiSmallMarginBegin" />
+							<VBox class="" width="100%">
+								<Text text="{i18n>NewPermit.Text.CarpoolDetails}" class=" sapUiSmallMarginBottom list-content-header-text" />
+								<Table inset="false" width="80%" showNoData="false" class="transparent-table-header carpool-zebra-table " items="{sessionData>carpoolMembers}">
+									<columns>
+										<Column>
+											<Text text="{i18n>NewPermit.Text.ParticipantsName}" />
+										</Column>
+										<Column minScreenWidth="720px" demandPopin="false">
+											<Text text="{i18n>NewPermit.Text.Email}" />
+										</Column>
+										<Column minScreenWidth="472px" demandPopin="false">
+											<Text text="{i18n>NewPermit.Text.Status}" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<VBox>
+													<Text text="{sessionData>name}" />
+													<Text text="{sessionData>email}" class="permit-details-carpool-email sapUiTinyMarginTop " />
+													<HBox class="permit-details-carpool-status sapUiTinyMarginTop">
+														<Text text="{path: 'sessionData>status', formatter: '.formatter.getStatusText'}" class="success" visible="{= ${sessionData>status} === 'A'}" />
+														<Text text="{path: 'sessionData>status', formatter: '.formatter.getStatusText'}" class="warning" visible="{= ${sessionData>status} === 'P'}" />
+														<Text text="{path: 'sessionData>status', formatter: '.formatter.getStatusText'}" class="error" visible="{= ${sessionData>status} === 'R'}" />
+													</HBox>
+												</VBox>
+												<Text text="{sessionData>email}" />
+												<HBox>
+													<Text text="{path: 'sessionData>status', formatter: '.formatter.getStatusText'}" class="success" visible="{= ${sessionData>status} === 'A'}" />
+													<Text text="{path: 'sessionData>status', formatter: '.formatter.getStatusText'}" class="warning" visible="{= ${sessionData>status} === 'P'}" />
+													<Text text="{path: 'sessionData>status', formatter: '.formatter.getStatusText'}" class="error" visible="{= ${sessionData>status} === 'R'}" />
+												</HBox>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</VBox>
+						</HBox>
+						<!-- Vehicle Info -->
+						<VBox items="{path: 'sessionData>vehicles', events : { change: '.setRemoveVehicleVisibility' }}" height="100%" fitContainer="true" class="sapUiSmallMarginBegin">
+							<VBox class="sapUiSmallMarginBottom">
+								<core:Fragment fragmentName="edu.mit.parking.features.fragments.Vehicle" type="XML" />
+							</VBox>
+						</VBox>
+						<HBox class="sapUiSmallMarginTop">
+							<VBox class="permit-details-add-vehicle">
+								<HBox wrap="Wrap" class="sapUiTinyMarginBottom">
+									<Link text="{i18n>Permit.Link.AddAVehicle}" press="onPressAddVehicle" class="sapUiSmallMarginBegin sapUiTinyMarginEnd" />
+									<Text text="(up to {sessionData>maxNumberOfVehicles})" class="max-vehicle-text" />
+								</HBox>
+								<HBox wrap="Wrap" class="sapUiSmallMarginBottom" visible="{= ${sessionData>maxNumberTempVehicles} > 0}">
+									<Link text="{i18n>Permit.Link.AddTemporaryVehicle}" press="onPressAddTemporaryVehicle" class="sapUiSmallMarginBegin sapUiTinyMarginEnd" />
+									<Text text="(up to {sessionData>maxNumberTempVehicles})" class="max-vehicle-text" />
+								</HBox>
+							</VBox>
+						</HBox>
+
+					</VBox>
+					<!-- <HBox alignItems="End" class="listFooterPermit" width="100%" visible="{device>/system/phone}">
+                        <VBox width="100%" height="100%" alignItems="Center" justifyContent="Center" class="border-right">                      
+                            <Button text="{i18n>Dashboard.Button.AddVehicle}" class="addVehicleButton" type="Transparent" press="onPressAddVehicle" width="100%" enabled="{sessionData>/user/activePermit}"/>
+                        </VBox>
+                        <VBox width="100%" height="100%" alignItems="Center" justifyContent="Center">                           
+                            <Button text="{i18n>Dashboard.Button.AddTempVehicle}" class="addVehicleButton" type="Transparent" press="onPressAddTemporaryVehicle" width="100%" enabled="{sessionData>/user/activePermit}"/>
+                        </VBox>
+                    </HBox> -->
+					<Link text="{i18n>Permit.Link.RequestPermitForSpouse}" press="onPressRequestPermitForSpouse" class="sapUiSmallMarginTop bold-text " visible="{sessionData>/auth/CAN_REQUEST_SPOUSE_PERMIT}" />
+				</VBox>
+				<!-- Footer -->
+				<Image src="images/MIT_logo.png" class="sapUiTinyMarginTop" height="3rem" />
+			</VBox>
+			<VBox class="side">
+				<VBox class="" height="100%">
+					<Text text="{i18n>Permit.Text.Questions}" class="side-header-text" />
+					<core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML" />
+				</VBox>
+			</VBox>
+		</HBox>
+	</Page>
+</mvc:View>

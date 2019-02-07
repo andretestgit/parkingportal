@@ -1,0 +1,252 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "edu.mit.parking",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "edu.mit.parking.features.App",
+			"type": "XML",
+			"async": true
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.m": {},
+				"sap.tnt": {
+					"minVersion": ""
+				},
+				"sap.ui.commons": {
+					"minVersion": ""
+				},
+				"sap.ui.comp": {},
+				"sap.ui.table": {
+					"minVersion": ""
+				},
+				"sap.ui.unified": {
+					"minVersion": ""
+				},
+				"sap.ui.ux3": {
+					"minVersion": ""
+				},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "edu.mit.parking.i18n.i18n"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"async": true,
+				"viewType": "XML",
+				"viewPath": "edu.mit.parking.features",
+				"controlId": "app",
+				"controlAggregation": "pages"
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "dashboard",
+					"target": "dashboard"
+				},
+				{
+					"pattern": "AccountHistory",
+					"name": "accountHistory",
+					"target": "accountHistory"
+				},
+				{
+					"pattern": "ViolationHistory",
+					"name": "violationHistory",
+					"target": "violationHistory"
+				},
+				{
+					"pattern": "PermitDetails/{sPath}",
+					"name": "permitDetails",
+					"target": "permitDetails"
+				},
+				{
+					"pattern": "NewPermit",
+					"name": "newPermit",
+					"target": "newPermit"
+				},
+				{
+					"pattern": "NewVehicle/{bTempVehicle}/{sPath}/{iVehicleNumber}",
+					"name": "newVehicle",
+					"target": "newVehicle"
+				},
+				{
+					"pattern": "CancelPermit",
+					"name": "cancelPermit",
+					"target": "cancelPermit"
+				},
+				{
+					"pattern": "AppealViolation/{sPath}",
+					"name": "appealViolation",
+					"target": "appealViolation"
+				},
+				{
+					"pattern": "MyDepartment",
+					"name": "myDepartment",
+					"target": "myDepartment"
+				},
+				{
+					"pattern": "DepartmentVehicles/{sTab}",
+					"name": "departmentVehicles",
+					"target": "departmentVehicles"
+				},
+				{
+					"pattern": "VisitorParking",
+					"name": "visitorParking",
+					"target": "visitorParking"
+				},
+				{
+					"pattern": "RequestVisitorPermit",
+					"name": "requestVisitorPermit",
+					"target": "requestVisitorPermit"
+				},
+				{
+					"pattern": "ScratchPasses",
+					"name": "scratchPasses",
+					"target": "scratchPasses"
+				},
+				{
+					"pattern": "OrderScratchPasses",
+					"name": "orderScratchPasses",
+					"target": "orderScratchPasses"
+				},
+				{
+					"pattern": "TicketInfo/{sPath}",
+					"name": "ticketInfo",
+					"target": "ticketInfo"
+				},
+				{
+					"pattern": "Logout",
+					"name": "logout",
+					"target": "logout"
+				}
+			],
+			"targets": {
+				"dashboard": {
+					"viewName": "dashboard.Dashboard",
+					"transition": "show"
+				},
+				"accountHistory": {
+					"viewName": "account.AccountHistory",
+					"transition": "show"
+				},
+				"violationHistory": {
+					"viewName": "violation.ViolationHistory",
+					"transition": "show"
+				},
+				"permitDetails": {
+					"viewName": "permit.PermitDetails",
+					"transition": "show"
+				},
+				"newPermit": {
+					"viewName": "permit.NewPermit",
+					"transition": "show"
+				},
+				"newVehicle": {
+					"viewName": "vehicle.NewVehicle",
+					"transition": "show"
+				},
+				"cancelPermit": {
+					"viewName": "permit.CancelPermit",
+					"transition": "show"
+				},
+				"appealViolation": {
+					"viewName": "violation.AppealViolation",
+					"transition": "show"
+				},
+				"myDepartment": {
+					"viewName": "coordinator.myDepartment.MyDepartment",
+					"transition": "show"
+				},
+				"departmentVehicles": {
+					"viewName": "coordinator.departmentVehicles.DepartmentVehicles",
+					"transition": "show"
+				},
+				"visitorParking": {
+					"viewName": "coordinator.visitorParking.VisitorParking",
+					"transition": "show"
+				},
+				"requestVisitorPermit": {
+					"viewName": "coordinator.visitorParking.RequestVisitorPermit",
+					"transition": "show"
+				},
+				"scratchPasses": {
+					"viewName": "coordinator.scratchPasses.ScratchPasses",
+					"transition": "show"
+				},
+				"orderScratchPasses": {
+					"viewName": "coordinator.scratchPasses.OrderScratchPasses",
+					"transition": "show"
+				},
+				"ticketInfo": {
+					"viewName": "violation.TicketInfo",
+					"transition": "show"
+				},
+				"logout": {
+					"viewName": "logout.Logout",
+					"transition": "show"
+				},
+				"Dashboard1": {
+					"viewType": "XML",
+					"viewName": "Dashboard1"
+				},
+				"Andre": {
+					"viewType": "XML",
+					"viewName": "Andre"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		}
+	}
+}

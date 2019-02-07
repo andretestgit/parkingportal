@@ -1,0 +1,12 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core">
+    <ResponsivePopover placement="Bottom" showHeader="false" showArrow="false">
+        <content>
+            <List mode="SingleSelectMaster" selectionChange="onPressSort" width="10rem">
+                <StandardListItem id="sort_ascending" title="Sort Ascending" icon="sap-icon://sort-ascending" iconDensityAware="true" iconInset="true" class="filter-popover"/>
+                <StandardListItem id="sort_descending" title="Sort Descending" icon="sap-icon://sort-descending" iconDensityAware="true" iconInset="true" class="filter-popover"/>
+            </List>
+        </content>
+    </ResponsivePopover>
+</core:FragmentDefinition>

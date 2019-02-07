@@ -1,0 +1,261 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "edu.mit.parking",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "edu.mit.parking.features.App",
+			"type": "XML",
+			"async": true
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "edu.mit.parking.i18n.i18n"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"async": true,
+				"viewType": "XML",
+				"viewPath": "edu.mit.parking.features",
+				"controlId": "app",
+				"controlAggregation": "pages"
+			},
+			"routes": [{
+					"pattern": "",
+					"name": "dashboard",
+					"target": "dashboard"
+				}, {
+					"pattern": "AccountHistory",
+					"name": "accountHistory",
+					"target": "accountHistory"
+				}, {
+					"pattern": "ViolationHistory",
+					"name": "violationHistory",
+					"target": "violationHistory"
+				}, {
+					"pattern": "PermitDetails/{sPath}",
+					"name": "permitDetails",
+					"target": "permitDetails"
+				}, {
+					"pattern": "NewPermit",
+					"name": "newPermit",
+					"target": "newPermit"
+				}, {
+					"pattern": "NewVehicle/{bTempVehicle}/{bEdit}/{sPath}/{iVehicleNumber}",
+					"name": "newVehicle",
+					"target": "newVehicle"
+				}, {
+					"pattern": "CancelPermit/{sId}",
+					"name": "cancelPermit",
+					"target": "cancelPermit"
+				}, {
+					"pattern": "AppealViolation/{sPath}",
+					"name": "appealViolation",
+					"target": "appealViolation"
+				}, {
+					"pattern": "TicketInfo/{sPath}",
+					"name": "ticketInfo",
+					"target": "ticketInfo"
+				}, {
+					"pattern": "Logout",
+					"name": "logout",
+					"target": "logout"
+				}, {
+					"pattern": "JoinCarpool",
+					"name": "joinCapool",
+					"target": "joinCarpool"
+				}, {
+					"pattern": "TestNewPermit",
+					"name": "testNewPermit",
+					"target": "testNewPermit"
+				}, {
+					"pattern": "parkingRequested",
+					"name": "parkingRequested",
+					"target": "parkingRequested"
+
+				}, {
+					"pattern": "cyberUpdateSuccess",
+					"name": "cyberUpdateSuccess",
+					"target": "cyberUpdateSuccess"
+
+				}, {
+					"pattern": "cyberError",
+					"name": "cyberError",
+					"target": "cyberError"
+
+				}, {
+					"pattern": "cyberCancel",
+					"name": "cyberCancel",
+					"target": "cyberCancel"
+				},
+				{
+					"pattern": "cyberUpdateCancel",
+					"name": "cyberUpdateCancel",
+					"target": "cyberUpdateCancel"
+				},
+				{
+					"pattern": "cyberUpdateError",
+					"name": "cyberUpdateError",
+					"target": "cyberUpdateError"
+				},
+				{
+					"pattern": "permitGrid",
+					"name": "permitGrid",
+					"target": "permitGrid"
+				},
+				{
+                    "pattern": "Status",
+                    "name": "status",
+                    "target": "status"
+                }
+
+			],
+			"targets": {
+				"dashboard": {
+					"viewName": "dashboard.Dashboard",
+					"transition": "show"
+				},
+				"accountHistory": {
+					"viewName": "account.AccountHistory",
+					"transition": "show"
+				},
+				"violationHistory": {
+					"viewName": "violation.ViolationHistory",
+					"transition": "show"
+				},
+				"permitDetails": {
+					"viewName": "permit.PermitDetails",
+					"transition": "show"
+				},
+				"newPermit": {
+					"viewName": "permit.NewPermit",
+					"transition": "show"
+				},
+				"newVehicle": {
+					"viewName": "vehicle.NewVehicle",
+					"transition": "show"
+				},
+				"cancelPermit": {
+					"viewName": "permit.CancelPermit",
+					"transition": "show"
+				},
+				"appealViolation": {
+					"viewName": "violation.AppealViolation",
+					"transition": "show"
+				},
+				"ticketInfo": {
+					"viewName": "violation.TicketInfo",
+					"transition": "show"
+				},
+				"logout": {
+					"viewName": "logout.Logout",
+					"transition": "show"
+				},
+				"joinCarpool": {
+					"viewName": "permit.JoinCarpool",
+					"transition": "show"
+				},
+				"testNewPermit": {
+					"viewName": "permit.TestNewPermit",
+					"transition": "show"
+				},
+				"parkingRequested": {
+					"viewName": "permit.PermitRequested",
+					"transition": "show"
+				},
+				"cyberUpdateSuccess": {
+					"viewName": "cybersource.UpdateSuccess",
+					"transition": "show"
+				},
+				"cyberError": {
+					"viewName": "cybersource.Error",
+					"transition": "show"
+				},
+				"cyberCancel": {
+					"viewName": "cybersource.Cancel",
+					"transition": "show"
+				},
+				"cyberUpdateCancel": {
+					"viewName": "cybersource.UpdateCancel",
+					"transition": "show"
+				},
+				"cyberUpdateError": {
+					"viewName": "cybersource.UpdateError",
+					"transition": "show"
+				},
+				"permitGrid": {
+					"viewName": "permit.PermitGrid",
+					"transition": "show"
+				},
+				"status": {
+                    "viewName": "status.Status",
+                    "transition": "show"
+                }
+
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			},
+			{
+				"uri": "css/less.css"
+			}]
+		}
+	}
+}

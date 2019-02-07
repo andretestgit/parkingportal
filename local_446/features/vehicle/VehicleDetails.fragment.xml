@@ -1,0 +1,105 @@
+<core:FragmentDefinition xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <!--	<l:Grid defaultSpan="L3 M3 S12" class="sapUiLargeMarginTop"><l:content><Text text="{path:'{/tempVehicle}', formatter: '.formatter.getTypeOfVehicle'} {vehicleNumber} {i18n>Vehicle.Text.Details}"><layoutData><l:GridData span="L12 M12 S12"/></layoutData></Text><VBox><Text text="{i18n>Vehicle.Text.Make}"/><Input value="{make}" width="{= ${device>/system/phone} ? '10rem' : '7rem'}"/></VBox><VBox ><Text text="{i18n>Vehicle.Text.Model}"/><Input value="{model}" width="{= ${device>/system/phone} ? '10rem' : '7rem'}"/></VBox><VBox ><Text text="{i18n>Vehicle.Text.Color}"/><ComboBox selectedKey="{color}" width="{= ${device>/system/phone} ? '7rem' : '10rem'}"/></VBox><VBox><Text text="{i18n>Vehicle.Text.LicensePlate}"/><Input value="{licensePlate}" width="{= ${device>/system/phone} ? '10rem' : '7rem'}"/><layoutData><l:GridData span="L2 M2 S12" linebreak="true"/></layoutData></VBox><VBox><Text text="{i18n>Vehicle.Text.State}"/><ComboBox selectedKey="{state}" width="{= ${device>/system/phone} ? '7rem' : '10rem'}"/></VBox></l:content></l:Grid>-->
+    <VBox wrap="Wrap" class="" width="100%">
+        <HBox wrap="Wrap" width="100%">
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom vehicle-input-container">
+                  <HBox>
+                    <Text text="{i18n>Vehicle.Text.Year}" />
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                </HBox>
+                <Input value="{path: 'year', type: '.CustomTypes.year'}" liveChange="onFilterMake"   class="vehicle-input input" maxLength="4" 
+                />
+               
+            </VBox>
+            <!-- <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom"><Text text="{i18n>Vehicle.Text.Year}" /><Input value="{year}" width="{= ${device>/system/phone} ? '17rem' : '5rem'}" liveChange="removeValidationError" class="vehicle-input input" type="Number"/></VBox> -->
+            <!-- Input -->
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom vehicle-input-container" >
+                <HBox>
+                    <Text text="{i18n>Vehicle.Text.Make}"/>
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                </HBox>
+                <!--<Input value="{path: 'make', type: '.CustomTypes.input'}" liveChange="removeValidationError" class="vehicle-input input" enabled="{= ${year}.length === 4}" />-->
+                	<Input value="{path: 'make', type: '.CustomTypes.input'}" placeholder="" type="Text" 
+						textFormatMode="Value" showSuggestion="true"  suggestionItems="{ path: 'lookups/make'}"
+						 change="onChangeMake" filterSuggests="true" 
+						 liveChange="removeValidationError" startSuggestion="0"
+						maxSuggestionWidth="auto" class="vehicle-input input ">
+						<suggestionItems>
+							<core:ListItem key="{id}" text="{text}" />
+						</suggestionItems>
+					</Input>
+                <!--<ComboBox selectedKey="{path: 'make', type: '.CustomTypes.combo'}" change="onChangeMake" items="{lookups>/vehicle/makesAndModels}" class="vehicle-combo combo"  busy="{lookups>/busyFlags/vehicle}">-->
+                <!--    <core:Item key="{lookups>id}" text="{lookups>text}" />-->
+                <!--</ComboBox>-->
+                
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom vehicle-input-container" >
+                <HBox>
+                    <Text text="{i18n>Vehicle.Text.Model}" />
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                </HBox>
+                <!--<Input value="{path: 'model', type: '.CustomTypes.input'}" liveChange="removeValidationError" class="vehicle-input input" enabled="{= ${year}.length === 4}" />-->
+                <Input value="{path: 'model', type: '.CustomTypes.input'}" placeholder="" type="Text" 
+						textFormatMode="Value" showSuggestion="true"  suggestionItems="{ path: 'lookups/model'}"
+						filterSuggests="true"   startSuggestion="0"
+						liveChange="removeValidationError"
+						maxSuggestionWidth="auto" class="vehicle-input input ">
+						<suggestionItems>
+							<core:ListItem key="{id}" text="{text}" />
+						</suggestionItems>
+					</Input>
+                <!--<ComboBox selectedKey="{path: 'model', type: '.CustomTypes.combo'}" change="removeValidationError" class="vehicle-combo combo" visible="{= ${config/make} === 'S'}" enabled="{= ${make}.length > 0}" busy="{lookups>/busyFlags/vehicle}">-->
+                <!--    <core:Item key="{lookups>id}" text="{lookups>text}" />-->
+                <!--</ComboBox>-->
+            </VBox>
+            <!-- <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom"><Text text="{i18n>Vehicle.Text.Color}" /><ComboBox selectedKey="{color}" width="{= ${device>/system/phone} ? '17rem' : '8rem'}" change="removeValidationError" items="{lookups>/vehicle/color}" class="vehicle-combo combo"><core:Item key="{lookups>name}" text="{lookups>name}" /></ComboBox></VBox> -->
+        </HBox>
+        <HBox wrap="Wrap" width="100%">
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom vehicle-input-container" >
+                <!--<HBox>-->
+                <!--    <Text text="{i18n>Vehicle.Text.Year}" />-->
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                <!--</HBox>-->
+                <!--<Input value="{path: 'year', type: '.CustomTypes.year'}" liveChange="onRestrictNumber" class="vehicle-input input" maxLength="4" />-->
+                 <HBox>
+                    <Text text="{i18n>Vehicle.Text.Body}" />
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                </HBox>
+                <ComboBox selectedKey="{path: 'bodyType', type: '.CustomTypes.combo'}" change="removeValidationError" items="{lookups>/vehicle/bodyTypes}" class="vehicle-combo combo" busy="{lookups>/busyFlags/vehicle}">
+                    <core:Item key="{lookups>id}" text="{lookups>text}"/>
+                </ComboBox>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom vehicle-input-container" >
+                <HBox>
+                    <Text text="{i18n>Vehicle.Text.Color}" />
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                </HBox>
+                <Input value="{path: 'color', type: '.CustomTypes.input'}" liveChange="allowOnlyLetters" class="vehicle-input input" />
+                <!--<ComboBox selectedKey="{path: 'color', type: '.CustomTypes.combo'}" change="removeValidationError" items="{lookups>/vehicle/colors}" class="vehicle-combo combo" visible="{= ${config/color} === 'S'}" busy="{lookups>/busyFlags/vehicle}">-->
+                <!--    <core:Item key="{lookups>id}" text="{lookups>text}" />-->
+                <!--</ComboBox>-->
+            </VBox>
+        </HBox>
+        <HBox wrap="Wrap">
+            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom vehicle-input-container">
+                <HBox>
+                    <Text text="{i18n>Vehicle.Text.LicensePlate}" />
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                </HBox>
+                <Input value="{path: 'plateNumber', type: '.CustomTypes.licensePlate'}" maxLength="10" liveChange="changeLicense" class="vehicle-input input" />
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd  sapUiSmallMarginBottom vehicle-input-container">
+                <HBox>
+                    <Text text="{i18n>Vehicle.Text.State}" />
+                    <!-- <Text text="*" class="required-field-astrix"/> -->
+                </HBox>
+                <ComboBox selectedKey="{path: 'plateState', type: '.CustomTypes.combo'}" change="onChangeState" items="{lookups>/vehicle/states}" class="vehicle-combo combo" busy="{lookups>/busyFlags/vehicle}">
+                    <core:Item key="{lookups>state}" text="{lookups>text}"/>
+                </ComboBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>

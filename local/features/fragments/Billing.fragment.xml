@@ -1,0 +1,37 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <VBox class="dashboard-tile">
+        <HBox justifyContent="SpaceBetween" alignItems="End" class="listHeader">
+            <Text text="{i18n>Dashboard.Text.MyBilling}" class="bold-text" />
+            <Link text="{i18n>Dashboard.Link.TransactionHisory}" press="onPressTransactionHistory" class="bold-text nav-link" visible="{= ${/state} !== 'HISTORY'}" enabled="{sessionData>/user/activePermit}"/>
+        </HBox>
+        <VBox items="{path:'sessionData>/billing/items', events : { change: '.calculateOutstandingBalance' }}">
+            <CustomListItem class="listItem">
+                <HBox justifyContent="SpaceBetween">
+                    <VBox>
+                        <HBox>
+                            <!-- <Text text="{path: 'sessionData>periodStartDate', formatter: '.formatter.getDateWithoutYear'} - {path: 'sessionData>periodEndDate', formatter: '.formatter.getDateWithoutYear'}" class="sapUiSmallMarginBottom sapUiSmallMarginEnd text-section-head" /> -->
+                            <Text text="{path: 'sessionData>periodStartDate', formatter: '.formatter.getBillingMonth'}" class="sapUiSmallMarginBottom sapUiSmallMarginEnd text-section-head"/>
+                            <Text text="{i18n>Dashboard.Text.Open}" visible="{parts: ['sessionData>periodStartDate', 'sessionData>periodEndDate'], formatter: '.formatter.getOpenBilling'}" class="openBilling"/>
+                        </HBox>
+                        <VBox items="{sessionData>autoDeductions}">
+                            <!-- <Text text="{path:'sessionData>date', formatter: '.formatter.getDateWithoutYear'} {path:'sessionData>deductionType', formatter:'.formatter.getDeductionType'}: {parts: ['sessionData>amount','sessionData>../periodStartDate', 'sessionData>../periodEndDate'], formatter: '.formatter.getBillingPeriodAmount'}" class="" /> -->
+                            <Text text="{path:'sessionData>date', formatter: '.formatter.getDateWithoutYear'} {path:'sessionData>deductionType', formatter:'.formatter.getDeductionType'}: ${path: 'sessionData>amount', formatter: '.formatter.getCurrency'}" class="" />
+                        </VBox>
+                    </VBox>
+                    <Text text="${sessionData>amount}" class="billAmount" wrapping="false" />
+                </HBox>
+            </CustomListItem>
+        </VBox>
+        <VBox class="listFooterBilling" visible="{= ${sessionData>/billing/deductionType} === 'CREDIT_CARD'}">
+            <HBox justifyContent="SpaceBetween">
+                <Text text="{i18n>Dashboard.Text.BillingSummary}" class=""/>
+                <Text text="${sessionData>/billing/outstandingBalance}" class="h1"/>
+            </HBox>
+            <Button text="{i18n>Dashboard.Button.PayFullBalance}" icon="sap-icon://lead" class="green-button" press="onPressPayFullBalance"/>
+        </VBox>
+    </VBox>
+</core:FragmentDefinition>

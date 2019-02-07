@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+    <Text text="{sessionData>location}" class="list-content-header-text" visible="{= ${sessionData>location}.length > 0}" />
+    <Text text="Parking Assignment Pending" class="list-content-header-text" visible="{= ${sessionData>location}.length === 0}"
+    />
+    <HBox wrap="Wrap" visible="{= !${sessionData>carpool}}">
+        <Text text="{parts:[ 'sessionData>permitFeeDetails/dailyFee', 'sessionData>permitFeeDetails/recurringFee', 'sessionData>permitFeeDetails/recurringFrequency'], formatter: '.formatter.getPermitCost'}"
+            class="list-content-text sapUiTinyMarginEnd" />
+        <Text text="{i18n>Dashboard.Text.CostCap} ${path:'sessionData>permitFeeDetails/annualCap', formatter: '.formatter.getNumberWithComma'})"
+            class="list-content-text italic-text" visible="{= ${sessionData>permitFeeDetails/annualCap} > 0}" />
+    </HBox>
+    <HBox class="permit-cost-container" visible="{= ${sessionData>carpool}}" wrap="Wrap">
+        <Text text="{parts: ['sessionData>permitFeeDetails/recurringFee','sessionData>carpoolMembers'], formatter: '.formatter.getCarpoolPermitCost'}"
+            class="list-content-text sapUiTinyMarginEnd" />
+        <Text text="{parts: ['sessionData>permitFeeDetails/recurringFee','sessionData>carpoolMembers'], formatter: '.formatter.getCarpoolPermitBreakdown'}"
+            class="list-content-text italic-text" />
+    </HBox>
+    <HBox visible="{= ${sessionData>permitFeeDetails/recurringFee} > 0 &amp;&amp; ${sessionData>permitFeeDetails/dailyFee} > 0}" wrap="Wrap">
+        <Text text="{parts: ['sessionData>permitFeeDetails/dailyFee', 'sessionData>permitFeeDetails/recurringFee', 'sessionData>permitFeeDetails/recurringFrequency'], formatter: '.formatter.getPermitFeeText'}"
+            class="list-content-text" />
+    </HBox>
+    <ProgressIndicator percentValue="{= ${sessionData>permitFeeDetails/annualCapProgress} / ${sessionData>permitFeeDetails/annualCap} * 100}"
+								 displayValue="${sessionData>permitFeeDetails/annualCapProgress} / ${sessionData>permitFeeDetails/annualCap} " state="None" width="100%" class="progress-indicator"
+								 visible="{= ${sessionData>permitFeeDetails/annualCap} > 0 }" />
+    <FormattedText htmlText="{parts: ['sessionData>permitTypeId','sessionData>validStart', 'sessionData>validEnd'], formatter: 'edu.mit.parking.formatter.getPermitValidityText'}"
+        class="permit-validity-text"  />
+    
+</core:FragmentDefinition>

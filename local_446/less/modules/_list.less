@@ -1,0 +1,67 @@
+.list {
+    &-header {
+        background: @dark-gray;
+        min-height: 3rem;
+        padding: 1rem 1rem .5rem 1rem !important;
+        &-text {
+            //font-weight: 500;
+            color: gray;
+            padding-bottom: 3px;
+        }
+        &-link {
+            font-weight: 500;
+        }
+    }
+    &-footer {
+        background: @light-gray-hover;
+        padding: .5rem 1rem .5rem 1rem !important;
+        &-billing {
+            background: @light-gray-hover;
+            height: 5rem;
+            padding: .5rem 1rem .5rem 1rem !important;  
+        }
+        &-permit {
+            background: @light-gray-hover;
+            height: 3rem;
+            & .sapMFlexItem {
+                width: 100%;
+            }
+        }
+    }
+    &-item {
+        padding: 1rem 1.2rem !important;
+    }
+    &-billing  {
+        &-amount {
+            font-size: @h1;     
+            font-weight: 300;      
+        }
+        &-details {
+            font-size: @h4;
+        }
+        &-open {
+            background: @highlight;
+        }
+        &-date-container {
+            padding-top:10px;
+        }
+    }
+    &-header-text {      
+        font-size:@h4;
+        color:@gray-text;;
+        font-weight: 500;        
+    }
+    &-content-header-text {
+        color: black;
+        font-size: @h4;
+        //font-weight: 500;
+    }
+    &-content-text {
+        color: @gray-text;
+    }
+    &-no-data-text {
+        color: #d1d0d0;
+
+    }
+   
+}

@@ -1,0 +1,216 @@
+.green-button {
+    & .sapMBtnInner {
+        // color: white!important;
+        // background: green!important;
+        // padding: 0 2rem;
+        color: white !important;
+        background: green !important;
+        padding: 5px 10px !important;
+        display: inline-flex;
+        align-items: center;
+        width: auto;
+        justify-content: center;
+        height: 3rem;
+        border: none;
+    }
+    &.sapMBtn .sapMBtnIcon {
+        color: white;
+    }
+    & .sapMBtnContent {
+        padding: 20px;
+    }
+}
+
+.blue-button {
+    & .sapMBtnInner {
+        color: white !important;
+        background: @dark-blue  !important; //padding: 0 2rem;
+        padding: 5px 2rem; //font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        width: auto;
+        justify-content: center;
+        height: 2.5rem;
+        border: none;
+    }
+    & .sapMBtnInner.sapMBtnText {
+        padding: 0 2rem; //font-size: 1rem;
+    }
+    &.sapMBtn .sapMBtnIcon {
+        color: white;
+    }
+    & .sapMBtnContent {
+        padding: 10px;
+        font-size: @font-size;
+    }
+}
+
+.credit-button {
+    .blue-button();
+    margin-right: 3rem;
+}
+
+.red-button {
+    & .sapMBtnInner {
+        color: white !important;
+        background: @red  !important; //padding: 0 2rem;
+        padding: 5px 2rem; //font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        width: auto;
+        justify-content: center;
+        height: 2.5rem;
+        border: none;
+    }
+    & .sapMBtnInner.sapMBtnText {
+        padding: 10px 2rem; //font-size: 1rem;
+    }
+    &.sapMBtn .sapMBtnIcon {
+        color: white;
+    }
+    & .sapMBtnContent {
+        padding: 10px;
+        font-size: @font-size;
+    }
+}
+
+.btn-8 {
+    & .sapMBtnInner {
+        width: 8rem !important;
+    }
+}
+
+.cancel-link {
+    color: @dark-blue !important;
+}
+
+.addVehicleButton {
+    height: 3rem;
+    padding: 0;
+    &.sapMBtn:hover .sapMBtnInner .sapMBtnContent {
+        color: @gray-text !important;
+    }
+    & .sapMBtnInner {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border: none;
+    }
+    & .sapMBtnInner .sapMBtnContent {
+        width: 100%;
+        font-weight: 500;
+        font-size: @h4;
+        color: #555 !important;
+        &:hover {
+            //color: @gray-text!important;
+        }
+    }
+    &.sapUiSizeCompact .sapMBtn {
+        padding: none !important;
+        height: 3rem !important;
+    }
+}
+
+
+
+.request-permit-button {
+    height: 3rem;
+    padding: 0; // &.sapMBtn:hover .sapMBtnInner .sapMBtnContent {
+    //     color: @gray-text!important;
+    // }
+    & .sapMBtnInner {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background: @dark-blue  !important; //padding: 0 2rem;
+        border: none;
+    }
+    & .sapMBtnInner .sapMBtnContent {
+        width: 100%;
+        font-weight: 500;
+        font-size: @h4;
+        color: white !important;
+        line-height: 2.375rem!important;
+        &:hover {
+            //color: @gray-text!important;
+        }
+    }
+    &.sapUiSizeCompact .sapMBtn {
+        padding: none !important;
+        height: 3rem !important;
+    }
+}
+
+.submit-button {
+    & .sapMBtnInner {
+        color: white !important;
+        background: @dark-blue  !important; //padding: 0 2rem;
+        padding: 5px 2rem; //font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        width: auto;
+        justify-content: center;
+        height: 2.5rem;
+        border: none;
+    }
+    &.sapMBtn .sapMBtnIcon {
+        color: white;
+    }
+    & .sapMBtnContent {
+        padding: 2.5rem;
+    }
+}
+
+.expand-button {
+    transition: .5s;
+    &.sapMTB-Transparent-CTX .sapMBtn:not(.sapMBtnDisabled)>.sapMBtnInner:not(.sapMToggleBtnPressed):not(.sapMBtnEmphasized):not(.sapMBtnAccept):not(.sapMBtnReject):not(.sapMBtnActive):hover {
+        background: rgba(179, 179, 179, 0);
+    }
+}
+
+.seg_button.sapMSegB .sapMSegBBtn {
+    width: auto !important;
+    height: auto !important;
+    padding: .3rem 1rem !important;
+    font-size: @font-size;
+}
+
+.icon-button {
+    &  .sapMBtnActive {
+        background: transparent!important;
+        border: 0px solid black;
+    }
+   
+    cursor: default!important;
+    &-success .sapUiIcon::before{
+        color: @success;
+    }
+    &-warning .sapUiIcon::before{
+        color: @warning;
+    }
+    &-error .sapUiIcon::before{
+        color: @error;
+    }
+}
+.sapMTB-Transparent-CTX .sapMBtn:not(.sapMBtnDisabled)>.sapMBtnInner:not(.sapMToggleBtnPressed):not(.sapMBtnEmphasized):not(.sapMBtnAccept):not(.sapMBtnReject):not(.sapMBtnActive):hover {
+    background: transparent!important;
+}
+
+
+
+
+@media (max-width: 482px) {
+    .credit-button .sapMBtnInner .sapMBtnContent {
+        white-space: normal;
+        line-height: 1.2rem; //  padding: 30px 10px;
+    }
+    .credit-button .sapMBtnInner.sapMBtnText {
+        padding: 30px 10px;
+    }
+    .credit-button-subt-text {
+        margin-bottom: 1rem;
+        margin-top: 18px;
+        margin-right: 0;
+    }
+}
+

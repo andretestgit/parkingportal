@@ -1,0 +1,43 @@
+<mvc:View controllerName="edu.mit.parking.features.coordinator.scratchPasses.ScratchPasses" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:t="sap.ui.table">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="sapUiLargeMarginBottom scrollContainer">
+        <Text text="{i18n>Dashboard.Text.ScratchPass}" class="title-global title-global-padding"/>
+        <VBox width="{= ${device>/system/phone} ? '100%' : '50%'}" class="responsive-padding">
+            <VBox class="white-panel ">
+                <HBox justifyContent="End" wrap="Wrap">
+                    <!-- <VBox><Text text="{i18n>Dashboard.Text.Display}"/><ComboBox></ComboBox></VBox> -->
+                    <Button text="{i18n>Dashboard.Button.OrderScratchPass}" class="blue-button" press="onPressOrderScratchPass"/>
+                </HBox>
+                <!-- <Table inset="false" mode="None" items="{path:'sessionData>/coordinator/scratchPasses'}" class="sapUiSmallMarginTop transparent-table-header"><columns><Column width="" hAlign="Begin"><Text text="{i18n>Dashboard.Text.NumberOfScratch}"/></Column><Column width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin"><Text text="{i18n>Dashboard.Text.RequestDate}" /></Column><Column width="" minScreenWidth="1450px" demandPopin="true" hAlign="Begin"><Text text="{i18n>Dashboard.Text.JV}" /></Column></columns><items><ColumnListItem ><cells><Text text="{path: 'sessionData>quantity'}" /><Text text="{sessionData>location}" /><Text text="{path: 'sessionData>date', formatter: '.formatter.getDateWithYear'}" /><Text text="{path: 'sessionData>jv'}" /></cells></ColumnListItem></items></Table> -->
+                <t:Table selectionMode="None" rows="{sessionData>/coordinator/scratchPasses}" ariaLabelledBy="title" class="sapUiSmallMarginTop transparent-table-header" visibleRowCount="{/visibleRowCount}" enableColumnReordering="false">
+                    <t:columns>
+                        <t:Column sortProperty="quantity">
+                            <Text text="{i18n>Dashboard.Text.NumberOfScratch}" />
+                            <t:template>
+                                <Text text="{path: 'sessionData>quantity'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column sortProperty="date">
+                            <Text text="{i18n>Dashboard.Text.RequestDate}" />
+                            <t:template>
+                                <Text text="{path: 'sessionData>date', formatter: '.formatter.getDateWithYear'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column sortProperty="jv">
+                            <Text text="{i18n>Dashboard.Text.JV}" />
+                            <t:template>
+                                <Text text="{path: 'sessionData>jv'}" />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                    <!-- <t:rowActionTemplate><t:RowAction><t:RowActionItem icon="sap-icon://pdf-attachment" press="onPressDownloadPDF" visible="{= ${sessionData>status} === 'Accepted'}"/><t:RowActionItem icon="sap-icon://sys-cancel" press="onPressDownloadPDF" visible="{= ${sessionData>status} === 'Accepted'}"/></t:RowAction></t:rowActionTemplate> -->
+                </t:Table>
+            </VBox>
+        </VBox>
+    </ScrollContainer>
+</mvc:View>

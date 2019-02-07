@@ -1,0 +1,185 @@
+@min-height: 650px;
+.panel {
+    background: white;
+    //border-radius: 6px;
+    padding: 2rem;     
+    //box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+    box-shadow: @box-shadow;    
+    //border-radius: 2px;
+}
+
+.panel-account {
+    .panel();        
+    max-width: 55rem;  
+    min-height: @min-height;  
+}
+
+.panel-permit {
+   .panel();
+   max-width: 60rem;
+   min-height: @min-height; 
+}
+
+.panel-permit-details {
+    max-width: 60rem;
+}
+
+.panel-violation {
+    .panel();
+    max-width: 60rem;
+    min-height: @min-height;
+}
+
+.panel-ticket {
+    .panel();
+    max-width: 40rem;
+   // min-width: 35rem;
+}
+
+.panel-ticket-payment {
+    .panel();
+    min-width: 25rem;
+}
+
+.panel-vehicle {
+    .panel();
+    max-width: 60rem;
+}
+
+.panel-appeal {
+    .panel();
+    min-height: @min-height;
+    max-width: 60rem;
+}
+
+.panel-new-permit {
+    .panel();
+    max-width: 50rem;
+    padding-bottom: 4rem;
+}
+.panel-permit-grid {
+    .panel();
+}
+
+.panel-no-border {
+    border-bottom: none;
+    margin-bottom: .3rem;
+}
+.panel-no-border .sapMPanelContent:not(.sapMPanelBGTransparent) {
+    border: none!important;
+   // padding: 2rem 3rem;
+}
+.panel-no-padding .sapMPanelContent:not(.sapMPanelBGTransparent) {
+    padding: 0 0!important;
+    //border: 1px solid grey;
+}
+.panel-parking-activity-container {
+    padding: .5rem 0;
+}
+
+.panel-grid-table .sapMListTblRow {
+    height: 2.9rem;
+}
+.panel-status {
+    .panel();
+    max-width: 70rem;
+}
+
+.panel-legend {
+    .panel();
+    width: 30rem;
+    padding: 2rem 1rem 1rem 1rem!important;
+}
+
+@media (min-width: 1100px) {
+    // .panel-violation {
+    //     margin-right: 1rem;
+    // }
+    .panel-appeal {
+        margin-right: 1rem;
+    }    
+}
+@media (max-width: 1099px) {
+    .panel-appeal {
+        max-width: 100%;
+    }
+    // .panel-account {
+    //     max-width: 100%;
+    // }   
+    .panel-appeal {
+        padding: 1rem;
+    } 
+    .panel-violation {
+        max-width: 35rem;
+    }
+}
+@media(max-width: 950px) {
+    .panel-violation {
+       max-width:31rem;
+    }
+}
+
+@media(min-width: 760px) {
+    .panel-no-border .sapMPanelContent:not(.sapMPanelBGTransparent) {        
+        padding: 2rem 3rem;
+    }
+}
+@media (min-width: 680px) and (max-width: 759px) {
+    .panel-no-border .sapMPanelContent:not(.sapMPanelBGTransparent) {       
+        padding: 2rem 1rem;
+    }
+}
+@media (max-width: 679px) {
+    .panel-no-border .sapMPanelContent:not(.sapMPanelBGTransparent) {        
+        padding: .5rem 0;
+    }
+}
+
+@media (min-width: 450px) and (max-width: 850px){
+    .panel-permit {
+        padding: 2rem 1rem;
+    }
+    .panel-new-permit {
+        padding: 2rem 1rem;
+    }
+    .panel-account {
+        padding: 2rem 1rem;
+    }
+    .panel-violation {
+        padding: 2rem 1rem;
+    }
+    .panel-ticket {
+        padding: 2rem 1rem;
+    }
+    .panel-permit-grid{
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 449px){
+    .panel-permit {
+        padding: 1rem .5rem;
+    }
+    .panel-new-permit {
+        padding: 1rem 0;
+    }
+    .panel-account {
+        padding: 1rem 0 0 0;
+    }
+    .panel-violation {
+        padding: 1rem 0 0 0;
+    }
+    .panel-header {
+        padding: 0 .6rem;
+    }
+    .panel-ticket {
+        padding: 1rem;
+    }
+    .panel-appeal, .panel-account, .panel-permit, .panel-violation {
+        min-height: auto;
+    }
+    .panel-permit-grid{
+        padding: 1rem 0;
+    }
+
+}

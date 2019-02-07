@@ -1,0 +1,54 @@
+<mvc:View controllerName="edu.mit.parking.features.account.AccountHistory" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class=" scrollContainer">
+        <Text text="{i18n>AccountHistory.Text.AccountHistory}" class="title-global title-global-padding  sapUiSmallMarginBottom" />
+        <HBox wrap="Wrap" class="" width="100%">
+            <!--Left Container-->
+            <VBox class="responsive-padding account-tile">
+                <VBox class="white-panel">
+                    <HBox class="sapUiSmallMarginBottom ">
+                        <VBox class="sapUiSmallMarginEnd">
+                            <Text text="{i18n>Ticket.Text.Display}" />
+                            <ComboBox items="{sessionData>/helperSets/accountHistoryType}" selectedKey="ALL" selectionChange="onFilterTable" class="combo">
+                                <core:Item key="{sessionData>id}" text="{sessionData>text}" />
+                            </ComboBox>
+                        </VBox>
+                        <VBox>
+                            <Text text="{i18n>Ticket.Text.Timeframe}" />
+                            <ComboBox items="{sessionData>/helperSets/accountTimeframe}" selectedKey="ALL" class="combo">
+                                <core:Item key="{sessionData>id}" text="{sessionData>text}" selectionChange=""/>
+                            </ComboBox>
+                        </VBox>
+                    </HBox>
+                    <!--<Table id="ticket_table" inset="false" items="{path:'/activity'}" noDataText="{i18n>Global.Text.NoTickets}"><columns><Column width="6rem" hAlign="Begin"><Text text="{i18n>Global.Text.Date}" /></Column><Column minScreenWidth="Tablet" demandPopin="true" hAlign="Begin"><Text text="{i18n>Global.Text.Description}" /></Column><Column width="4rem" demandPopin="true" hAlign="Begin"><Text text="{i18n>Global.Text.Amount}" /></Column></columns><items><ColumnListItem press="onPressTicketRow"><cells><Text text="{date}" /><Text text="{description}" /><Text text="{amount}" /></cells></ColumnListItem></items></Table>-->
+                    <!--Testing Panels for table control-->
+                    <Toolbar class="noBorderBottom  ">
+                        <Table inset="false" showNoData="false" class="transparent-table-header">
+                            <columns>
+                                <Column width="8rem">
+                                    <Text text="{i18n>Global.Text.Date}" />
+                                </Column>
+                                <Column minScreenWidth="550px" demandPopin="true">
+                                    <Text text="{i18n>Global.Text.Description}" />
+                                </Column>
+                                <Column width="4rem" hAlign="End">
+                                    <Text text="{i18n>Global.Text.Amount}" />
+                                </Column>
+                                <Column width="2rem"></Column>
+                            </columns>
+                        </Table>
+                    </Toolbar>
+                    <VBox id="vbox_history" items="{path: '/activity', factory: '.onCreateTable'}"></VBox>
+                </VBox>
+            </VBox>
+            <!--  Right Container-->
+            <VBox visible="{= !${device>/system/phone}}" class="responsive-padding account-billing-tile">
+                <core:Fragment fragmentName="edu.mit.parking.features.fragments.Billing" type="XML" />
+            </VBox>
+        </HBox>
+    </ScrollContainer>
+</mvc:View>

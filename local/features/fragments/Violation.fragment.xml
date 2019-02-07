@@ -1,0 +1,44 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <Text text="{i18n>Ticket.Text.ViolationDetails}" class="title-global sapUiTinyMarginTopBottom " visible="{= ${device>/system/phone}}"/>
+    <VBox class="ticket-container" width="100%">
+        <VBox class="sapUiSmallMarginBottom">
+            <HBox justifyContent="SpaceBetween" visible="{= !${device>/system/phone}}">
+                <Text text="{i18n>Ticket.Text.ViolationDetails}" class="grey-text" />
+                <Text text="${sessionData>amount}" class="ticket-payment-amount" />
+            </HBox>
+            <HBox justifyContent="End" visible="{= ${device>/system/phone}}">
+                <Text text="${sessionData>amount}" class="ticket-payment-amount" />
+            </HBox>
+            <Text text="{path:'sessionData>violationDate', formatter:'.formatter.getDateWithYear'} at {path:'sessionData>violationDate', formatter:'.formatter.getStandardTime'}" class=" ticket-date" />
+            <Text text="#{sessionData>ticketId}" class=" ticket-number" />
+            <Text text="{sessionData>location}" class=" ticket-lot" />
+            <Text text="{sessionData>description}" wrap="Wrap" class="sapUiSmallMarginTop" />
+            <Link text="View Paper Ticket" class=" ticket-view-paper"/>
+        </VBox>
+        <Carousel class="" loop="true" width="100%" heigh="20rem">
+            <pages>
+                <Image src="local/images/an-illegally-parked-car-at-a-busy-bus-stop-in-oxted-surrey-uk-EN0B06.jpg" alt="Example picture of screw"/>
+                <Image src="local/images/lithuania-car-crushing-mayor.jpg" alt="Example picture of screw" />
+            </pages>
+        </Carousel>
+        <HBox class="sapUiSmallMarginTop " justifyContent="SpaceBetween" visible="{= ${/role} === 'COORDINATOR'}">
+            <!-- <Button text="{i18n>Ticket.Button.PayWithCC}" class="green-button sapUiSmallMarginEnd" enabled="{= ${sessionData>status} !== 'ADJUDICATION_APPROVED' &amp;&amp; ${sessionData>status} !== 'PAID'}"/> -->
+            <Button text="{i18n>Ticket.Button.PayWithJV}" class="green-button" enabled="{= ${sessionData>status} !== 'ADJUDICATION_APPROVED' &amp;&amp; ${sessionData>status} !== 'PAID'}"/>
+            <VBox>
+                <Link text="{i18n>Ticket.Link.Appeal}" press="onPressAppealViolation" enabled="{sessionData>canAppeal}" />
+                <Text text="{i18n>Ticket.Text.30Days}" class="grey-text h3" />
+            </VBox>
+        </HBox>
+        <HBox class="sapUiSmallMarginTop " justifyContent="SpaceBetween" visible="{/showAppealPayment}">
+            <Button text="{i18n>Ticket.Button.MakePayment}" class="green-button" enabled="{= ${sessionData>status} !== 'ADJUDICATION_APPROVED' &amp;&amp; ${sessionData>status} !== 'PAID'}"/>
+            <VBox>
+                <Link text="{i18n>Ticket.Link.Appeal}" press="onPressAppealViolation" enabled="{sessionData>canAppeal}" />
+                <Text text="{i18n>Ticket.Text.30Days}" class="grey-text h3" />
+            </VBox>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>

@@ -1,0 +1,35 @@
+<mvc:View controllerName="edu.mit.parking.features.permit.NewPermit" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+	<Page title="{i18n>title}" showHeader="false" class="page"> 
+		<!-- Header -->
+		<core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML"/>
+		<HBox class="sapUiLargeMarginTop" justifyContent="Center" visible="{= !${/dataLoaded} || ${sessionData>/busyFlags/permits}}">
+			<BusyIndicator size="2rem"/>
+		</HBox>
+		<HBox width="100%" class="container" visible="{= ${/dataLoaded} &amp;&amp; !${sessionData>/busyFlags/permits}}" busy="{= ${/flags/requestPermit}}" busyIndicatorDelay="0">
+			<VBox class="main main-permit" width="100%">
+				<!-- Testing Permits Dropdown -->
+				<!--<ComboBox width="15rem" selectedKey="EMPLOYEE" class="combo" items="{sessionData>/permitsModel}" selectionChange="onChangePermit">-->
+				<!--	<core:Item key="{sessionData>id}" text="{sessionData>title}"/>-->
+				<!--</ComboBox>-->
+				<!-- Title -->
+				<Text text="{/permit/title}" class="title-global"/>
+				 <Link text="{i18n>Global.Back}" press="onNavBack" class="sapUiTinyMarginBottom"/>
+				<VBox class="panel-new-permit">
+					<VBox id="permit_panel_container" binding="{/permit/permitTypes/0}">
+						<core:Fragment fragmentName="edu.mit.parking.features.fragments.NewPermit" type="XML" class=""/>
+					</VBox>
+				</VBox>
+				<!-- Footer -->
+				<Image src="images/MIT_logo.png" class="sapUiTinyMarginTop" height="3rem"/>
+			</VBox>
+			<VBox class="side">
+				<!-- <Text text="{i18n>Dashboard.Text.MITPrograms}" class="side-header-text"/>
+				<Link text="{i18n>Dashboard.Link.Atlas}" class="sapUiMediumMarginBottom link" wrapping="true"/> -->
+				<Text text="{i18n>Global.Text.QuestionContact}" class="side-header-text"/>
+				<core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML"/>
+				<!-- <Text text="{i18n>Dashboard.Text.ClaimYour}" /><Link text="{i18n>Dashboard.Text.ElectriceVehicleRebate}" class="sapUiMediumMarginBottom link" wrapping="true" /><Text text="{i18n>Global.Text.QuestionContact}" /><core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML" /> -->
+			</VBox>
+		</HBox>
+	</Page>
+</mvc:View>

@@ -1,0 +1,309 @@
+.responsive-header {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.main {
+    background: #f3f3f3;
+    min-height: calc(~"100vh - 70px");
+    min-width: 1000px;
+}
+
+.side {
+    min-width: 25rem;
+    width: 100%;
+    min-height: calc(~"100vh - 70px");
+    background: white;
+    padding: 6.7rem 3rem 3rem 3rem;
+}
+
+.container {
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto 0 0;
+    background: #f3f3f3;
+}
+
+.container-dashboard {
+    max-width: 1000px
+}
+
+.container-violation {
+    .container();
+}
+
+.page {
+    background: #f3f3f3;
+}
+
+// .panel {
+//     background: white;
+//     padding: 2rem;
+//     margin: 1rem 1rem 1rem 0;
+// }
+.dashboard-tile {
+    min-width: 470px; // box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+    max-width: 480px;
+    box-shadow: @box-shadow;
+    border-radius: 2px;
+}
+
+@media (min-width: 4001px) {
+    .sapMShellContent {
+        width: 50%;
+    }
+}
+
+@media (min-width: 3501px) and (max-width: 4000px) {
+    .sapMShellContent {
+        width: 60%;
+    }
+}
+
+@media (min-width: 3001px) and (max-width: 3500px) {
+    .sapMShellContent {
+        width: 70%;
+    }
+}
+
+@media (min-width: 2501px) and (max-width: 3000px) {
+    .sapMShellContent {
+        width: 80%;
+    }
+}
+
+@media (min-width: 2300px) and (max-width: 2500px) {
+    .sapMShellContent {
+        width: 90%;
+    }
+}
+
+@media (min-width: 1851px) {
+    .responsive-header {
+        margin: 0 13rem;
+    }
+    .main {
+        margin: 0 13rem;
+    }
+}
+
+@media (min-width: 1751px) and (max-width: 1850px) {
+    .responsive-header {
+        margin: 0 7rem;
+    }
+    .main {
+        margin: 0 7rem;
+    }
+}
+
+@media (min-width: 1651px) and (max-width: 1750px) {
+    .responsive-header {
+        margin: 0 5rem;
+    }
+    .main {
+        margin: 0 5rem;
+    }
+}
+
+@media (min-width: 1551px) and (max-width: 1650px) {
+    .responsive-header {
+        margin: 0 3rem;
+    }
+    .main {
+        margin: 0 3rem;
+    }
+}
+
+@media (min-width: 1351px) and (max-width: 1550px) {
+    .responsive-header {
+        margin: 0 2rem;
+    }
+    .main {
+        margin: 0 2rem;
+    }
+}
+
+@media (min-width: 1151px) and (max-width: 1350px) {
+    .responsive-header {
+        margin: 0 1rem;
+    }
+    .main {
+        margin: 0 1rem; //min-width: 850px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .responsive-header {
+        margin: 0 .5rem;
+    }
+    .main {
+        margin: .5rem .5rem;
+    }
+}
+@media (min-width: 1371px) and (max-width: 1470px) {
+    .dashboard-tile {
+        min-width: 420px;
+        width: 420px;
+    }
+    .main {
+        min-width: 900px;
+    }
+}
+
+@media (min-width: 1186px) and (max-width: 1370px) {
+    .dashboard-tile {
+        min-width: 370px;
+        width: 370px;        
+    }
+    .main {
+        min-width: 800px;
+    }
+}
+@media (min-width: 801px) and (max-width: 1250px) {
+    .side {
+        padding: 6.7rem 2rem 3rem 2rem;
+    }
+}
+@media (min-width: 971px) and (max-width: 1185px) {
+    // .dashboard-tile {
+    //     min-width: 320px;
+    //     width: 320px;        
+    // }
+    .main {
+        min-width: 700px;
+    }
+}
+@media (max-width: 1185px) {
+    .dashboard-tile {
+        min-width: auto;
+        width: 100%;    
+        max-width:none;    
+    }
+    .dashboard-tile-container {
+        width:100%;
+    }
+}
+@media (min-width: 971px) and (max-width: 1070px) {  
+    .main {
+        min-width: 600px;
+    }
+}
+@media (min-width: 871px) and (max-width: 970px) {  
+    .main {
+        min-width: 500px;
+    }
+}
+
+
+
+
+
+// @media (max-width: 1150px) {
+//     .dashboard-tile {
+//         min-width: 25rem;
+//         width: 100%;
+//     }
+//     .dashboard-tile-container{
+//             width:100%;
+//         }
+//     .main {       
+//         min-width: 850px;
+//     }
+// }
+@media (max-width: 1280px) {
+    // .dashboard-tile {
+    //    width: 100%;
+    //    min-width: 15rem;
+    // }
+    // .dashboard-tile-container{
+    //     width:100%;
+    // }
+}
+
+@media(min-width: 800px) {
+    .container-violation {
+        flex-wrap: nowrap;
+    }
+}
+
+@media (min-width: 872px) {
+    .container {
+        flex-wrap: nowrap;
+    }
+    // .dashboard-tile {
+    //     min-width: auto;
+    //     width: 100%;
+    // .responsive-header {
+    //     padding-left: 2rem;
+    //     padding-right: 2rem;
+    // }
+    // .main {
+    //     padding: 2rem 2rem 2rem 2rem;
+    // }
+}
+
+@media only screen and (max-width: 871px) {
+    .side {
+        width: 100%;
+        min-height: auto;
+        padding: 2rem 1rem;
+    } 
+    .dashboard-tile {
+            min-width: auto!important;
+            width: 100%;
+    }    
+    .dashboard-tile-container{
+            width:100%;
+         }
+    // .page {
+    //     background: white;
+    // }
+    .main {
+        min-height: 50vh;
+        width: auto;
+        max-width: auto!important;
+        min-width: auto!important;
+    }
+}
+
+@media (max-width: 390px) {
+    .main {
+        margin: .5rem .3rem;
+    }
+    .main-permit {
+        margin: .5rem 0!important;
+    }
+}
+
+.vehicle-input-year {
+    width: 6rem !important;
+}
+
+.vehicle-input {
+    width: 9rem !important;
+}
+
+.vehicle-combo {
+    width: 9rem !important;
+}
+.permit-location-input {
+    width: 15rem;
+}
+
+@media only screen and (max-width: 500px) {
+    .vehicle-input-year {
+        width: 100% !important;
+    }
+    .vehicle-input {
+        width: 100% !important;
+    }
+    .vehicle-combo {
+        width: 100% !important;
+    }
+    .vehicle-input-container {
+        width: 100% !important;
+    }
+    .permit-location-input {
+        width: 100% !important;
+    }
+}

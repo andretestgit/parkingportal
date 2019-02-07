@@ -1,0 +1,19 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <HBox>
+        <VBox class="sapUiTinyMarginTop">
+            <Image src="{path: 'sessionData>bodyType', formatter: '.formatter.getVehicleImage'}" width="60px" class="sapUiMediumMarginEnd" />
+            <Link text="{i18n>Permit.Link.Remove}" press="onPressRemoveVehicle" visible="{/canRemoveVehicles}" />
+        </VBox>
+        <VBox class="sapUiTinyMarginTop">
+            <!-- <Text text="{path: 'sessionData>licensePlate', formatter: '.formatter.dashboardVehicleNumber'}" />-->
+            <Text text="{path:'sessionData>plateNumber', formatter:'.formatter.dashboardVehicleNumber'}" class="text-section-head" />
+            <Text text="{sessionData>year} {sessionData>make} {sessionData>model}" />
+            <Text text="{sessionData>plateNumber}"/>
+            <Text text="Expires on {path:'sessionData>endDate', formatter:'.formatter.getDateWithoutYear'}" visible="{sessionData>temporary}" class="red-text" />
+        </VBox>
+    </HBox>
+</core:FragmentDefinition>

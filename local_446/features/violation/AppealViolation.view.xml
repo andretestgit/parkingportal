@@ -1,0 +1,40 @@
+<mvc:View controllerName="edu.mit.parking.features.violation.AppealViolation" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core">
+    <Page title="{i18n>title}" showHeader="false" class="page">
+        <!-- Header -->
+        <core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML"/>
+        <VBox class="main" justifyContent="SpaceBetween">
+            <VBox>
+                <Text text="{i18n>Appeal.Text.AppealViolation}" class="title-global title-global-padding sapUiTinyMarginBottom" />
+                <HBox width="100%" justifyContent="SpaceBetween" class="container-violation">
+                    <!--Left Container-->
+                    <VBox class="" width="100%">
+                        <VBox class="panel-appeal sapUiSmallMarginBottom" width="100%">
+                            <VBox width="{= ${device>/system/phone} ? '100%' : '75%'}" class="">
+                                <Text text="{i18n>Appeal.Text.AppealDetails}" class="sapUiSmallMarginBottom grey-text"/>
+                                <Text text="{i18n>Appeal.Text.AppealReason}"/>
+                                <TextArea width="100%" value="{/appeal/appealText}" class="appeal-description sapUiMediumMarginBottom"/>
+                                <!-- <HBox class="sapUiMediumMarginTop"><Text text="{i18n>Appeal.Text.AttachFile}" class="sapUiTinyMarginEnd"/><Text text="{i18n>Appeal.Text.MaxSize}"/></HBox><Text text="{i18n>Appeal.Text.FileFormats}"/>-->
+                                <UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="4" multiple="true" sameFilenameAllowed="true" instantUpload="false" showSeparators="Inner" change="onChange" fileDeleted="onFileDeleted" uploadUrl="/sap/opu/odata/sap/zmm_create_purchase_order_srv/POAttachmentSet" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch" uploadComplete="onUploadComplete" noDataDescription="{i18n>Appeal.Text.FileFormats}" noDataText="{i18n>Appeal.Text.AttachFile} {i18n>Appeal.Text.MaxSize}" numberOfAttachmentsText=" " beforeUploadStarts="onBeforeUploadStarts" class="sapUiLargeMarginBottom appeal-file-upload"></UploadCollection>
+                                <HBox class="sapUiSmallMarginBottom">
+                                    <Button text="{i18n>Global.Button.Submit}" class="sapUiLargeMarginEnd submit-button" press="onPressSubmit"/>
+                                    <Link text="{i18n>Global.Link.Cancel}" class="sapUiTinyMarginTop" press="onPressCancel"/>
+                                </HBox>
+                            </VBox>
+                        </VBox>
+                    </VBox>
+                    <!--  Right Container-->
+                    <VBox id="details-container" visible="{= !${device>/system/phone}}">
+                        <core:Fragment fragmentName="edu.mit.parking.features.fragments.Violation" type="XML" />
+                    </VBox>
+                </HBox>
+            </VBox>
+            <!-- Footer -->
+            <Image src="images/MIT_logo.png" class="sapUiTinyMarginTop" height="3rem"/>
+        </VBox>
+    </Page>
+</mvc:View>

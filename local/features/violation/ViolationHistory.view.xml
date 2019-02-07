@@ -1,0 +1,73 @@
+<mvc:View controllerName="edu.mit.parking.features.violation.ViolationHistory" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="scrollContainer">
+        <Text text="{i18n>Ticket.Text.TicketsAndAppeals}" class="title-global  title-global-padding sapUiSmallMarginBottom" />
+        <HBox wrap="Wrap" height="100%" class="">
+            <!--Left Container-->
+            <VBox class="responsive-padding ticket-tile" height="100%" fitContainer="true">
+                <VBox class="white-panel">
+                    <HBox>
+                        <VBox class="sapUiSmallMarginBottom ">
+                            <Text text="{i18n>Ticket.Text.Display}" />
+                            <ComboBox items="{sessionData>/helperSets/ticketType}" selectedKey="ALL" selectionChange="onFilterTable" class="combo">
+                                <core:Item key="{sessionData>id}" text="{sessionData>text}" />
+                            </ComboBox>
+                        </VBox>
+                        <!-- <VBox><Text text="{i18n>Ticket.Text.Timeframe}" /><ComboBox /></VBox> -->
+                    </HBox>
+                    <Table id="ticket_table" inset="false" mode="SingleSelectMaster" items="{path:'sessionData>/tickets'}" noDataText="{i18n>Global.Text.NoTickets}" selectionChange="onPressTicketRow" class="transparent-table-header ">
+                        <columns>
+                            <Column width="2rem" hAlign="Begin" visible="{= !${device>/system/phone}}"></Column>
+                            <Column width="5rem" hAlign="Begin">
+                                <Text text="{i18n>Global.Text.Date}" />
+                            </Column>
+                            <Column width="" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Global.Text.Description}" />
+                            </Column>
+                            <Column width="5rem" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Ticket.Text.PlateNumber}" />
+                            </Column>
+                            <Column width="5rem" demandPopin="true" hAlign="Begin">
+                                <Text text="{i18n>Global.Text.Amount}" class="bold-text"/>
+                            </Column>
+                            <Column width="20%" hAlign="Begin">
+                                <Text text="{i18n>Ticket.Text.Status}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem press="onSelectRow">
+                                <cells>
+                                    <CheckBox select="onPressCheckbox" />
+                                    <Text text="{path: 'sessionData>violationDate', formatter:'.formatter.getDateWithYear'}" />
+                                    <Text text="{sessionData>description}" />
+                                    <Text text="{sessionData>vehicle/plateNumber}" />
+                                    <Text text="${sessionData>amount}" />
+                                    <Text text="{path:'sessionData>status', formatter:'.formatter.getTicketStatus'}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+            <!--  Right Container-->
+            <VBox id="details-container" visible="{= !${device>/system/phone}}" class="responsive-padding">
+                <!--Ticket info -->
+                <VBox visible="{= ${/state} === 1}" class="">
+                    <core:Fragment fragmentName="edu.mit.parking.features.fragments.Violation" type="XML" />
+                </VBox>
+                <!--Payment info-->
+                <VBox class="white-panel ticket-payment-tile" visible="{= ${/state} === 2}" width="100%">
+                    <HBox justifyContent="SpaceBetween">
+                        <Text text="{i18n>Ticket.Text.Violations} {/numberSelectedTickets}" class="grey-text h2 sapUiSmallMarginTop" />
+                        <Text text="${/selectedTicketsAmount}" class="ticket-payment-amount" />
+                    </HBox>
+                    <Button text="{i18n>Ticket.Button.MakePayment}" class="sapUiMediumMarginTop green-button"/>
+                </VBox>
+            </VBox>
+        </HBox>
+    </ScrollContainer>
+</mvc:View>

@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <!-- <Text text="{i18n>Global.Text.QuestionContact}" class="side-header-text" /> -->
+    <Link text="{i18n>Global.Link.ParkingOffice}" class=" link" wrapping="true" href="http://web.mit.edu/facilities/transportation/parking/index.html" target="_blank"/>
+    <Text text="{i18n>Global.Text.Located}" class="bold-text side-contact-text" />
+      <FormattedText htmlText="{i18n>Global.Text.Building}" class="side-contact-text" />
+    <Text text="{i18n>Global.Text.Hours}" class="side-contact-text" />   
+    <Link text="{i18n>Global.Text.EmailAddress}" class="side-contact-text " wrapping="true" href="mailto:mitparking@mit.edu"/>    
+    <Text text="{i18n>Global.Text.Phone}" class="side-contact-phone-text" />
+   
+</core:FragmentDefinition>

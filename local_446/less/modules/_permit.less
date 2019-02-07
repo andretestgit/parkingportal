@@ -1,0 +1,343 @@
+@import '../_vars';
+.permit {
+    &-link-addcomment {
+        margin-top: 6px;
+        font-size: 14px;
+    }
+    &-link-comment {
+        margin-bottom: -6px;
+        font-size: 14px;
+    }
+    &-link-another-vehicle {
+        margin-bottom: -.5rem;
+    }
+    &-vehicle-container {
+        margin-bottom: -.8rem;
+    }
+    &-input-lot {
+        width: 20rem !important;
+        margin-right: 1rem;
+    }
+    &-input-carpool {
+        width: 100%;
+    }
+    &-sub-text {
+        font-size: @h5;
+        color: @gray-text;
+        font-weight: 300;
+        &-payment {
+            max-width: 30rem;
+        }
+    }
+    &-comment-box {
+        top: 6px !important;
+    }
+    &-comment-container {
+        width: 28rem;
+    }
+    &-text-best-effort {
+        width: 580px;
+    }
+    &-comment-header .sapMFlexItem {
+        align-self: flex-end;
+    }
+    &-checkbox {
+        margin-left: -.5rem;
+        &-text {
+            margin-top: 4px;
+            margin-right: 3px;
+        }
+        &-text-price {
+            margin-top: 5px;
+            font-size: @h5;
+            color: @gray-text;
+            font-weight: 300;
+            
+        }
+        &-green-vehicle {
+            margin-top: -.3rem;
+        }
+    }
+    &-border-bottom {
+        border-bottom: 1px solid #cccccc;
+        padding-bottom: 2rem;
+    }
+    &-details {
+        padding: 1rem 2rem 2rem 1rem;
+        background-color: @light-gray-hover;
+        box-shadow: @box-shadow;
+        //box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+    }
+    &-details-add-vehicle {
+        margin-left: 5.6rem;
+    }
+    &-details-cost {
+        color: @red;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    &-details-cost-sub {
+        color: @red;
+        font-style: italic;
+        margin-top: 5px;
+    }
+    &-details-desc {
+        font-size: 15px;
+        font-style: italic;
+        font-weight: 300;
+        max-width: 600px;
+    }
+    &-payment-credit {
+        //font-size: 16px;
+       //font-weight: 400;
+        max-width: 680px;
+    }
+    &-header-text {
+        //font-size: 16px;
+        max-width: 680px;
+    }
+    &-payment-desc {
+        max-width: 35rem;
+    }
+    &-add-vehicle-sub-text {
+        margin-top: 6px;
+    }
+    &-fee-green-discount {
+        text-decoration: line-through;
+    }
+    &-preferred-lot-radio{
+        display: none;
+        margin-left: -.9rem;
+        & .sapMRbB .sapMRbBOut{
+            height: 1.2rem!important;
+            width: 1.2rem!important;
+        }
+        & .sapMLabel {
+            font-size: 18px;
+        }
+    }
+    &-text-area {
+        & .sapMInputDivWrapper{
+            min-height: 5rem!important;
+        }
+        &.sapMInputBaseInner {
+            min-height: 5rem!important;
+        }
+        &.sapMInputBase {
+            min-height: 5rem!important;
+        }
+    }
+    &-header-text {
+        font-size: 16px;
+        //color: @gray-text!important;
+    }
+    &-sub-header-text {
+        font-size: @h4;
+        color: @gray-text !important;
+    }
+    &-vehicle-number {
+        font-size: @h5;
+        color: @light-gray-text !important;
+    }
+    &-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    &-tos-link {      
+        margin-top: 6px;        
+    }
+    &-economy-container {
+        margin-top: 2px;
+    }
+    &-renew-text {
+        font-size: @h3;
+    }
+    &-tos-text {
+        font-weight: 600;
+    }
+    &-jv-text {
+        font-weight: 600;
+    }
+    &-carpool-tos-text {
+    	margin-bottom: 4px;
+    }
+    &-location {
+        margin-left: .8rem;
+    }
+    &-location-container .sapMFlexItem {
+        width: 100%;
+    }
+}
+.permit-validity-text {
+    margin-top: 8px;
+}
+.carpool-zebra-table tbody tr:nth-child(odd) {
+    background-color: #f5f5f5
+}
+
+.carpool-zebra-table .sapMLIBShowSeparator>td {
+    border: o;
+}
+
+.carpool-zebra-table .sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td, .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td {
+    border: 0;
+}
+
+.carpool-zebra-table .sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td, .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td {
+    border: 0;
+}
+.carpool-zebra-table .sapMListTblHighlightCol + .sapMListTblHeaderCell, .sapMListTblHighlightCell + .sapMListTblCell {
+    padding-left: .5rem;
+}
+.carpool-email {
+    display: none;
+}
+
+
+
+@media(min-width: 523px) {
+    .permit-input-carpool {
+        width: 20rem!important;
+    }
+}
+
+@media (max-width:522px) {
+    // .permit-input-lot {
+    //     width: 10rem !important;
+    // }
+    .carpool-zebra-table {
+        width: 100%!important;
+    }
+  
+}
+
+@media (max-width: 501px) {
+    .permit-input-lot {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .permit-details-desc {
+        width: 100%
+    }
+    .permit-payment-credit {
+        width: 100%
+    }
+    .permit-header-text {
+        width: 100%
+    }
+}
+
+@media (max-width: 500px) {
+    .permit-preferred-lot-segment.sapMSegB .sapMSegBBtn {
+        width: 50%!important;
+        padding: 6px 10px 0 10px !important;
+    } 
+    .carpool-zebra-table .sapMListTblHighlightCol + .sapMListTblHeaderCell, .sapMListTblHighlightCell + .sapMListTblCell {
+        padding-left: 1rem;
+    }
+}
+@media (max-width: 555px) {
+    .permit-comment-container {
+        width: 100%;
+    } // .permit-checkbox-text-price {
+    //     margin: 0 0 0 2rem;
+    // }
+    .permit-text-best-effort {
+        width: 100%;
+    }
+    .permit-details {
+        padding: 1rem .5rem;
+    }
+    .permit-preferred-lot-radio {
+        display: block;
+    }
+    .permit-preferred-lot-segment {
+        display: none;
+    }
+}
+
+@media (max-width: 518px) {
+    .permit-green-driver-discount-container {
+        margin-bottom: .5rem;
+    }
+}
+
+@media (max-width: 429px) {
+    .permit-checkbox-text-price {
+        margin: 0;
+    }
+}
+
+@media (max-width: 425px) {
+    .permit-details-cost {
+        font-size: 18px;
+    }
+    .permit-details-cost-sub {
+        font-size: 14px;
+    }
+    .permit-economy-container {
+        margin-top: 2px;
+    }
+    .permit-tos-link {
+        margin-top: 10px;
+    }
+    .permit-checkbox-green-vehicle {
+        margin-top: -.5rem;
+    }
+}
+@media(max-width:380px) {
+    // .permit-input-lot {
+    //     width: 100% !important;       
+    // } 
+    .permit-cost-container {
+        margin-bottom: .5rem;
+    }
+    .carpool-email {
+        display: block;
+    }
+}
+
+.permit-details-carpool-email {
+    display: none;
+}
+.permit-details-carpool-status {
+    display: none;
+}
+@media(max-width:719px) {   
+    .permit-details-carpool-email {
+        display: block;
+    }
+}
+@media(max-width:471px) {   
+    .permit-details-carpool-status {
+        display: block;
+    }
+}
+
+@media (max-width:355px) {
+    .permit-details-add-vehicle {
+        margin-left: 0;
+    }
+}
+
+
+
+
+@media (max-width:350px) {
+    
+    .permit-payment-segment.sapMSegB .sapMSegBBtn {
+        padding: 0 5px 0 5px !important;
+    }
+  
+    .permit-preferred-lot-radio{        
+        & .sapMRbB .sapMRbBOut{
+            height: 1rem!important;
+            width: 1rem!important;
+        }
+        & .sapMLabel {
+            font-size: 15px;
+        }
+    }
+}

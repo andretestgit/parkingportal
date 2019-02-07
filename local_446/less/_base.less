@@ -1,0 +1,314 @@
+html.sap-desktop .sapMShellAppWidthLimited .sapMShellCentralBox {
+    width: 100%;
+    margin-left: auto;
+    left: 0;
+    background-color: #5f5f5f;
+    margin-right: auto;
+}
+.sapMText {
+    font-family: @font !important;
+    font-size: @font-size;
+    //font-size: 1.3rem;
+}
+.sapMTB-Transparent-CTX .sapMText {
+    font-size: @font-size;
+}
+.sapMInputBaseInner {
+    font-size: @font-size;
+}
+.sapMSelectListItemBase{
+    font-size: @font-size;
+}
+.sapMLnk {
+    font-family: @font !important;
+    font-size: @font-size;
+    color: @blue-link;
+    //font-size: 1rem;
+}
+.sapMLnk:hover:not(.sapMLnkDsbl) {
+    color: @blue-link-hover;
+}
+.sapUiBody {
+	font-family: adelle-sans, sans-serif;
+    font-style: normal;
+    font-size: @font-size;
+}
+
+.sapMBtnInner {
+    font-family: @font !important;
+    font-size: @font-size;
+   // font-size: 1.3rem;
+}
+.sapMLnk, .sapMBtnInner{
+    font-family: adelle-sans, sans-serif;
+    font-size: @font-size;
+}
+
+.sapMFT {
+	font-family: adelle-sans, sans-serif;
+    font-style: normal;	
+    font-size: @font-size;
+}
+.sapMListTbl .sapMText, .sapMListTbl .sapMLabel
+.h1 {
+    font-size: @h4;
+}
+
+.h2 {
+    font-size: @h2;
+}
+
+.h3 {
+    font-size: @h3;
+}
+
+.sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner {
+    color: white;
+}
+
+.scrollContainer {
+    height: calc(100% - 4rem) !important;
+    background: @light-gray  !important; // & .sapMScrollContScroll{
+    // padding-bottom: 2rem;
+    padding-bottom: 4rem !important; // }
+}
+
+// .sapMInputBaseInner {
+//     height: 2rem!important;
+// }
+
+
+//remove borders on focus
+.sapMFocus .sapMInputDivWrapper:not(.sapMInputBaseDisabledInner)::before {
+    border: none !important;
+}
+
+html.sap-desktop .sapMBtn:focus>.sapMFocusable {
+    outline: 0px dotted #000000 !important;
+    outline-offset: -3px;
+}
+
+html.sap-desktop .sapMLnk:focus:not(.sapMLnkDsbl) {
+    outline: 0px dotted #000000;
+}
+.sapMLIBFocusable:focus {
+    outline: none;
+}
+
+.sapMIBar.sapMHeader-CTX {
+    color: @red;
+    background-color: @red;
+    filter: none;
+    background-image: none;
+    height: 4rem;
+}
+
+
+.test {
+    color: @red;
+    background-color: @red;
+    filter: none;
+    background-image: none;
+    height: 4rem;
+}
+
+.sapMPage>.sapMPageHeader+section,
+.sapMPage>.sapMPageSubHeader+section,
+.sapMPage>.sapMPageHeader+.sapUiHiddenPlaceholder+section {
+    top: 4rem;
+}
+
+.sapMPanel .sapMPanelWrappingDiv .sapMPanelHdr,
+.sapMPanel .sapMPanelWrappingDivTb .sapMIBar.sapMTB {
+    padding-left: .2rem;
+    margin-left: 0rem;
+}
+
+.sapMListTblSubCntRow>.sapMListTblSubCntSpr,
+.sapMListTblSubCntRow>.sapMListTblSubCntHdr .sapMText,
+.sapMListTblSubCntRow>.sapMListTblSubCntHdr .sapMLabel {
+    color: @gray-text;
+    font-size: 14px;
+    padding-top: 0;
+    font-weight: 500;
+}
+
+
+.sapMBtnInner {
+    text-shadow: none !important;
+}
+
+.sapUiSizeCompact .sapMBtn {
+    height: 3.000rem;
+    padding: 0 0;
+}
+
+.sapUiSizeCompact .sapMBtnInner.sapMBtnText {
+    padding: none !important;
+    border-radius: 4px;
+}
+
+//Ui Table
+.sapUiTableCnt {
+    border-left: none!important;
+    border-right: none!important;
+    border-top: none!important;
+}
+
+.sapUiTableTr>td {
+    border-right: none!important;
+}
+
+.sapUiTableCol {
+    border-right: none!important;    
+    font-weight: 500!important;
+}
+
+.sapMIBar-CTX .sapMBtn:hover>.sapMBtnHoverable:not(.sapMBtnActive) {
+    background-color: @red-hover;
+    color: #346187;
+}
+
+.sapMShellBrandingBar {    
+    display: none;    
+}
+
+.sapUiRootBackground, .sapMShellGlobalOuterBackground {
+    background: #b7b7b7;;
+}
+
+.sapMSegB .sapMSegBBtn {
+    height: 2.5rem;
+    // padding: 6px 20px 0 20px;
+    padding: 0px 20px 0 20px; 
+   // padding-top: 6px!important;
+    width: auto!important;
+    font-size: 16px!important;
+    font-weight: 300!important;
+}
+
+//Input
+.sapMInputDivWrapper {
+    height: 2.5rem!important;
+}
+.sapMInputBase {
+   height: 2.5rem!important;
+}
+
+//combo
+.sapMComboBoxTextFieldArrow {
+    padding-top: 4px!important;
+    height:  calc(~"100% - 4px")!important;
+}
+
+
+.sapMInputBaseInner:not(textarea) {    
+    border-radius: 3px;
+}
+.sapMComboBoxTextField:not(textarea) {    
+    border-radius: 3px;
+}
+
+.sapMComboBoxTextFieldArrow {
+    line-height: 2rem;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.sapMInputDivWrapper {    
+    border-radius: 3px;    
+}
+//checkbox
+.sapMCbBg {
+    border-radius: 3px!important;
+}
+
+//icon focus
+html:not([data-sap-ui-browser^="ie"]):not([data-sap-ui-browser^="ed"]) .sapUiIcon:focus {
+    outline-width: 0px;
+}
+
+//panel
+.sapMTB-Transparent-CTX.sapMTB {
+    padding: 0;
+}
+
+//segbutton
+html.sap-desktop .sapMSegBBtnFocusable.sapMSegBBtnSel:focus {
+    outline: 0px dotted;
+    outline-offset: -3px;
+    outline-color: #ffffff;
+}
+
+.sapUiSizeCompact .sapMSegB {
+    height: 3rem!important;
+}
+
+.sapMSegBBtn.sapMSegBBtnSel {
+    background: @blue-link;
+}
+
+ .sapMSegBBtn:first-child {
+    border-top-left-radius: 10px!important;
+    border-bottom-left-radius: 10px!important;
+}
+
+.sapMSegBBtn:last-child {
+    border-top-right-radius: 10px!important;
+    border-bottom-right-radius: 10px!important;
+}
+.permit-payment-segment .sapMSegBBtn:nth-child(even) {
+    border-top-left-radius: 10px!important;
+    border-bottom-left-radius: 10px!important;
+}
+.sapMSegBBtn.sapMSegBBtnFocusable.sapMSegBBtnSel:hover, .sapMSegBBtnFocusable.sapMBtnActive:hover, html.sap-desktop .sapMSegBBtn.sapMSegBBtnFocusable.sapMSegBBtnSel:hover, html.sap-desktop .sapMSegBBtnFocusable.sapMBtnActive:hover {
+    background: @blue-link-hover;
+}
+
+//datepicker
+.sapUiSizeCompact .sapMInputValHelp {
+    height: 2.5rem!important;
+}
+
+.sapMInputValHelp>.sapMInputValHelpInner {
+    height: calc(~"2.5rem - 6px")!important;
+    padding-top: 6px;
+}
+
+.sapMInputValHelp {
+    padding-top: 0!important;
+}
+//image
+.sapMImgFocusable:focus {
+    outline: 0px dotted #000000;
+}
+
+//dialog
+html.sap-tablet .sapMDialog, html.sap-desktop .sapMDialog {
+    min-width: 30rem!important;
+}
+
+html.sap-phone .sapMDialog {
+    min-width: 98vw;
+}
+
+.sapMFlexBoxAlignContentStretch {
+    max-width: 100%;
+}
+.sapMFlexBox {
+    max-width: 100%;
+}
+
+//button
+// .sapUiSizeCompact .sapMBtnInner.sapMBtnText {
+//     padding-left: 0;
+//     padding-right: 0;
+// }
+
+@media (min-width: 450px) {
+    .sapMSegB .sapMSegBBtn {     
+        padding: 6px 20px 0 20px;      
+    
+    }
+}
+    

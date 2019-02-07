@@ -1,0 +1,10 @@
+<mvc:View  xmlns="sap.m" xmlns:core="sap.ui.core" controllerName="edu.mit.parking.features.cybersource.CyberSource"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:l="sap.ui.layout">
+	<Page title="{i18n>title}" showHeader="false" class="page">
+		<!-- Header -->
+		<core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML" />
+		<VBox width="100%" class="sapUiLargeMarginTop" busyIndicatorDelay="0" busy="true">
+
+		</VBox>		
+	</Page>
+</mvc:View>

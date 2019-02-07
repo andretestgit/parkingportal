@@ -1,0 +1,157 @@
+html.sap-desktop .sapMShellAppWidthLimited .sapMShellCentralBox {
+    width: 100%;
+    margin-left: auto;
+    left: 0;
+    background-color: #5f5f5f;
+    margin-right: auto;
+}
+.sapMText {
+    font-family: @font !important;
+    font-size: @font-size;
+    //font-size: 1.3rem;
+}
+.sapMTB-Transparent-CTX .sapMText {
+    font-size: @font-size;
+}
+.sapMInputBaseInner {
+    font-size: @font-size;
+}
+.sapMSelectListItemBase{
+    font-size: @font-size;
+}
+.sapMLnk {
+    font-family: @font !important;
+    font-size: @font-size;
+    //font-size: 1rem;
+}
+.sapUiBody {
+	font-family: adelle-sans, sans-serif;
+    font-style: normal;
+    font-size: @font-size;
+}
+
+.sapMBtnInner {
+    font-family: @font !important;
+    font-size: @font-size;
+   // font-size: 1.3rem;
+}
+.sapMLnk, .sapMBtnInner{
+    font-family: adelle-sans, sans-serif;
+    font-size: @font-size;
+}
+
+.sapMFT {
+	font-family: adelle-sans, sans-serif;
+    font-style: normal;	
+    font-size: @font-size;
+}
+.sapMListTbl .sapMText, .sapMListTbl .sapMLabel
+.h1 {
+    font-size: @font-size;
+}
+
+.h2 {
+    font-size: 1rem;
+}
+
+.h3 {
+    font-size: .8rem;
+}
+
+.sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner {
+    color: white;
+}
+
+.scrollContainer {
+    height: calc(100% - 4rem) !important;
+    background: @light-gray  !important; // & .sapMScrollContScroll{
+    // padding-bottom: 2rem;
+    padding-bottom: 4rem !important; // }
+}
+
+//remove borders on focus
+.sapMFocus .sapMInputDivWrapper:not(.sapMInputBaseDisabledInner)::before {
+    border: none !important;
+}
+
+html.sap-desktop .sapMBtn:focus>.sapMFocusable {
+    outline: 0px dotted #000000 !important;
+    outline-offset: -3px;
+}
+
+html.sap-desktop .sapMLnk:focus:not(.sapMLnkDsbl) {
+    outline: 0px dotted #000000;
+}
+.sapMLIBFocusable:focus {
+    outline: none;
+}
+
+.sapMIBar.sapMHeader-CTX {
+    color: @red;
+    background-color: @red;
+    filter: none;
+    background-image: none;
+    height: 4rem;
+}
+
+.sapMPage>.sapMPageHeader+section,
+.sapMPage>.sapMPageSubHeader+section,
+.sapMPage>.sapMPageHeader+.sapUiHiddenPlaceholder+section {
+    top: 4rem;
+}
+
+.sapMPanel .sapMPanelWrappingDiv .sapMPanelHdr,
+.sapMPanel .sapMPanelWrappingDivTb .sapMIBar.sapMTB {
+    padding-left: .2rem;
+    margin-left: 0rem;
+}
+
+.sapMListTblSubCntRow>.sapMListTblSubCntSpr,
+.sapMListTblSubCntRow>.sapMListTblSubCntHdr .sapMText,
+.sapMListTblSubCntRow>.sapMListTblSubCntHdr .sapMLabel {
+    color: black;
+    padding-top: 0;
+    font-weight: bold;
+}
+
+.sapMBtnInner {
+    text-shadow: none !important;
+}
+
+.sapUiSizeCompact .sapMBtn {
+    height: 3.000rem;
+    padding: 0 0;
+}
+
+.sapUiSizeCompact .sapMBtnInner.sapMBtnText {
+    padding: none !important;
+}
+
+//Ui Table
+.sapUiTableCnt {
+    border-left: none!important;
+    border-right: none!important;
+    border-top: none!important;
+}
+
+.sapUiTableTr>td {
+    border-right: none!important;
+}
+
+.sapUiTableCol {
+    border-right: none!important;    
+    font-weight: bold!important;
+}
+
+.sapMIBar-CTX .sapMBtn:hover>.sapMBtnHoverable:not(.sapMBtnActive) {
+    background-color: @red-hover;
+    color: #346187;
+}
+
+.sapMShellBrandingBar {    
+    display: none;    
+}
+
+.sapUiRootBackground, .sapMShellGlobalOuterBackground {
+    background: #b7b7b7;;
+}

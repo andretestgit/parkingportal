@@ -1,0 +1,46 @@
+<mvc:View controllerName="edu.mit.parking.features.vehicle.NewVehicle" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" bindingContexts="{/}">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="scrollContainer">
+        <HBox height="auto" wrap="Wrap" class="" fitContainer="true">
+            <VBox class="main-container">
+                <Text id="vehicle_text_title" text="{path: '/tempVehicle', formatter: '.formatter.vehicleTitle'}" class="title-global  title-global-padding" />
+                <VBox class="responsive-padding" height="100%" fitContainer="true">
+                    <VBox class="white-panel vehicle-tile">
+                        <VBox id="vehicle_container" items="{/vehicles}">
+                            <VBox>
+                                <Text text="{path:'/tempVehicle', formatter: '.formatter.getTypeOfVehicle'} {/vehicleNumber} {i18n>Vehicle.Text.Details}" class="sapUiSmallMarginBottom addVehicle-head" />
+                                <core:Fragment fragmentName="edu.mit.parking.features.vehicle.VehicleDetails" type="XML" />
+                            </VBox>
+                            <!--<Link text="{i18n>Global.Link.AddAnotherVehicle}" press="onPressAddAnotherVehicle" class="sapUiSmallMarginTop sapUiSmallMarginBottom" />-->
+                        </VBox>
+                        <HBox wrap="Wrap" class="" visible="{/tempVehicle}">
+                            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginTopBottom">
+                                <Text text="{i18n>Vehicle.Text.StartDate}" />
+                                <DatePicker id="vehicle_datepicker_startDate" placeholder=" " dateValue="{/startDate}" width="{= ${device>/system/phone} ? '17rem' : '10rem'}" change="removeValidationError" class="input" />
+                            </VBox>
+                            <VBox class="sapUiSmallMarginEnd sapUiSmallMarginTopBottom">
+                                <Text text="{i18n>Vehicle.Text.EndDate}" />
+                                <DatePicker id="vehicle_datepicker_endDate" placeholder=" " dateValue="{/endDate}" width="{= ${device>/system/phone} ? '17rem' : '10rem'}" change="removeValidationError" class="input"/>
+                            </VBox>
+                        </HBox>
+                        <HBox wrap="Wrap" class="sapUiSmallMarginTop ">
+                            <Button id="vehicle_button_submit" text="Add Vehicle" class="sapUiMediumMarginEnd blue-button" press="onPressSubmitVehicles" />
+                            <Link text="{i18n>Global.Link.Cancel}" press="onPressCancel" class="sapUiSmallMarginTop" />
+                        </HBox>
+                        <!--	<l:Grid defaultSpan="L4 M4 S12" class=""><l:content><Link text="{i18n>Vehicle.Link.AddAnotherVehicle}" press="onPressAddAnotherVehicle"><layoutData><l:GridData span="L12 M12 S12"/></layoutData></Link><VBox><Text text="{i18n>Vehicle.Text.StartDate}"/><DatePicker placeholder=" " dateValue="{startDate}" width="{= ${device>/system/phone} ? '10rem' : '10rem'}"/><layoutData><l:GridData span="L3 M3 S12"/></layoutData></VBox><VBox><Text text="{i18n>Vehicle.Text.EndDate}"/><DatePicker placeholder=" " dateValue="{endDate}" width="{= ${device>/system/phone} ? '10rem' : '10rem'}"/><layoutData><l:GridData span="L3 M3 S12"/></layoutData></VBox><Button id="vehicle_button_submit"><layoutData><l:GridData linebreak="true"/></layoutData></Button><Link text="{i18n>Vehicle.Link.Cancel}" press="onPressCancel"/></l:content></l:Grid>-->
+                    </VBox>
+                </VBox>
+            </VBox>
+            <VBox class="side-container" visible="{= ${sessionData>/user/type} !== 'COORDINATOR'}">
+                <VBox class="sapUiLargeMarginTopBottom  one-rem-padding" height="100%">
+                    <Text text="{i18n>Permit.Text.Questions}" />
+                    <core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML" />
+                </VBox>
+            </VBox>
+        </HBox>
+    </ScrollContainer>
+</mvc:View>

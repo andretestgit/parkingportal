@@ -1,0 +1,22 @@
+<mvc:View 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="scrollContainer">
+        <Text text="{i18n>Logout.Text.ImportantInfo}" class="title-global title-global-padding" />
+        <HBox wrap="Wrap" class="responsive-padding">
+            <!--Left Container-->
+            <VBox class="white-panel" width="50rem">
+                <FormattedText class="regular-text" width="680px" htmlText="
+					You are authenticated to GAP through &lt;a href=&quot;http://ist.mit.edu/touchstone-detail&quot; target=&quot;_blank&quot;&gt;MIT Touchstone&lt;/a&gt;. MIT Touchstone is a &lt;a href=&quot;http://en.wikipedia.org/wiki/Single_sign-on&quot; target=&quot;_blank&quot;&gt;single sign-on&lt;/a&gt; service that allows members of the MIT community to log in to participating MIT websites. Once you are authenticated via Touchstone, &lt;strong&gt;the only way to log out of Touchstone is to close the browser.&lt;/strong&gt;
+                    &lt;br/&gt;&lt;br/&gt;
+                    To return to MIT Parking, please click &lt;a target=&quot;_self&quot; href=&quot;/index.html&quot;&gt;here&lt;/a&gt;.
+                    &lt;br/&gt;&lt;br/&gt;
+                    Please contact the Help Desk at  &lt;strong&gt;computing-help@mit.edu &lt;/strong&gt; or &lt;strong&gt;3-1101&lt;/strong&gt; for assistance.					"/>
+            </VBox>
+        </HBox>
+    </ScrollContainer>
+</mvc:View>

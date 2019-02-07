@@ -1,0 +1,45 @@
+<mvc:View controllerName="edu.mit.parking.features.coordinator.scratchPasses.OrderScratchPasses" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="sapUiLargeMarginBottom scrollContainer">
+        <Text text="{i18n>Scratch.Text.OrderScratchPasses}" class="title-global title-global-padding"/>
+        <VBox width="{= ${device>/system/phone} ? '100%' : '70%'}" class="responsive-padding">
+            <VBox class="white-panel" width="100%">
+                <HBox class="sapUiSmallMarginBottom sapUiTinyMarginBegin">
+                    <VBox class="sapUiSmallMarginEnd" width="12rem">
+                        <Text text="{i18n>Visitor.Text.ContactName}"/>
+                        <Input value="{/contactName}" placeholder="Margaret Mahoney" width="90%" class="scratch-input scratch-field" change="removeValidationError"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd" width="10rem">
+                        <Text text="{i18n>Visitor.Text.Phone}"/>
+                        <MaskInput id="scratch_phone_input" mask = "(999) 999-9999" placeholder="(123) 456-7890" value="{/phoneNumber}" width="8rem" change="removeValidationError" class="scratch-field"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd" width="12rem">
+                        <Text text="{i18n>Visitor.Text.Email}"/>
+                        <Input id="scratch_email_input" value="{/email}" placeholder="mmahoney@mit.edu" type="Email" width="90%" change="removeValidationError" class="scratch-input scratch-field"/>
+                    </VBox>
+                </HBox>
+                <VBox class="sapUiTinyMarginBegin">
+                    <Text text="{i18n>Scratch.Text.Quantity}" class=""/>
+                    <HBox class="sapUiSmallMarginBottom">
+                        <ComboBox selectedKey="{/quantity}" width="5rem" class="sapUiMediumMarginEnd scratch-combo scratch-field" change="onChangeQuantity" items="{sessionData>/helperSets/scratchPassQuantity}">
+                            <core:Item key="{sessionData>id}" text="{sessionData>text}" />
+                        </ComboBox>
+                        <Text text="{/totalCost}" class="sapUiTinyMarginTop"/>
+                    </HBox>
+                    <Text text="{i18n>Scratch.Text.CostObject}"/>
+                    <Input value="{/costObject}" width="8rem" placeholder="1234567890" type="Number" class="scratch-input sapUiSmallMarginBottom scratch-field" change="removeValidationError"/>
+                    <Text text="{i18n>Comments}"/>
+                    <TextArea width="24rem" height="6rem" value="{/comment}" class="sapUiSmallMarginBottom"/>
+                    <HBox>
+                        <Button text="{i18n>Scratch.Button.Order}" class="blue-button sapUiSmallMarginEnd btn-8" press="onPressOrder" />
+                        <Link text="{i18n>Global.Link.Cancel}" press="onPressCancel" class="sapUiSmallMarginTop"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollContainer>
+</mvc:View>

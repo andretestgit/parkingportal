@@ -1,0 +1,60 @@
+<mvc:View controllerName="edu.mit.parking.features.permit.PermitDetails" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core">
+    <ScrollContainer height="100%" width="100%" vertical="true" horizontal="true" class="scrollContainer">
+        <HBox wrap="Wrap" width="100%" class="">
+            <VBox class="main-container">
+                <Text text="{i18n>Permit.Text.PermitDetails}" class="title-global title-global-padding" />
+                <VBox class="responsive-padding" width="100%">
+                    <VBox class="white-panel permit-tile" height="auto">
+                        <HBox class="sapUiSmallMarginBottom border-bottom-grey ">
+                            <!-- <core:Icon src="sap-icon://map-3" size="3rem" class="sapUiMediumMarginEnd sapUiSmallMarginBegin" /> -->
+                            <Image src="local/images/GoogleMaps.PNG" size="3rem" class="image-map sapUiMediumMarginEnd" press="onPressMap"/>
+                            <VBox>
+                                <Text text="{sessionData>location}" class="text-section-head"/>
+                                <HBox wrap="Wrap">
+                                    <Text text="{path: 'sessionData>costPerDay', formatter: '.formatter.dashboardPermitCostPerDay'}" class="blue-text sapUiTinyMarginEnd"/>
+                                    <Text text="{i18n>Dashboard.Text.CostCap} ${sessionData>costCap})" class="blue-text italic-text"/>
+                                </HBox>
+                                <ProgressIndicator percentValue="{= ${sessionData>runningBalance} / ${sessionData>costCap} * 100}" displayValue="${sessionData>runningBalance}" state="None" width="100%" class="progress-indicator"/>
+                            </VBox>
+                        </HBox>
+                        <HBox class="sapUiSmallMarginBottom border-bottom-grey">
+                            <core:Icon src="sap-icon://sales-quote" size="3rem" class="sapUiLargeMarginEnd sapUiSmallMarginBegin" />
+                            <VBox>
+                                <Text text="{i18n>Permit.Text.PaymentInformation}" />
+                                <Text text="{sessionData>paymentInformation/type}" />
+                            </VBox>
+                        </HBox>
+                        <VBox items="{sessionData>vehicles}" height="100%" fitContainer="true" class="sapUiSmallMarginBegin">
+                            <core:Fragment fragmentName="edu.mit.parking.features.fragments.Vehicle" type="XML" />
+                        </VBox>
+                        <HBox class="sapUiSmallMarginTop">
+                            <HBox width="1rem"/>
+                            <VBox class="sapUiLargeMarginBegin">
+                                <HBox wrap="Wrap">
+                                    <Link text="{i18n>Permit.Link.AddAnotherVehicle}" press="onPressAddVehicle" class="sapUiTinyMarginBottom sapUiMediumMarginBegin" />
+                                    <Text text="{i18n>Permit.Text.UpTo3}" class="sapUiTinyMarginBegin" />
+                                </HBox>
+                                <HBox wrap="Wrap">
+                                    <Link text="{i18n>Permit.Link.AddTemporaryVehicle}" press="onPressAddTemporaryVehicle" class="sapUiSmallMarginBottom sapUiMediumMarginBegin" />
+                                    <Text text="{i18n>Permit.Text.UpTo2}" class="sapUiTinyMarginBegin" />
+                                </HBox>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                    <Link text="{i18n>Permit.Link.RequestPermitForSpouse}" press="onPressRequestPermitForSpouse" class=" sapUiSmallMarginTop bold-text " />
+                </VBox>
+            </VBox>
+            <VBox class="side-container ">
+                <VBox class="" height="100%">
+                    <Text text="{i18n>Permit.Text.Questions}" />
+                    <core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML" />
+                </VBox>
+            </VBox>
+        </HBox>
+    </ScrollContainer>
+</mvc:View>

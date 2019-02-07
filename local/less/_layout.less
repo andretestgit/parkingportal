@@ -1,0 +1,240 @@
+.main-container {
+    width: 100%;
+    background: @light-gray  !important; //padding: 1rem;
+}
+
+.side-container {
+    width: 100%;
+    background: white !important;
+    padding: 0 .5rem;
+}
+
+.dashboard-tile-container {
+    width: 100%;
+}
+
+.dashboard-tile {
+    width: 100%
+}
+
+.account-billing-tile {
+    width: 100%
+}
+
+.account-tile {
+    width: 100%
+}
+.permit-tile {
+    width: 100%
+}
+
+.ticket-tile {
+    width: 100%
+}
+
+.vehicle-tile{
+    width: 100%
+}
+
+.ticket-payment-tile {
+    min-width: 30rem;
+}
+
+
+@media only screen and (min-width: 1380px) {
+    .ticket-tile {
+        width: 60%
+    }
+}
+
+@media only screen and (min-width: 1175px) {
+    .side-container {
+        width: 25% !important;
+        overflow: auto !important;
+        min-height: calc(100vh - 5rem) !important;         
+        padding: 6rem 2rem 0 2rem;
+    }
+    .main-container {
+        width: 75% !important;
+        overflow: auto !important;
+    }
+    .account-tile {
+        width: 60%
+    }
+    .account-billing-tile {
+        width: 40%
+    }
+    .vehicle-tile{
+        width:75%
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .large-margin-begin {
+        margin-left: 3rem !important;
+    }
+  
+    .dashboard-tile-container {
+        width: 50%
+    }
+    .dashboard-tile {
+        width: 90%
+    }
+    .permit-tile {
+        width: 80%
+    }
+    
+
+    
+    /*Force Vboxs to fill screen inside of scroll container*/
+    /*    .sapMScrollContScroll {
+        height: 100% !important;
+    }*/
+    .parking-activity {
+        margin-left: 6rem !important;
+    }
+}
+
+@media (min-width: 1660px) {
+    html.sap-desktop .sapMShellAppWidthLimited .sapMShellCentralBox {
+        width: 85%;
+        margin-left: auto;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.3);
+        margin-right: auto;
+    } //CSS
+}
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 1281px) {
+   
+    .white-panel {
+        padding: 2rem 2.5rem 3.5rem 2.5rem; //margin: 0 0 4rem 3rem;
+    }
+    .title-global-padding {
+        margin: 3rem 0 1rem 3rem;
+    }
+    .responsive-padding {
+        padding: 0 0 4rem 3rem;
+    }
+}
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .white-panel {
+        padding: 2rem 2.5rem 3.5rem 2.5rem; //margin: 0 0 4rem 3rem;
+    }
+    .title-global-padding {
+        margin: 3rem 0 1rem 3rem;
+    }
+    .responsive-padding {
+        padding: 0 3rem 4rem 3rem;
+    } //CSS
+}
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .responsive-padding {
+        padding: 2rem;
+    }
+    .white-panel {
+        padding: 2rem 2rem 3.5rem 2rem; // margin: 0 2rem 4rem 2rem;
+    }
+    .title-global-padding {
+        margin: 2rem 0 1rem 2rem;
+    }
+    .responsive-padding {
+        padding: 0 2rem 4rem 2rem;
+    }
+    .banner-box {
+        margin: 0 2rem!important;
+    }
+}
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .responsive-padding {
+        padding: 2rem;
+    } //CSS
+    .white-panel {
+        padding: 2rem 2rem 3.5rem 2rem; //margin: 0 2rem 4rem 2rem;
+    }
+    .title-global-padding {
+        margin: 2rem 0 1rem 2rem;
+    }
+    .responsive-padding {
+        padding: 0 2rem 4rem 2rem;
+    }
+    .banner-box {
+        margin: 0 2rem!important;
+    }
+}
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .responsive-padding {
+        padding: 1rem;
+    } //CSS
+    .white-panel {
+        padding: 1rem .5rem 2rem .5rem; // margin: 0 1rem 4rem 1rem;
+    }
+    .title-global-padding {
+        margin: 1rem 0 1rem 1rem;
+    }
+    .responsive-padding {
+        padding: 0 1rem 3rem 1rem;
+    }
+    .nav-link {
+        font-size: 1rem;
+    }
+    .banner-box {
+        margin: 0 1rem!important;
+    }
+}
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .responsive-padding {
+        padding: 1rem .5rem 4rem .5rem;
+    } //CSS
+    .white-panel {
+        padding: 1rem .5rem 2rem .5rem; // margin: 0 .5rem 4rem .5rem;
+    }
+    .account-flex-padding {
+        padding: 1rem .5rem 4rem .5rem;
+    }
+    .title-global-padding {
+        margin: .5rem 0 .5rem .5rem;
+    }
+    .responsive-padding {
+        padding: 0rem .5rem 4rem .5rem;
+    }
+    .nav-link {
+        font-size: 1rem;
+    }
+    .banner-box {
+        margin: 0 .5rem!important;
+    }
+}

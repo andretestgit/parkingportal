@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+    <VBox class="dashboard-tile sapUiLargeMarginBottom " visible="{= !${sessionData>/busyFlags/billing}}">
+        <HBox justifyContent="SpaceBetween" alignItems="End" class="list-header">
+            <Text text="{i18n>Dashboard.Text.MyBilling}" class="list-header-text" />
+            <Link text="{i18n>Dashboard.Link.TransactionHisory}" press="onPressTransactionHistory" class="list-header-link"
+                visible="{= ${sessionData>/dashboard/billing/items}.length > 0}" />
+            <!-- <Link text="{i18n>Dashboard.Link.TransactionHisory}" press="onPressTransactionHistory" class="list-header-link"/> -->
+        </HBox>
+        <List id="billing_container" items="{path:'sessionData>/dashboard/billing/items', events : { change: '.highlightOpenPeriod' }}" mode="SingleSelectMaster" selectionChange="onPressBillingItem"
+                visible="{= ${sessionData>/dashboard/billing/items}.length > 0}">
+            <CustomListItem class="list-item" >
+                <HBox justifyContent="SpaceBetween">
+                    <VBox>
+                        <HBox class="list-billing-date-container">
+                            <!-- <Text text="{path: 'sessionData>periodStartDate', formatter: '.formatter.getDateWithoutYear'} - {path: 'sessionData>periodEndDate', formatter: '.formatter.getDateWithoutYear'}" class="list-content-header-text" /> -->
+                            <Text text="{path: 'sessionData>invoiceDateText'}" class="list-content-header-text" />
+                            <HBox visible="{= ${sessionData>status} === 'O'}">
+                                <FormattedText htmlText="&lt;span class=&quot;open-billing-dot&quot;&gt;&lt;/span&gt;"
+                                    class="sapUiSmallMarginBegin" />
+                                <Text text="{i18n>Dashboard.Text.Open}" class="open-billing " />
+                            </HBox>
+                            <!-- <HBox class="sapUiSmallMarginBegin" visible="{= !${sessionData>isOpen}}">
+                                <Button icon="sap-icon://accept" visible="{= ${sessionData>status} === 'F'}" tooltip="Fully Paid"
+                                    type="Transparent" class="icon-button icon-button-success" />
+                                <Button icon="sap-icon://goalseek" visible="{= ${sessionData>status} === 'P'}" tooltip="Partially Paid"
+                                    type="Transparent" class="icon-button icon-button-warning" />
+                                <Button icon="sap-icon://alert" visible="{= ${sessionData>status} === 'N'}" tooltip="Not Paid"
+                                    type="Transparent" class="icon-button icon-button-error" />
+                            </HBox> -->
+                        </HBox>
+                        <!-- <VBox class="sapUiTinyMarginTop">
+                            <Text text="Payment Date: {path: 'sessionData>billingDate', formatter: '.formatter.getDateWithYear'}" class="list-content-text"/>
+                            <Text text="Payment Type: {path: 'sessionData>deductionType', formatter: '.formatter.getDeductionType'}" class="list-content-text"/>
+                        </VBox> -->
+                    </VBox>
+                    <VBox justifyContent="End">
+                        <Text text="${sessionData>amount}" class="list-billing-amount" wrapping="false" visible="{= ${sessionData>status} !== 'N'}"/>
+                        <Text text="${sessionData>amount}" class="list-billing-amount error" wrapping="false" visible="{= ${sessionData>status} === 'N'}"/>
+                    </VBox>
+                </HBox>
+            </CustomListItem>
+
+        </List>
+        <!-- No data tile -->
+        <CustomListItem class="list-item" visible="{= ${sessionData>/dashboard/billing/items}.length === 0}">
+            <FormattedText htmlText="{i18n>Dashboard.Text.BillingNoData}" />
+        </CustomListItem>
+        <VBox class="list-footer-billing" visible="{= ${sessionData>/billing/deductionType} === 'CREDIT_CARD'}">
+            <HBox justifyContent="SpaceBetween">
+                <Text text="{i18n>Dashboard.Text.BillingSummary}" class="" />
+                <Text text="${sessionData>/billing/outstandingBalance}" class="h1" />
+            </HBox>
+            <Button text="{i18n>Dashboard.Button.PayFullBalance}" icon="sap-icon://lead" class="green-button" press="onPressPayFullBalance" />
+        </VBox>
+    </VBox>
+</core:FragmentDefinition>

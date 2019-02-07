@@ -1,0 +1,107 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc">
+    <HBox wrap="Wrap" width="100%" visible="{= ${sessionData>/user/type} !== 'COORDINATOR'}">
+        <VBox class="main-container" width="100%">
+            <!-- Banner Messages -->
+            <VBox items="{sessionData>/banners}" class="">
+                <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop banner-box">
+                    <HBox>
+                        <core:Icon src="sap-icon://pending" class="sapUiTinyMarginEnd" size="2rem" color="#F1C134" visible="{= ${sessionData>type} === 'P'}"/>
+                        <core:Icon src="sap-icon://pending" class="sapUiTinyMarginEnd" size="2rem" color="#8d3433" visible="{= ${sessionData>type} === 'W'}"/>
+                        <core:Icon src="sap-icon://pending" class="sapUiTinyMarginEnd" size="2rem" color="Green" visible="{= ${sessionData>type} === 'S'}"/>
+                        <VBox>
+                            <Text text="{sessionData>header}" class="banner-text-pending" visible="{= ${sessionData>type} === 'P'}"/>
+                            <Text text="{sessionData>header}" class="banner-text-warning" visible="{= ${sessionData>type} === 'W'}"/>
+                            <Text text="{sessionData>header}" class="banner-text-success" visible="{= ${sessionData>type} === 'S'}"/>
+                            <Text text="{sessionData>message}"/>
+                        </VBox>
+                    </HBox>
+                    <core:Icon src="sap-icon://sys-cancel" class="sapUiTinyMarginEnd" press="onPressDeleteBannerMessage" visible="{sessionData>cancel}"/>
+                </HBox>
+            </VBox>
+            <Text text="{i18n>Dashboard.Text.MyParkingDashboard}" class="title-global title-global-padding sapUiSmallMarginBottom" textAlign="Center"/>
+            <HBox wrap="Wrap" class="responsive-padding" width="100%">
+                <VBox height="100%" class="dashboard-tile-container">
+                    <!--Billing Statements-->
+                    <core:Fragment fragmentName="edu.mit.parking.features.fragments.Billing" type="XML" />
+                    <!--Tickets-->
+                    <VBox class="sapUiMediumMarginTopBottom dashboard-tile dashboard-no-busy" busy="{/busy}">
+                        <HBox justifyContent="SpaceBetween" alignItems="End" class="listHeader">
+                            <Text text="{i18n>Dashboard.Text.TicketsAndAppeals}" class="bold-text" />
+                            <Link text="{i18n>Dashboard.Link.History}" press="onPressTicketHistory" class="bold-text nav-link" enabled="{sessionData>/user/activePermit}"/>
+                        </HBox>
+                        <VBox items="{path: 'sessionData>/ticketCount' , factory: '.createTicketCounts'}">
+                            <!-- <CustomListItem class="listItem"><HBox justifyContent="SpaceBetween"><Text text="{i18n>Dashboard.Text.OpenParkingViolation}" /><Text text="{/outstandingTickets}" class="billAmount" wrapping="false" /></HBox></CustomListItem> -->
+                        </VBox>
+                    </VBox>
+                </VBox>
+                <!--Section for permit info-->
+                <VBox class="dashboard-tile-container" fitContainer="true">
+                    <VBox items="{path: 'sessionData>/permits'}" width="100%">
+                        <VBox class="sapUiMediumMarginBottom dashboard-tile dashboard-no-busy" busy="{/busy}">
+                            <HBox justifyContent="SpaceBetween" alignItems="End" class="listHeader">
+                                <Text text="{path: 'sessionData>permitId', formatter: '.formatter.dashboardPermitTitle'}" class="bold-text" />
+                                <Link text="{i18n>Dashboard.Link.PermitDetails}" press="onPressPermitDetails" class="bold-text nav-link" enabled="{sessionData>/user/activePermit}"/>
+                            </HBox>
+                            <CustomListItem class="listItem">
+                                <HBox>
+                                    <!-- <core:Icon src="sap-icon://map-3" size="3rem" class="sapUiMediumMarginEnd" /> -->
+                                    <Image src="images/GoogleMaps.PNG" size="3rem" class="image-map" press="onPressMap"/>
+                                    <VBox>
+                                        <Text text="TEST" class="text-section-head" />
+                                        <HBox wrap="Wrap">
+                                            <Text text="{path: 'sessionData>costPerDay', formatter: '.formatter.dashboardPermitCostPerDay'}" class="blue-text sapUiTinyMarginEnd"/>
+                                            <Text text="{i18n>Dashboard.Text.CostCap} ${sessionData>costCap})" class="blue-text italic-text"/>
+                                        </HBox>
+                                        <ProgressIndicator percentValue="{= ${sessionData>runningBalance} / ${sessionData>costCap} * 100}" displayValue="${sessionData>runningBalance}" state="None" width="100%" class="progress-indicator"/>
+                                        <!--	<HBox class="progressIndicator"><ProgressIndicator percentValue="{= ${runningBalance} / ${costCap} * 100}" displayValue="${runningBalance}" state="None" width="100%"/><Text text="${runningBalance}" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/></HBox>-->
+                                    </VBox>
+                                </HBox>
+                            </CustomListItem>
+                            <List items="{path: 'sessionData>vehicles', sorter:{path:'temporary', descending: false }}">
+                                <CustomListItem class="listItem">
+                                    <core:Fragment fragmentName="edu.mit.parking.features.fragments.Vehicle" type="XML" />
+                                </CustomListItem>
+                            </List>
+                            <!--<Button text="Test" type="Transparent" width="100%"/>-->
+                            <HBox alignItems="End" class="listFooterPermit" width="100%">
+                                <VBox width="100%" height="100%" alignItems="Center" justifyContent="Center" class="border-right">
+                                    <!-- <Link text="{i18n>Dashboard.Button.AddVehicle}" press="onPressAddVehicle" class="bold-text" /> -->
+                                    <Button text="{i18n>Dashboard.Button.AddVehicle}" class="addVehicleButton" type="Transparent" press="onPressAddVehicle" width="100%" enabled="{sessionData>/user/activePermit}"/>
+                                </VBox>
+                                <VBox width="100%" height="100%" alignItems="Center" justifyContent="Center">
+                                    <!-- <Link text="{i18n>Dashboard.Button.AddTempVehicle}" press="onPressAddTemporaryVehicle" class="bold-text" /> -->
+                                    <Button text="{i18n>Dashboard.Button.AddTempVehicle}" class="addVehicleButton" type="Transparent" press="onPressAddTemporaryVehicle" width="100%" enabled="{sessionData>/user/activePermit}"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                    <HBox class="email sapUiSmallMarginTop dasboard-tile" fitContainer="true" justifyContent="Center" wrap="Wrap">
+                        <Text text="{i18n>Dashboard.Text.Email}" class="sapUiTinyMarginEnd" />
+                        <Link text="{i18n>Global.Text.EmailAddress}" class="sapUiTinyMarginEnd " />
+                        <Text text="{i18n>Dashboard.Text.SwitchCarpool}" />
+                    </HBox>
+                </VBox>
+            </HBox>
+            <!-- Footer -->
+            <Image src="images/MIT_logo.png" class="responsive-padding" height="3rem"/>
+        </VBox>
+        <VBox class="side-container ">
+            <VBox class="">
+                <Text text="{i18n>Dashboard.Text.WantMoreInfo}" />
+                <Link text="{i18n>Dashboard.Link.ViewDeductionSchedule}" class="sapUiMediumMarginBottom link" wrapping="true" />
+                <Text text="{i18n>Dashboard.Text.NeedRideshare}" />
+                <Link text="{i18n>Dashboard.Link.RideAmigos}" class="sapUiMediumMarginBottom link" wrapping="true" />
+                <Text text="{i18n>Dashboard.Text.MITPrograms}" />
+                <Link text="{i18n>Dashboard.Link.Atlas}" class="sapUiMediumMarginBottom link" wrapping="true" />
+                <Text text="{i18n>Dashboard.Text.ClaimYour}" />
+                <Link text="{i18n>Dashboard.Text.ElectriceVehicleRebate}" class="sapUiMediumMarginBottom link" wrapping="true" />
+                <Text text="{i18n>Global.Text.QuestionContact}" />
+                <core:Fragment fragmentName="edu.mit.parking.features.fragments.Contact" type="XML" />
+            </VBox>
+        </VBox>
+    </HBox>
+</core:FragmentDefinition>

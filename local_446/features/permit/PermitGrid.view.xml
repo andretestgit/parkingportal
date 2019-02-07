@@ -1,0 +1,41 @@
+<mvc:View controllerName="edu.mit.parking.features.permit.PermitGrid" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+    <Page title="{i18n>title}" showHeader="false" class="page">
+        <!-- Header -->
+        <core:Fragment fragmentName="edu.mit.parking.features.fragments.Header" type="XML" />
+        <HBox width="100%" class="container">
+            <VBox class="main " width="100%">
+                <Text text="{i18n>Permit.PermitsAndRates}" class="title-global sapUiTinyMarginBottom" />
+                <VBox class="panel-permit-grid sapUiTinyMarginBottom">
+                    <Table inset="false" mode="None" items="{path:'/permitGrid'}" noDataText="{i18n>Ticket.Text.NoTickets}" selectionChange="onPressTicketRow" busyIndicatorDelay="0" busy="{= ${/permitGrid}.length === 0}"
+                        class="transparent-table-header panel-grid-table">
+                        <columns>
+                            <Column  hAlign="Begin" width="10rem">
+                                <Text text="Permit Type" />
+                            </Column>
+                            <Column width="" minScreenWidth="950px" demandPopin="true" hAlign="Begin">
+                                <Text text="Parking Cost" />
+                            </Column>
+                            <Column width="16rem"  minScreenWidth="1380px" demandPopin="true" hAlign="Begin">
+                                <Text text="Parking Fee" />
+                            </Column>
+                            <Column minScreenWidth="550px" demandPopin="true">
+                                <Text text="Who is eligible?" />
+                            </Column>                            
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{name}" />
+                                    <Text text="{parts:[ 'dailyFee', 'recurringFee', 'recurringFrequency', 'annualCap', 'name'], formatter: '.formatter.getParkingGridPermitCost'}" />
+                                    <Text text="{parts: ['dailyFee', 'recurringFee', 'recurringFrequency'], formatter: '.formatter.getParkingGidFeeText'}"/>
+                                    <Text text="{description}" />                                    
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </HBox>
+    </Page>
+</mvc:View>

@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog title="System Unavailable" type="Message">
+        <content>
+            <VBox>
+                <FormattedText htmlText="{i18n>Init.Error}"/>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>
